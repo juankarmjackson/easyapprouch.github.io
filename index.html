@@ -32,7 +32,7 @@
                     <input type="text" id="nombreempresa">
                     <label for="">¿Qué es lo que estás buscando?</label>
                     <textarea placeholder="Escribe aquí lo que buscas para tu empresa" id="observaciones"></textarea>
-                    <input type="submit" value="Enviar" id="inputBoton">
+                    <button id="inputBoton">Enviar</button>
                 </form>
             </div>
     </section>
@@ -182,22 +182,23 @@
             const authString = `${username}:${password}`;
             const encodedAuthString = btoa(authString);
 
-            const xhr = new XMLHttpRequest();
-            const url = "https://presupuestaya-production.up.railway.app/api/leads";
-            xhr.open("POST", url, true);
-            xhr.setRequestHeader("Authorization", `Basic ${encodedAuthString}`);
-            xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                console.log(xhr.responseText);
+            $.ajax({
+            url: `https://presupuestaya-production.up.railway.app/api/leads`,
+            type: 'POST',
+            async: false,
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify({
+                "nombre": nombre,
+                "telefono": telefono,
+                "nombreempresa": nombreempresa,
+                "observaciones": observaciones
+            }),
+            success: function (data) {
+                console.log('okey');
             }
-            };
-            const data = {
-            nombre: "nombre",
-            telefono: "telefono",
-            nombreempresa: "nombreempresa",
-            observaciones: "observaciones"
-            };
-            xhr.send(JSON.stringify(data));
+
+            })
 
 });
     </script>
