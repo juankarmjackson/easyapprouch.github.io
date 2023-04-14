@@ -25,14 +25,14 @@
             <div class="formulario plan">
                 <form action="">
                     <label for="">Nombre Completo</label>
-                    <input type="text" placeholder="Escribe Tu Nombre">
+                    <input type="text" placeholder="Escribe Tu Nombre" id="nombre">
                     <label for="">Teléfono</label>
-                    <input type="text">
+                    <input type="text" id="telefono">
                     <label for="">Nombre de Tu Empresa</label>
-                    <input type="text">
+                    <input type="text" id="nombreempresa">
                     <label for="">¿Qué es lo que estás buscando?</label>
-                    <textarea placeholder="Escribe aquí lo que buscas para tu empresa" ></textarea>
-                    <input type="submit" value="Enviar">
+                    <textarea placeholder="Escribe aquí lo que buscas para tu empresa" id="observaciones"></textarea>
+                    <input type="submit" value="Enviar" id="inputBoton">
                 </form>
             </div>
     </section>
@@ -154,7 +154,7 @@
         <div class="comentario">
             <label for="">¿Qué es lo que estás buscando?</label>
             <textarea placeholder="Escribe aquí lo que buscas para tu empresa" class="observaciones"></textarea>
-            <input type="submit" value="Enviar" id="inputBoton">
+            <input type="submit" value="Enviar">
         </div>
        </div>
     </form>
@@ -171,20 +171,26 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script type="module">
         $('#inputBoton').click(function () {
-    var data = document.getElementById('inputProyecto').value;
-    localStorage.setItem("proyecto", JSON.stringify(data));
-    console.log(data);
+            const nombre = document.getElementById('nombre').value;
+            const telefono = document.getElementById('telefono').value;
+            const nombreempresa = document.getElementById('nombreempresa').value;
+            const observaciones = document.getElementById('observaciones').value;
 
 
     $.ajax({
-        url: `http://localhost:8000/store/create`,
+        url: `https://api.localads.es/auth/register`,
         type: 'POST',
         async: false,
         contentType: 'application/json',
         dataType: 'json',
-        data: JSON.stringify({ "name": data }),
+        data: JSON.stringify({
+            "nombre": nombre,
+            "telefono": telefono,
+            "nombreempresa": nombreempresa,
+            "observaciones": observaciones
+        }),
         success: function (data) {
-            window.location.href = './generadordesign.php';
+            console.log('okey');
         }
 
     })
