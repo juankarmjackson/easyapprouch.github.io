@@ -1,0 +1,392 @@
+body{
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.slider{
+    height: 100vh;
+    background-image: url(../img/positivenation6.gif);
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    padding: 10px;
+}
+
+.slider h1{
+    font-family: 'Lovelo', sans-serif;
+    font-size: 60px;
+    margin: 0;
+    color: white;
+    filter: drop-shadow(0 2px 5px rgba(59, 204, 30, 0.7));
+}
+
+.slider .title img{
+    width: 450px;
+}
+
+.slider p{
+    font-size: 25px;
+}
+
+.title {
+    width: 50%;
+    text-align: center;
+}
+
+.formulario {
+    padding: 10px;
+}
+
+.formulario form{
+    margin: 10px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    width: 300px;
+}
+
+.plan {
+    margin: 10px;
+    padding: 10px;
+    background: rgba(225, 225, 225, 0.30);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37 );
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px);
+    position: relative;
+    overflow: hidden;
+}
+
+form label{
+    padding: 10px;
+    margin: 10px;
+}
+
+form input{
+    height: 30px;
+    border-radius: 30px;
+    border: none;
+    padding: 10px;
+    margin: 10px;
+}
+
+form textarea{
+    height: 50px;
+    border-radius: 30px;
+    border: none;
+    padding: 10px;
+}
+
+form input[type=submit]{
+    height: 30px;
+    border-radius: 30px;
+    border: none;
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+    width: 100px;
+}
+
+@media (max-width: 750px) {
+    .slider{
+        display: block;
+    }
+    .title {
+        width: 100%;
+        text-align: center;
+    }
+  }
+
+
+  /* SECTION RESULTADOS */
+
+  .resultados{
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .text-resultados{
+    width: 50%;
+    padding: 50px;
+    
+  }
+
+  .video-resultados{
+    width: 50%;
+    padding: 10px;
+    margin: 10px;
+    
+    
+  }
+
+  .video-resultados .video{
+    background-image: url(../img/positivenation3.gif);
+    background-size: cover;
+    height: 250px;
+    border-radius: 30px;
+  }
+
+
+  /* SECTION LOGOS */
+
+  .informacion h1{
+    text-align: center;
+  }
+
+  .slider2 {
+    width: 90%;
+    height: auto;
+    margin: auto;
+    overflow: hidden;
+}
+
+.slider2 .slide-track {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    animation: scroll 40s linear infinite;
+    -webkit-animation: scroll 40s linear infinite;
+    width: calc(200px * 14);
+}
+
+.slider2 .slide {
+    width: 200px;
+}
+
+.slider2 .slide img {
+    width: 150px;
+}
+
+@keyframes scroll {
+    0% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+    100% {
+        -webkit-transform: translateX(calc(-200px * 7));
+        transform: translateX(calc(-200px * 7));
+    }
+}
+
+
+
+/* SECTION DESARROLLO */
+
+
+.video-desarrollo .video{
+    background-image: url(../img/positivenation4.gif);
+    background-size: cover;
+    height: 350px;
+}
+
+.capsula {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../img/positivenation10.png);
+    background-size: cover;
+}
+
+
+.text-desarrollo {
+    margin: 10px;
+    padding: 10px;
+    width: 50%;
+}
+
+.crms{
+    margin: 10px;
+    padding: 10px;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.crms img{
+    width: 350px;
+}
+
+/* Contacto */
+
+.contacto{
+    padding: 10px;
+    margin: 10px;
+}
+
+.contacto .formulario{
+    background: rgba(225, 225, 225, 0.30);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37 );
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(50px);
+    padding: 10px;
+    max-width: 500px;
+    margin: auto;
+}
+
+.contacto .formulario h1{
+    text-align: center;
+}
+
+.contacto .formulario .box-preguntas{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.formulario input{
+    border: 1px solid black;
+}
+
+.box-preguntas .comentario{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.comentario .observaciones{
+    width: 350px;
+    border: 1px solid black;
+}
+
+.comentario input[type=submit]{
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(60,183,221,1) 100%);
+    color: white;
+    font-size: 25px;
+    height: 53px;
+    width: auto;
+    padding: 10px;
+    margin: 10px;
+}
+
+
+.exito{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    margin: 10px;
+}
+
+.slide-exito{
+    width: 350px;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid black;
+    
+}
+
+.fondo-exito{
+    width: 350px;
+    height: 300px;
+}
+
+
+.consultores{
+    padding: 10px;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.consultores .consultores-text{
+    width: 50%;
+    margin: 10px;
+    padding: 10px;
+}
+
+.consultores .consultores-img{
+    width: 50%;
+    background-image: url(../img/positivenation5.gif);
+    background-size: cover;
+    height: 350px;
+    border-radius: 30px;
+}
+
+footer{
+    padding: 10px;
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(60,183,221,1) 100%);
+    color: white;
+}
+@media (max-width: 1040px) {
+    .crms img{
+        width: 90%;
+    }
+}
+
+@media (max-width: 750px) {
+    .resultados{
+        display: block;
+    }
+    .text-resultados {
+        width: 90%;
+        padding: 10px;
+    }
+
+    .video-resultados {
+        width: 90%;
+        text-align: center;
+    }
+    .capsula{
+        display: block;
+    }
+
+    .text-desarrollo {
+        margin: 10px;
+        padding: 10px;
+        width: 90%;
+    }
+
+    .crms {
+        margin: 10px;
+        padding: 10px;
+        width: 90%;
+    }
+
+    .crms img{
+        margin:auto;
+        width: 90%;
+    }
+
+    .exito{
+        display: block;
+        margin: 0;
+        padding: 0;
+    }
+
+    .slide-exito {
+        margin: auto;
+    }
+
+    .consultores{
+        display: block;
+    }
+
+    .consultores .consultores-text {
+        width: 90%;
+    }
+
+    .consultores .consultores-img {
+        width: 90%;
+        background-size: cover;
+        height: 225px;
+        border-radius: 30px;
+        margin: auto;
+    }
+
+    .comentario .observaciones {
+        width: 90%;
+        margin: auto;
+        border: 1px solid black;
+    }
+    }
