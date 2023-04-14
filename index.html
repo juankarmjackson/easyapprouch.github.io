@@ -179,8 +179,6 @@
 
             const username = "username1";
             const password = "password1";
-            const authString = `${username}:${password}`;
-            const encodedAuthString = btoa(authString);
 
             $.ajax({
             url: `https://presupuestaya-production.up.railway.app/api/leads`,
@@ -188,6 +186,8 @@
             async: false,
             contentType: 'application/json',
             dataType: 'json',
+            username: username,
+            password: password,
             data: JSON.stringify({
                 "nombre": nombre,
                 "telefono": telefono,
