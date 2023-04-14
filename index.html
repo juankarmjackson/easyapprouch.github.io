@@ -177,23 +177,27 @@
             const observaciones = document.getElementById('observaciones').value;
 
 
-    $.ajax({
-        url: `https://api.localads.es/auth/register`,
-        type: 'POST',
-        async: false,
-        contentType: 'application/json',
-        dataType: 'json',
-        data: JSON.stringify({
-            "nombre": nombre,
-            "telefono": telefono,
-            "nombreempresa": nombreempresa,
-            "observaciones": observaciones
-        }),
-        success: function (data) {
-            console.log('okey');
-        }
+            const username = "username1";
+            const password = "password1";
+            const authString = `${username}:${password}`;
+            const encodedAuthString = btoa(authString);
 
-    })
+            const xhr = new XMLHttpRequest();
+            const url = "https://presupuestaya-production.up.railway.app/api/leads";
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Authorization", `Basic ${encodedAuthString}`);
+            xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log(xhr.responseText);
+            }
+            };
+            const data = {
+            nombre: "nombre",
+            telefono: "telefono",
+            nombreempresa: "nombreempresa",
+            observaciones: "observaciones"
+            };
+            xhr.send(JSON.stringify(data));
 
 });
     </script>
