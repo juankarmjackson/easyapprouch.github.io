@@ -23,7 +23,7 @@
                 <img src="img/easy4.png" alt="Easy Approuch | Proposal System">
             </div>
             <div class="formulario plan">
-                <form action="">
+                <div class="form">
                     <label for="">Nombre Completo</label>
                     <input type="text" placeholder="Escribe Tu Nombre" id="nombre">
                     <label for="">Teléfono</label>
@@ -33,7 +33,7 @@
                     <label for="">¿Qué es lo que estás buscando?</label>
                     <textarea placeholder="Escribe aquí lo que buscas para tu empresa" id="observaciones"></textarea>
                     <button id="inputBoton">Enviar</button>
-                </form>
+                </div>
             </div>
     </section>
     <section class="resultados">
@@ -172,11 +172,6 @@
     <script type="module">
 
 
-        $(document).ready(function () {
-        const forms = document.querySelectorAll("form");
-        forms.preventDefault;
-        });
-
 
         $('#inputBoton').click(function () {
             const nombre = document.getElementById('nombre').value;
@@ -194,7 +189,7 @@
             type: 'POST',
             async: false,
             contentType: 'application/json',
-            dataType: 'json',
+            dataType: 'jsonp',
             username: username,
             password: password,
             data: JSON.stringify({

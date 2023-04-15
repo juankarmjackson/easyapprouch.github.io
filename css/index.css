@@ -39,7 +39,7 @@ body{
     padding: 10px;
 }
 
-.formulario form{
+.formulario .form{
     margin: 10px auto;
     display: flex;
     justify-content: center;
@@ -61,12 +61,12 @@ body{
     overflow: hidden;
 }
 
-form label{
+.form label{
     padding: 10px;
     margin: 10px;
 }
 
-form input{
+.form input{
     height: 30px;
     border-radius: 30px;
     border: none;
@@ -74,14 +74,14 @@ form input{
     margin: 10px;
 }
 
-form textarea{
+.form textarea{
     height: 50px;
     border-radius: 30px;
     border: none;
     padding: 10px;
 }
 
-form input[type=submit]{
+.form #inputBoton{
     height: 30px;
     border-radius: 30px;
     border: none;
