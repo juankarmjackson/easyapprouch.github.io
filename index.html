@@ -170,11 +170,20 @@
     <script src="confetti.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script type="module">
+
+
+        $(document).ready(function () {
+        const forms = document.querySelectorAll("form");
+        forms.preventDefault;
+        });
+
+
         $('#inputBoton').click(function () {
             const nombre = document.getElementById('nombre').value;
             const telefono = document.getElementById('telefono').value;
             const nombreempresa = document.getElementById('nombreempresa').value;
             const observaciones = document.getElementById('observaciones').value;
+            const tipoDeNegocio = "Agencia de Marketing";
 
 
             const username = "username1";
@@ -190,9 +199,10 @@
             password: password,
             data: JSON.stringify({
                 "nombre": nombre,
-                "telefono": telefono,
-                "nombreempresa": nombreempresa,
-                "observaciones": observaciones
+                "email": telefono,
+                "webNegocio": nombreempresa,
+                "tipoDeNegocio": tipoDeNegocio,
+                "mensaje": observaciones
             }),
             success: function (data) {
                 console.log('okey');
