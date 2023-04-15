@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content= "width=device-width, user-scalable=no">
+	<meta name="referrer" content="no-referrer">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.cdnfonts.com/css/lovelo" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/0a7198e186.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" type="image/jpg" href="img/favicon2.png"/>
+    <link rel="stylesheet" href="css/index.css">
+    <title>Easy Approuch | Login</title>
+</head>
+<body>
+    <header>
+        <h1>Bienvenido <span id="nombrecliente"></span></h1>
+    </header>
+    <button id="nodolead">Crear Lead</button>
+   <section class="leads" id="tabla">
+        <div class="lead">
+            <input type="text" value="Restaurante Lopez">
+            <select name="comercial" id="">
+                <option value="Comercial1">Comercial 1</option>
+                <option value="Comercial1">Comercial 2</option>
+                <option value="Comercial1">Comercial 3</option>
+            </select>
+            <input type="checkbox" class="whatsapp">
+            <input type="checkbox" class="telefono">
+            <input type="checkbox" class="email">
+            <select name="estatus" id="">
+                <option value="contactado">Contactado</option>
+                <option value="propuesta lanzada">Propuesta Lanzada</option>
+                <option value="modificaciones">Modificaciones</option>
+                <option value="perdido">Perdido</option>
+                <option value="No Responde">No Responde</option>
+                <option value="Más Adelante">Más Adelante</option>
+                <option value="Aceptado">Aceptado</option>
+            </select>
+            <select name="canal" id="">
+                <option value="Google Ads">Google Ads</option>
+                <option value="Facebook Ads">Facebook Ads</option>
+                <option value="Linkedin Ads">Linkedin Ads</option>
+                <option value="SEO">Formulario Web</option>
+                <option value="Recomendación">Recomendación</option>
+            </select>
+        </div>
+        <div class="lead">
+            <input type="text" value="Restaurante Lopez">
+            <select name="comercial" id="">
+                <option value="Comercial1">Comercial 1</option>
+                <option value="Comercial1">Comercial 2</option>
+                <option value="Comercial1">Comercial 3</option>
+            </select>
+            <input type="checkbox" class="whatsapp">
+            <input type="checkbox" class="telefono">
+            <input type="checkbox" class="email">
+            <select name="estatus" id="">
+                <option value="contactado">Contactado</option>
+                <option value="propuesta lanzada">Propuesta Lanzada</option>
+                <option value="modificaciones">Modificaciones</option>
+                <option value="perdido">Perdido</option>
+                <option value="No Responde">No Responde</option>
+                <option value="Más Adelante">Más Adelante</option>
+                <option value="Aceptado">Aceptado</option>
+            </select>
+            <select name="canal" id="">
+                <option value="Google Ads">Google Ads</option>
+                <option value="Facebook Ads">Facebook Ads</option>
+                <option value="Linkedin Ads">Linkedin Ads</option>
+                <option value="SEO">Formulario Web</option>
+                <option value="Recomendación">Recomendación</option>
+            </select>
+        </div>
+        <div id="nuevolead"></div>
+   </section>
+   
+<footer>
+    <ul>
+        <li>Políticas de Empresa</li>
+        <li>Preguntas Frecuentes</li>
+        <li>Aviso Legal</li>
+    </ul>
+</footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script src="confetti.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      
+        // API LEADS EMPRESAS
+      
+        $(document).ready(function () {
+            const username = "username1";
+            const password = "password1";
+
+            $.ajax({
+            url: `https://presupuestaya-production.up.railway.app/api/leads`,
+            type: 'GET',
+            async: false,
+            contentType: 'application/json',
+            dataType: 'jsonp',
+            username: username,
+            password: password,
+              
+              success: function (response) {
+                  let leadsEmpresas = response;
+                  let template = '';
+                  leadsEmpresas.forEach(task => {
+                      template += `
+            <div class="lead">
+                <span>${task.id}</span>
+                <input type="text" value="${task.nombre}">
+                <input type="text" value="${task.email}">
+                <input type="text" value="${task.webNegocio}">
+                <input type="text" value="${task.tipoDeNegocio}">
+                <input type="text" value="${task.mensaje}">
+                <select name="comercial" id="">
+                    <option value="Comercial1">Comercial 1</option>
+                    <option value="Comercial1">Comercial 2</option>
+                    <option value="Comercial1">Comercial 3</option>
+                </select>
+                <input type="checkbox" class="whatsapp">
+                <input type="checkbox" class="telefono">
+                <input type="checkbox" class="email">
+                <select name="estatus" id="">
+                    <option value="contactado">Contactado</option>
+                    <option value="propuesta lanzada">Propuesta Lanzada</option>
+                    <option value="modificaciones">Modificaciones</option>
+                    <option value="perdido">Perdido</option>
+                    <option value="No Responde">No Responde</option>
+                    <option value="Más Adelante">Más Adelante</option>
+                    <option value="Aceptado">Aceptado</option>
+                </select>
+                <select name="canal" id="">
+                    <option value="Google Ads">Google Ads</option>
+                    <option value="Facebook Ads">Facebook Ads</option>
+                    <option value="Linkedin Ads">Linkedin Ads</option>
+                    <option value="SEO">Formulario Web</option>
+                    <option value="Recomendación">Recomendación</option>
+                </select>
+            </div>
+                      `
+                  })
+      
+                  var tabla = document.getElementById('tabla');
+                  console.log(tabla);
+                  tabla.appendChild(template);
+              }
+      
+          })
+      
+      
+      })
+
+
+      $('#nodolead').click(function () {
+         var nuevolead = document.getElementById('nuevolead').innerHTML += `
+
+            <div class="lead">
+                <span>1</span>
+                <input type="text" value="Nombre del Lead">
+                <input type="text" value="Email del Lead">
+                <input type="text" value="Web del Lead">
+                <input type="text" value="Tipo de Negocio">
+                <input type="text" value="observaciones">
+                <select name="comercial" id="">
+                    <option value="Comercial1">Comercial 1</option>
+                    <option value="Comercial1">Comercial 2</option>
+                    <option value="Comercial1">Comercial 3</option>
+                </select>
+                <input type="checkbox" class="whatsapp">
+                <input type="checkbox" class="telefono">
+                <input type="checkbox" class="email">
+                <select name="estatus" id="">
+                    <option value="contactado">Contactado</option>
+                    <option value="propuesta lanzada">Propuesta Lanzada</option>
+                    <option value="modificaciones">Modificaciones</option>
+                    <option value="perdido">Perdido</option>
+                    <option value="No Responde">No Responde</option>
+                    <option value="Más Adelante">Más Adelante</option>
+                    <option value="Aceptado">Aceptado</option>
+                </select>
+                <select name="canal" id="">
+                    <option value="Google Ads">Google Ads</option>
+                    <option value="Facebook Ads">Facebook Ads</option>
+                    <option value="Linkedin Ads">Linkedin Ads</option>
+                    <option value="SEO">Formulario Web</option>
+                    <option value="Recomendación">Recomendación</option>
+                </select>
+            </div>
+                    `;
+                  
+      })
+      
+      </script>
+</body>
+</html>
