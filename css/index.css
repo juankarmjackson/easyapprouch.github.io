@@ -391,3 +391,11 @@ footer{
         border: 1px solid black;
     }
     }
+
+    @media (max-width: 500px) {
+        .slider .title img {
+            width: 150px;
+        }
+    }
+
+    
