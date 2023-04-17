@@ -11,7 +11,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script src="jquery.min.js"></script>
+    <script src="https://cdn.zinggrid.com/zinggrid.min.js"></script>
     <script src="https://kit.fontawesome.com/0a7198e186.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" type="image/jpg" href="img/favicon2.png"/>
     <link rel="stylesheet" href="css/index.css">
@@ -21,8 +22,8 @@
     <header>
         <h1>Bienvenido <span id="nombrecliente"></span></h1>
     </header>
-    <button id="nodolead">Crear Lead</button>
-   <section class="leads" id="tabla">
+    <!-- <button id="nodolead">Crear Lead</button> -->
+   <!-- <section class="leads" id="tabla">
         <div class="lead">
             <input type="text" value="Restaurante Lopez">
             <select name="comercial" id="">
@@ -78,7 +79,12 @@
             </select>
         </div>
         <div id="nuevolead"></div>
-   </section>
+   </section> -->
+
+   <zing-grid caption="Easy Marketing Leads" editor-controls="all" pager="" page-size="50" layout="row" role="grid" editor="inline" viewport="tablet-portrait">
+    <zg-data src="https://presupuestaya-production.up.railway.app/api/leads"></zg-data>
+  </zing-grid>
+  
    
 <footer>
     <ul>
