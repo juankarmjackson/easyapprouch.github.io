@@ -8,82 +8,39 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.cdnfonts.com/css/lovelo" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 	<script src="jquery.min.js"></script>
     <script src="https://cdn.zinggrid.com/zinggrid.min.js"></script>
     <script src="https://kit.fontawesome.com/0a7198e186.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" type="image/jpg" href="img/favicon2.png"/>
     <link rel="stylesheet" href="css/index.css">
-    <title>Easy Approuch | Login</title>
+    <title>Easy Approuch | Dashboard</title>
 </head>
 <body>
     <header>
         <h1>Bienvenido <span id="nombrecliente"></span></h1>
     </header>
-    <!-- <button id="nodolead">Crear Lead</button> -->
-   <!-- <section class="leads" id="tabla">
-        <div class="lead">
-            <input type="text" value="Restaurante Lopez">
-            <select name="comercial" id="">
-                <option value="Comercial1">Comercial 1</option>
-                <option value="Comercial1">Comercial 2</option>
-                <option value="Comercial1">Comercial 3</option>
-            </select>
-            <input type="checkbox" class="whatsapp">
-            <input type="checkbox" class="telefono">
-            <input type="checkbox" class="email">
-            <select name="estatus" id="">
-                <option value="contactado">Contactado</option>
-                <option value="propuesta lanzada">Propuesta Lanzada</option>
-                <option value="modificaciones">Modificaciones</option>
-                <option value="perdido">Perdido</option>
-                <option value="No Responde">No Responde</option>
-                <option value="Más Adelante">Más Adelante</option>
-                <option value="Aceptado">Aceptado</option>
-            </select>
-            <select name="canal" id="">
-                <option value="Google Ads">Google Ads</option>
-                <option value="Facebook Ads">Facebook Ads</option>
-                <option value="Linkedin Ads">Linkedin Ads</option>
-                <option value="SEO">Formulario Web</option>
-                <option value="Recomendación">Recomendación</option>
-            </select>
-        </div>
-        <div class="lead">
-            <input type="text" value="Restaurante Lopez">
-            <select name="comercial" id="">
-                <option value="Comercial1">Comercial 1</option>
-                <option value="Comercial1">Comercial 2</option>
-                <option value="Comercial1">Comercial 3</option>
-            </select>
-            <input type="checkbox" class="whatsapp">
-            <input type="checkbox" class="telefono">
-            <input type="checkbox" class="email">
-            <select name="estatus" id="">
-                <option value="contactado">Contactado</option>
-                <option value="propuesta lanzada">Propuesta Lanzada</option>
-                <option value="modificaciones">Modificaciones</option>
-                <option value="perdido">Perdido</option>
-                <option value="No Responde">No Responde</option>
-                <option value="Más Adelante">Más Adelante</option>
-                <option value="Aceptado">Aceptado</option>
-            </select>
-            <select name="canal" id="">
-                <option value="Google Ads">Google Ads</option>
-                <option value="Facebook Ads">Facebook Ads</option>
-                <option value="Linkedin Ads">Linkedin Ads</option>
-                <option value="SEO">Formulario Web</option>
-                <option value="Recomendación">Recomendación</option>
-            </select>
-        </div>
-        <div id="nuevolead"></div>
-   </section> -->
-
-   <zing-grid caption="Easy Marketing Leads" editor-controls="all" pager="" page-size="50" layout="row" role="grid" editor="inline" viewport="tablet-portrait">
-    <zg-data src="https://presupuestaya-production.up.railway.app/api/leads"></zg-data>
+   <zing-grid caption="Easy Marketing Leads" editor-controls="all" pager="" page-size="100" layout="row" role="grid" editor="inline" viewport="tablet-portrait">
+    <zg-data src="https://presupuestaya-production.up.railway.app/api/leads/findAllByUsuarioIdAndFechaCreacionDesc/1?page=0&size=50"></zg-data>
   </zing-grid>
+    <table id="datos" class="contenedor">
+        <tbody>
+            <tr>
+                <td>ID</td>
+                <td>Nombre</td>
+                <td>Teléfono</td>
+                <td>Email</td>
+                <td>Whatsapp</td>
+                <td>Llamada</td>
+                <td>Email Enviado</td>
+                <td>Estado del Lead</td>
+                <td>Fecha de Creación</td>
+                <td>Observaciones</td>
+            </tr>
+        </tbody>
+    </table>
+    
+
   
    
 <footer>
@@ -93,115 +50,84 @@
         <li>Aviso Legal</li>
     </ul>
 </footer>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <script src="main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
-    <script src="confetti.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
       
-        // API LEADS EMPRESAS
-      
-        $(document).ready(function () {
-            const username = "username1";
-            const password = "password1";
+        // COLORES
+        $(document).ready(
+            function obtenerColores() {
+    // Esto selecciona todos los estado.color que están dentro de un estado.color
+    let cajas = document.querySelectorAll("[data-field-index='estado.color'] [data-field-index='estado.color']");
+    let colores = [];
+    for (let i = 0; i < cajas.length; i++) {
+        colores.push(cajas[i].textContent);
+    }
 
-            $.ajax({
-            url: `https://presupuestaya-production.up.railway.app/api/leads`,
-            type: 'GET',
-            async: false,
-            contentType: 'application/json',
-            dataType: 'jsonp',
-            username: username,
-            password: password,
-              
-              success: function (response) {
-                  let leadsEmpresas = response;
-                  let template = '';
-                  leadsEmpresas.forEach(task => {
-                      template += `
-            <div class="lead">
-                <span>${task.id}</span>
-                <input type="text" value="${task.nombre}">
-                <input type="text" value="${task.email}">
-                <input type="text" value="${task.webNegocio}">
-                <input type="text" value="${task.tipoDeNegocio}">
-                <input type="text" value="${task.mensaje}">
-                <select name="comercial" id="">
-                    <option value="Comercial1">Comercial 1</option>
-                    <option value="Comercial1">Comercial 2</option>
-                    <option value="Comercial1">Comercial 3</option>
-                </select>
-                <input type="checkbox" class="whatsapp">
-                <input type="checkbox" class="telefono">
-                <input type="checkbox" class="email">
-                <select name="estatus" id="">
-                    <option value="contactado">Contactado</option>
-                    <option value="propuesta lanzada">Propuesta Lanzada</option>
-                    <option value="modificaciones">Modificaciones</option>
-                    <option value="perdido">Perdido</option>
-                    <option value="No Responde">No Responde</option>
-                    <option value="Más Adelante">Más Adelante</option>
-                    <option value="Aceptado">Aceptado</option>
-                </select>
-                <select name="canal" id="">
-                    <option value="Google Ads">Google Ads</option>
-                    <option value="Facebook Ads">Facebook Ads</option>
-                    <option value="Linkedin Ads">Linkedin Ads</option>
-                    <option value="SEO">Formulario Web</option>
-                    <option value="Recomendación">Recomendación</option>
-                </select>
-            </div>
-                      `
-                  })
-      
-                  var tabla = document.getElementById('tabla');
-                  console.log(tabla);
-                  tabla.appendChild(template);
-              }
-      
-          })
-      
-      
-      })
+    return colores;
+});
 
 
-      $('#nodolead').click(function () {
-         var nuevolead = document.getElementById('nuevolead').innerHTML += `
+$(document).ready(function () {
+    $.ajax({
+        url: 'https://presupuestaya-production.up.railway.app/api/leads/findAllByUsuarioIdAndFechaCreacionDesc/1?page=0&size=50',
+        type: 'GET',
+        contentType: "application/json; charset=utf-8",
+        async: false, // HERE
+        
+        success: function (response) {
+            let leadsEmpresas = response;
+            let template = '';
+            leadsEmpresas.forEach(task => {
+                template += `
+                        <tbody class="lista" id="lista">
+                            <tr class="persona">
+                                <td>${task.id}</td>
+                                <td>${task.nombre}</td>
+                                <td>
+                                    <a href="tel:${task.telefono}"><i class="fa-solid fa-phone"></i></a>
+                                    <a href="wa.me/34:${task.telefono}"><i class="fa-brands fa-whatsapp"></i></a>
+                                </td>
+                                <td><a href="mailto:${task.email}"><i class="fa-regular fa-envelope"></i></a></td>
+                                <td><input type="checkbox" data-whatsapp="${task.whatsapp}"></td>
+                                <td><input type="checkbox" data-llamada="${task.llamada}"></td>  
+                                <td><input type="checkbox" data-email="${task.emailEnviado}"></td> 
+                                <td>
+                                    <select name="" id="" value="${task.estadoNombre}">
+                                        <option value="1">No Contactado</option>
+                                        <option value="2">Contactado</option>
+                                        <option value="3">Propuesta</option>
+                                        <option value="4">Negociación</option>
+                                        <option value="5">Cerrado</option>
+                                    </select>
+                                </td>
+                                <td>${task.fechaCreacion}</td>
+                                <td><input type="text" value="${task.observacion}"></td>  
+                            </tr>
+                        </tbody>
+                `
+            })
 
-            <div class="lead">
-                <span>1</span>
-                <input type="text" value="Nombre del Lead">
-                <input type="text" value="Email del Lead">
-                <input type="text" value="Web del Lead">
-                <input type="text" value="Tipo de Negocio">
-                <input type="text" value="observaciones">
-                <select name="comercial" id="">
-                    <option value="Comercial1">Comercial 1</option>
-                    <option value="Comercial1">Comercial 2</option>
-                    <option value="Comercial1">Comercial 3</option>
-                </select>
-                <input type="checkbox" class="whatsapp">
-                <input type="checkbox" class="telefono">
-                <input type="checkbox" class="email">
-                <select name="estatus" id="">
-                    <option value="contactado">Contactado</option>
-                    <option value="propuesta lanzada">Propuesta Lanzada</option>
-                    <option value="modificaciones">Modificaciones</option>
-                    <option value="perdido">Perdido</option>
-                    <option value="No Responde">No Responde</option>
-                    <option value="Más Adelante">Más Adelante</option>
-                    <option value="Aceptado">Aceptado</option>
-                </select>
-                <select name="canal" id="">
-                    <option value="Google Ads">Google Ads</option>
-                    <option value="Facebook Ads">Facebook Ads</option>
-                    <option value="Linkedin Ads">Linkedin Ads</option>
-                    <option value="SEO">Formulario Web</option>
-                    <option value="Recomendación">Recomendación</option>
-                </select>
-            </div>
-                    `;
-                  
-      })
+            let datos = document.getElementById('datos');
+            datos.innerHTML += template;
+
+            // Get all the input elements in the table
+            var inputs = document.querySelectorAll('#datos input[type="checkbox"]');
+
+            // Loop through each input element and check its data attribute
+            inputs.forEach(function(input) {
+            if (input.dataset.whatsapp === "true" || input.dataset.llamada === "true" || input.dataset.email === "true") {
+                input.checked = true;
+            }
+            });
+
+        }
+
+    })
+
+
+})
       
       </script>
 </body>
