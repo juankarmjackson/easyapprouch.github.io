@@ -6,20 +6,12 @@
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <meta name="referrer" content="no-referrer">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<<<<<<< HEAD
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.cdnfonts.com/css/lovelo" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-	<script src="jquery.min.js"></script>
-    <script src="https://cdn.zinggrid.com/zinggrid.min.js"></script>
-=======
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.cdnfonts.com/css/lovelo" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <script src="jquery.min.js"></script>
->>>>>>> d5569a8bb7b0b0acb0b1df16182fbbb1aa04f426
     <script src="https://kit.fontawesome.com/0a7198e186.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" type="image/jpg" href="img/favicon2.png"/>
     <link rel="stylesheet" href="css/handsontable.full.min.css">
@@ -28,34 +20,6 @@
     <title>Easy Approuch | Dashboard</title>
 </head>
 <body>
-<<<<<<< HEAD
-    <header>
-        <h1>Bienvenido <span id="nombrecliente"></span></h1>
-    </header>
-   <zing-grid caption="Easy Marketing Leads" editor-controls="all" pager="" page-size="100" layout="row" role="grid" editor="inline" viewport="tablet-portrait">
-    <zg-data src="https://presupuestaya-production.up.railway.app/api/leads/findAllByUsuarioIdAndFechaCreacionDesc/1?page=0&size=50"></zg-data>
-  </zing-grid>
-    <table id="datos" class="contenedor">
-        <tbody>
-            <tr>
-                <td>ID</td>
-                <td>Nombre</td>
-                <td>Teléfono</td>
-                <td>Email</td>
-                <td>Whatsapp</td>
-                <td>Llamada</td>
-                <td>Email Enviado</td>
-                <td>Estado del Lead</td>
-                <td>Fecha de Creación</td>
-                <td>Observaciones</td>
-            </tr>
-        </tbody>
-    </table>
-    
-
-  
-   
-=======
 <header>
     <h1>Bienvenido <span id="nombrecliente"></span></h1>
 </header>
@@ -104,28 +68,54 @@
         const data = response.data;
 
         const container = document.getElementById('example-table');
-        const hot = new Handsontable(container, {
-            data: data,
-            rowHeaders: true,
-            colHeaders: ['ID', 'Nombre', 'Teléfono', 'Email', 'WhatsApp', 'Llamada', 'Email Enviado', 'Estado', 'Fecha de Creación', 'Observación'],
-            columns: [
-                {data: 'id'},
-                {data: 'nombre'},
-                {data: 'telefono'},
-                {data: 'email'},
-                {data: 'whatsapp', type: 'checkbox'},
-                {data: 'llamada', type: 'checkbox'},
-                {data: 'emailEnviado', type: 'checkbox'},
-                {
-                    data: 'estadoNombre',
-                    type: 'dropdown',
-                    source: estados,
-                    title: 'Estado',
-                    width: 150
-                },
-                {data: 'fechaCreacion', type: 'date'},
-                {data: 'observacion'},
-            ],
+const hot = new Handsontable(container, {
+  data: data,
+  rowHeaders: true,
+  colHeaders: ['ID', 'Nombre', 'Teléfono', 'Email', 'WhatsApp', 'Llamada', 'Email Enviado', 'Estado', 'Fecha de Registro', 'Observación'],
+  columns: [
+    {data: 'id'},
+    {data: 'nombre'},
+    {data: 'telefono'},
+    {data: 'email'},
+    {
+        data: 'whatsapp',
+        type: 'checkbox'
+        },
+    {data: 'llamada', type: 'checkbox'},
+    {data: 'emailEnviado', type: 'checkbox'},
+    {
+      data: 'estadoNombre',
+      type: 'dropdown',
+      source: estados,
+      title: 'Estado',
+      width: 150,
+      renderer: function(instance, td, row, col, prop, value, cellProperties) {
+        switch(value) {
+          case 'Cerrado':
+            td.style.backgroundColor = 'green';
+            td.style.color = 'white';
+            break;
+          case 'Descartado':
+            td.style.backgroundColor = 'red';
+            td.style.color = 'white';
+            break;
+          case 'En Negociacion':
+            td.style.backgroundColor = 'orange';
+            td.style.color = 'white';
+            break;
+          case 'Contactado':
+            td.style.backgroundColor = 'grey';
+            td.style.color = 'white';
+            break;
+        }
+        Handsontable.renderers.TextRenderer.apply(this, arguments);
+      }
+    },
+    {data: 'fechaCreacion', type: 'date'},
+    {data: 'observacion'},
+  ],
+
+            
             manualRowMove: true,
             manualColumnMove: true,
             contextMenu: ['row_above', 'row_below', 'remove_row', 'undo', 'redo'],
@@ -333,97 +323,10 @@
 <br>
 <br>
 
->>>>>>> d5569a8bb7b0b0acb0b1df16182fbbb1aa04f426
 <footer>
     <ul>
         <li>Políticas de Empresa</li>
         <li>Preguntas Frecuentes</li>
         <li>Aviso Legal</li>
     </ul>
-<<<<<<< HEAD
 </footer>
-    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
-    <script src="main.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
-    <script>
-      
-        // COLORES
-        $(document).ready(
-            function obtenerColores() {
-    // Esto selecciona todos los estado.color que están dentro de un estado.color
-    let cajas = document.querySelectorAll("[data-field-index='estado.color'] [data-field-index='estado.color']");
-    let colores = [];
-    for (let i = 0; i < cajas.length; i++) {
-        colores.push(cajas[i].textContent);
-    }
-
-    return colores;
-});
-
-
-$(document).ready(function () {
-    $.ajax({
-        url: 'https://presupuestaya-production.up.railway.app/api/leads/findAllByUsuarioIdAndFechaCreacionDesc/1?page=0&size=50',
-        type: 'GET',
-        contentType: "application/json; charset=utf-8",
-        async: false, // HERE
-        
-        success: function (response) {
-            let leadsEmpresas = response;
-            let template = '';
-            leadsEmpresas.forEach(task => {
-                template += `
-                        <tbody class="lista" id="lista">
-                            <tr class="persona">
-                                <td>${task.id}</td>
-                                <td>${task.nombre}</td>
-                                <td>
-                                    <a href="tel:${task.telefono}"><i class="fa-solid fa-phone"></i></a>
-                                    <a href="wa.me/34:${task.telefono}"><i class="fa-brands fa-whatsapp"></i></a>
-                                </td>
-                                <td><a href="mailto:${task.email}"><i class="fa-regular fa-envelope"></i></a></td>
-                                <td><input type="checkbox" data-whatsapp="${task.whatsapp}"></td>
-                                <td><input type="checkbox" data-llamada="${task.llamada}"></td>  
-                                <td><input type="checkbox" data-email="${task.emailEnviado}"></td> 
-                                <td>
-                                    <select name="" id="" value="${task.estadoNombre}">
-                                        <option value="1">No Contactado</option>
-                                        <option value="2">Contactado</option>
-                                        <option value="3">Propuesta</option>
-                                        <option value="4">Negociación</option>
-                                        <option value="5">Cerrado</option>
-                                    </select>
-                                </td>
-                                <td>${task.fechaCreacion}</td>
-                                <td><input type="text" value="${task.observacion}"></td>  
-                            </tr>
-                        </tbody>
-                `
-            })
-
-            let datos = document.getElementById('datos');
-            datos.innerHTML += template;
-
-            // Get all the input elements in the table
-            var inputs = document.querySelectorAll('#datos input[type="checkbox"]');
-
-            // Loop through each input element and check its data attribute
-            inputs.forEach(function(input) {
-            if (input.dataset.whatsapp === "true" || input.dataset.llamada === "true" || input.dataset.email === "true") {
-                input.checked = true;
-            }
-            });
-
-        }
-
-    })
-
-
-})
-      
-      </script>
-</body>
-</html>
-=======
-</footer>
->>>>>>> d5569a8bb7b0b0acb0b1df16182fbbb1aa04f426
