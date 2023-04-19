@@ -4,88 +4,216 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content= "width=device-width, user-scalable=no">
-	<meta name="referrer" content="no-referrer">
+    <meta name="referrer" content="no-referrer">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.cdnfonts.com/css/lovelo" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.cdnfonts.com/css/lovelo" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-	<script src="jquery.min.js"></script>
-    <script src="https://cdn.zinggrid.com/zinggrid.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <script src="jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/0a7198e186.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" type="image/jpg" href="img/favicon2.png"/>
+    <link rel="stylesheet" href="css/handsontable.full.min.css">
+    <script src="handsontable.full.min.js"></script>
     <link rel="stylesheet" href="css/index.css">
     <title>Easy Approuch | Login</title>
 </head>
 <body>
-    <header>
-        <h1>Bienvenido <span id="nombrecliente"></span></h1>
-    </header>
-    <!-- <button id="nodolead">Crear Lead</button> -->
-   <!-- <section class="leads" id="tabla">
-        <div class="lead">
-            <input type="text" value="Restaurante Lopez">
-            <select name="comercial" id="">
-                <option value="Comercial1">Comercial 1</option>
-                <option value="Comercial1">Comercial 2</option>
-                <option value="Comercial1">Comercial 3</option>
-            </select>
-            <input type="checkbox" class="whatsapp">
-            <input type="checkbox" class="telefono">
-            <input type="checkbox" class="email">
-            <select name="estatus" id="">
-                <option value="contactado">Contactado</option>
-                <option value="propuesta lanzada">Propuesta Lanzada</option>
-                <option value="modificaciones">Modificaciones</option>
-                <option value="perdido">Perdido</option>
-                <option value="No Responde">No Responde</option>
-                <option value="Más Adelante">Más Adelante</option>
-                <option value="Aceptado">Aceptado</option>
-            </select>
-            <select name="canal" id="">
-                <option value="Google Ads">Google Ads</option>
-                <option value="Facebook Ads">Facebook Ads</option>
-                <option value="Linkedin Ads">Linkedin Ads</option>
-                <option value="SEO">Formulario Web</option>
-                <option value="Recomendación">Recomendación</option>
-            </select>
-        </div>
-        <div class="lead">
-            <input type="text" value="Restaurante Lopez">
-            <select name="comercial" id="">
-                <option value="Comercial1">Comercial 1</option>
-                <option value="Comercial1">Comercial 2</option>
-                <option value="Comercial1">Comercial 3</option>
-            </select>
-            <input type="checkbox" class="whatsapp">
-            <input type="checkbox" class="telefono">
-            <input type="checkbox" class="email">
-            <select name="estatus" id="">
-                <option value="contactado">Contactado</option>
-                <option value="propuesta lanzada">Propuesta Lanzada</option>
-                <option value="modificaciones">Modificaciones</option>
-                <option value="perdido">Perdido</option>
-                <option value="No Responde">No Responde</option>
-                <option value="Más Adelante">Más Adelante</option>
-                <option value="Aceptado">Aceptado</option>
-            </select>
-            <select name="canal" id="">
-                <option value="Google Ads">Google Ads</option>
-                <option value="Facebook Ads">Facebook Ads</option>
-                <option value="Linkedin Ads">Linkedin Ads</option>
-                <option value="SEO">Formulario Web</option>
-                <option value="Recomendación">Recomendación</option>
-            </select>
-        </div>
-        <div id="nuevolead"></div>
-   </section> -->
+<header>
+    <h1>Bienvenido <span id="nombrecliente"></span></h1>
+</header>
 
-   <zing-grid caption="Easy Marketing Leads" editor-controls="all" pager="" page-size="50" layout="row" role="grid" editor="inline" viewport="tablet-portrait">
-    <zg-data src="https://presupuestaya-production.up.railway.app/api/leads"></zg-data>
-  </zing-grid>
-  
-   
+<div id="example-table"></div>
+<div class="page-limit">
+    <label for="page-size">Límite de registros: </label>
+    <select id="page-size">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+    </select>
+</div>
+
+<div class="page-number">
+    <label for="current-page">Página: </label>
+    <input id="current-page" type="number" min="1" step="1" value="1">
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+<script src="confetti.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', async function () {
+
+        let estados = [];
+
+        async function fetchEstados() {
+            try {
+                const response = await axios.get('http://localhost:8080/api/estados');
+                estados = response.data.map(estado => ({id: estado.id, nombre: estado.nombre}));
+            } catch (error) {
+                console.error('Error al obtener los estados:', error);
+            }
+        }
+
+        fetchEstados();
+
+        const response = await axios.get('http://localhost:8080/api/leads/findAllByUsuarioIdAndFechaCreacionDesc/1?page=0&size=10');
+        const data = response.data;
+
+        const container = document.getElementById('example-table');
+        const hot = new Handsontable(container, {
+            data: data,
+            rowHeaders: true,
+            colHeaders: ['ID', 'Nombre', 'Teléfono', 'Email', 'WhatsApp', 'Llamada', 'Email Enviado', 'Estado', 'Fecha de Creación', 'Observación'],
+            columns: [
+                {data: 'id'},
+                {data: 'nombre'},
+                {data: 'telefono'},
+                {data: 'email'},
+                {data: 'whatsapp', type: 'checkbox'},
+                {data: 'llamada', type: 'checkbox'},
+                {data: 'emailEnviado', type: 'checkbox'},
+                {
+                    data: 'estadoId',
+                    type: 'dropdown',
+                    source: function (query, process) {
+                        process(estados.map(estado => estado.id));
+                    },
+                    renderer: function (instance, td, row, col, prop, value, cellProperties) {
+                        const selectedEstado = estados.find(estado => estado.id === value);
+                        td.innerHTML = selectedEstado ? selectedEstado.nombre : '';
+                        return td;
+                    },
+                    title: 'Estado',
+                    width: 150
+                },
+                {data: 'fechaCreacion', type: 'date'},
+                {data: 'observacion'},
+            ],
+            manualRowMove: true,
+            manualColumnMove: true,
+            contextMenu: ['row_above', 'row_below', 'remove_row', 'undo', 'redo'],
+            licenseKey: 'non-commercial-and-evaluation',
+            minSpareRows: 1,
+            afterChange: function (changes, source) {
+                if (source === 'loadData') {
+                    return;
+                }
+
+                // Obtén la fila y la columna modificadas
+                const row = changes[0][0];
+                const column = changes[0][1];
+
+                // Comprueba si es la última fila (la fila de "nuevo registro")
+                if (row === hot.countRows() - 1) {
+                    // Crea un nuevo registro a partir de los datos de la fila
+                    const registro = {
+                        nombre: hot.getDataAtCell(row, 0),
+                        telefono: hot.getDataAtCell(row, 1),
+                        email: hot.getDataAtCell(row, 2),
+                        whatsapp: hot.getDataAtCell(row, 3),
+                        llamada: hot.getDataAtCell(row, 4),
+                        emailEnviado: hot.getDataAtCell(row, 5),
+                        estado: hot.getDataAtCell(row, 6),
+                        fechaCreacion: hot.getDataAtCell(row, 7),
+                        observacion: hot.getDataAtCell(row, 8),
+                        usuario: 1
+                    };
+
+                    // Llama a la función guardarRegistro y maneja la respuesta
+                    guardarRegistro(registro)
+                        .then(function (response) {
+                            console.log('Registro guardado con éxito:', response.data);
+                        })
+                        .catch(function (error) {
+                            console.error('Error al guardar el registro:', error);
+                        });
+                } else {
+
+                    // Actualizar registros existentes
+                    const id = hot.getDataAtCell(row, 0); // Asegúrate de que la columna 0 contiene el ID
+                    const registro = {
+                        nombre: hot.getDataAtCell(row, 1),
+                        telefono: hot.getDataAtCell(row, 2),
+                        email: hot.getDataAtCell(row, 3),
+                        whatsapp: hot.getDataAtCell(row, 4),
+                        llamada: hot.getDataAtCell(row, 5),
+                        emailEnviado: hot.getDataAtCell(row, 6),
+                        estado: hot.getDataAtCell(row, 7),
+                        fechaCreacion: hot.getDataAtCell(row, 8),
+                        observacion: hot.getDataAtCell(row, 9),
+                        usuario: 1
+                    };
+
+                    // Llama a la función actualizarRegistro y maneja la respuesta
+                    actualizarRegistro(id, registro)
+                        .then(function (response) {
+                            console.log('Registro actualizado con éxito:', response.data);
+                        })
+                        .catch(function (error) {
+                            console.error('Error al actualizar el registro:', error);
+                        });
+                }
+            }
+        });
+
+        function guardarRegistro(registro) {
+            return axios.post('http://localhost:8080/api/leads', registro, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        }
+
+        function actualizarRegistro(id, registro) {
+            return axios.put(`http://localhost:8080/api/leads/${id}`, registro, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        }
+
+        const currentPageInput = document.getElementById('current-page');
+
+        currentPageInput.addEventListener('change', () => {
+            const newPage = parseInt(currentPageInput.value, 10);
+            const totalPages = Math.ceil(tusDatos.length / pageSize);
+
+            if (newPage >= 1 && newPage <= totalPages) {
+                currentPage = newPage;
+                loadData();
+            } else {
+                // Restablece el valor del campo de entrada si el número ingresado está fuera de rango
+                currentPageInput.value = currentPage;
+            }
+        });
+
+        function renderPagination(totalPages) {
+            // ...
+            pageLink.onclick = () => {
+                currentPage = i;
+                currentPageInput.value = i; // Añade esta línea
+                loadData();
+            };
+            // ...
+        }
+
+
+    });
+
+</script>
+
+<script>
+</script>
+
+<br>
+<br>
+<br>
+
 <footer>
     <ul>
         <li>Políticas de Empresa</li>
@@ -93,116 +221,3 @@
         <li>Aviso Legal</li>
     </ul>
 </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
-    <script src="confetti.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-      
-        // API LEADS EMPRESAS
-      
-        $(document).ready(function () {
-            const username = "username1";
-            const password = "password1";
-
-            $.ajax({
-            url: `https://presupuestaya-production.up.railway.app/api/leads/findAllByUsuarioIdAndFechaCreacionDesc/1?page=0&size=10`,
-            type: 'GET',
-            async: false,
-            contentType: 'application/json',
-            dataType: 'jsonp',
-            username: username,
-            password: password,
-              
-              success: function (response) {
-                  let leadsEmpresas = response;
-                  let template = '';
-                  leadsEmpresas.forEach(task => {
-                      template += `
-            <div class="lead">
-                <span>${task.id}</span>
-                <input type="text" value="${task.nombre}">
-                <input type="text" value="${task.email}">
-                <input type="text" value="${task.webNegocio}">
-                <input type="text" value="${task.tipoDeNegocio}">
-                <input type="text" value="${task.mensaje}">
-                <select name="comercial" id="">
-                    <option value="Comercial1">Comercial 1</option>
-                    <option value="Comercial1">Comercial 2</option>
-                    <option value="Comercial1">Comercial 3</option>
-                </select>
-                <input type="checkbox" class="whatsapp">
-                <input type="checkbox" class="telefono">
-                <input type="checkbox" class="email">
-                <select name="estatus" id="">
-                    <option value="contactado">Contactado</option>
-                    <option value="propuesta lanzada">Propuesta Lanzada</option>
-                    <option value="modificaciones">Modificaciones</option>
-                    <option value="perdido">Perdido</option>
-                    <option value="No Responde">No Responde</option>
-                    <option value="Más Adelante">Más Adelante</option>
-                    <option value="Aceptado">Aceptado</option>
-                </select>
-                <select name="canal" id="">
-                    <option value="Google Ads">Google Ads</option>
-                    <option value="Facebook Ads">Facebook Ads</option>
-                    <option value="Linkedin Ads">Linkedin Ads</option>
-                    <option value="SEO">Formulario Web</option>
-                    <option value="Recomendación">Recomendación</option>
-                </select>
-            </div>
-                      `
-                  })
-      
-                  var tabla = document.getElementById('tabla');
-                  console.log(tabla);
-                  tabla.appendChild(template);
-              }
-      
-          })
-      
-      
-      })
-
-
-      $('#nodolead').click(function () {
-         var nuevolead = document.getElementById('nuevolead').innerHTML += `
-
-            <div class="lead">
-                <span>1</span>
-                <input type="text" value="Nombre del Lead">
-                <input type="text" value="Email del Lead">
-                <input type="text" value="Web del Lead">
-                <input type="text" value="Tipo de Negocio">
-                <input type="text" value="observaciones">
-                <select name="comercial" id="">
-                    <option value="Comercial1">Comercial 1</option>
-                    <option value="Comercial1">Comercial 2</option>
-                    <option value="Comercial1">Comercial 3</option>
-                </select>
-                <input type="checkbox" class="whatsapp">
-                <input type="checkbox" class="telefono">
-                <input type="checkbox" class="email">
-                <select name="estatus" id="">
-                    <option value="contactado">Contactado</option>
-                    <option value="propuesta lanzada">Propuesta Lanzada</option>
-                    <option value="modificaciones">Modificaciones</option>
-                    <option value="perdido">Perdido</option>
-                    <option value="No Responde">No Responde</option>
-                    <option value="Más Adelante">Más Adelante</option>
-                    <option value="Aceptado">Aceptado</option>
-                </select>
-                <select name="canal" id="">
-                    <option value="Google Ads">Google Ads</option>
-                    <option value="Facebook Ads">Facebook Ads</option>
-                    <option value="Linkedin Ads">Linkedin Ads</option>
-                    <option value="SEO">Formulario Web</option>
-                    <option value="Recomendación">Recomendación</option>
-                </select>
-            </div>
-                    `;
-                  
-      })
-      
-      </script>
-</body>
-</html>

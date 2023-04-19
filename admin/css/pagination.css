@@ -1,0 +1,40 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.pagination a {
+    padding: 8px 16px;
+    margin: 0 4px;
+    border: 1px solid #ccc;
+    text-decoration: none;
+    color: black;
+}
+
+.pagination a:hover {
+    background-color: #ddd;
+}
+
+.page-limit {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.page-limit select {
+    width: 100px;
+}
+
+/*page number*/
+/* Añade esto en tu archivo CSS */
+.page-number {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.page-number input {
+    width: 100px;
+}
+
