@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content= "width=device-width, user-scalable=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
     <meta name="referrer" content="no-referrer">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,6 +24,9 @@
     <h1>Bienvenido <span id="nombrecliente"></span></h1>
 </header>
 
+
+<button id="eliminar-fila" class="eliminar-fila">Eliminar fila seleccionada</button>
+
 <div id="example-table"></div>
 <div class="page-limit">
     <label for="page-size">Límite de registros: </label>
@@ -34,6 +37,7 @@
         <option value="50">50</option>
     </select>
 </div>
+
 
 <div class="page-number">
     <label for="current-page">Página: </label>
@@ -49,11 +53,10 @@
     document.addEventListener('DOMContentLoaded', async function () {
 
         let estados = [];
-
         async function fetchEstados() {
             try {
-                const response = await axios.get('http://localhost:8080/api/estados');
-                estados = response.data.map(estado => ({id: estado.id, nombre: estado.nombre}));
+                const response = await axios.get('https://presupuestaya-production.up.railway.app/api/estados');
+                estados = response.data.map(estado => (estado.nombre));
             } catch (error) {
                 console.error('Error al obtener los estados:', error);
             }
@@ -61,7 +64,7 @@
 
         fetchEstados();
 
-        const response = await axios.get('http://localhost:8080/api/leads/findAllByUsuarioIdAndFechaCreacionDesc/1?page=0&size=10');
+        const response = await axios.get('https://presupuestaya-production.up.railway.app/api/leads/findAllByUsuarioIdAndFechaCreacionDesc/1?page=0&size=50');
         const data = response.data;
 
         const container = document.getElementById('example-table');
@@ -78,16 +81,9 @@
                 {data: 'llamada', type: 'checkbox'},
                 {data: 'emailEnviado', type: 'checkbox'},
                 {
-                    data: 'estadoId',
+                    data: 'estadoNombre',
                     type: 'dropdown',
-                    source: function (query, process) {
-                        process(estados.map(estado => estado.id));
-                    },
-                    renderer: function (instance, td, row, col, prop, value, cellProperties) {
-                        const selectedEstado = estados.find(estado => estado.id === value);
-                        td.innerHTML = selectedEstado ? selectedEstado.nombre : '';
-                        return td;
-                    },
+                    source: estados,
                     title: 'Estado',
                     width: 150
                 },
@@ -99,6 +95,15 @@
             contextMenu: ['row_above', 'row_below', 'remove_row', 'undo', 'redo'],
             licenseKey: 'non-commercial-and-evaluation',
             minSpareRows: 1,
+            hiddenColumns: {
+                columns: [0], // Agrega esta línea para ocultar la columna ID
+                indicators: false // Desactiva los indicadores visuales de las columnas ocultas
+            },
+            beforeCopy: function (data, coords) {
+                for (let i = 0; i < data.length; i++) {
+                    data[i][0] = ''; // Establece el primer elemento (ID) de cada fila copiada como vacío
+                }
+            },
             afterChange: function (changes, source) {
                 if (source === 'loadData') {
                     return;
@@ -109,60 +114,105 @@
                 const column = changes[0][1];
 
                 // Comprueba si es la última fila (la fila de "nuevo registro")
-                if (row === hot.countRows() - 1) {
-                    // Crea un nuevo registro a partir de los datos de la fila
-                    const registro = {
-                        nombre: hot.getDataAtCell(row, 0),
-                        telefono: hot.getDataAtCell(row, 1),
-                        email: hot.getDataAtCell(row, 2),
-                        whatsapp: hot.getDataAtCell(row, 3),
-                        llamada: hot.getDataAtCell(row, 4),
-                        emailEnviado: hot.getDataAtCell(row, 5),
-                        estado: hot.getDataAtCell(row, 6),
-                        fechaCreacion: hot.getDataAtCell(row, 7),
-                        observacion: hot.getDataAtCell(row, 8),
-                        usuario: 1
-                    };
-
-                    // Llama a la función guardarRegistro y maneja la respuesta
-                    guardarRegistro(registro)
-                        .then(function (response) {
-                            console.log('Registro guardado con éxito:', response.data);
-                        })
-                        .catch(function (error) {
-                            console.error('Error al guardar el registro:', error);
-                        });
-                } else {
-
+                if (!isLastRow(row)) {
                     // Actualizar registros existentes
-                    const id = hot.getDataAtCell(row, 0); // Asegúrate de que la columna 0 contiene el ID
+                    /*
+                    * Tener cuidado con el ID 0, si existe en BDD puede ser una putada
+                    * */
+                    const id = hot.getDataAtCell(row, 0) || -1; // Asegúrate de que la columna 0 contiene el ID
                     const registro = {
                         nombre: hot.getDataAtCell(row, 1),
                         telefono: hot.getDataAtCell(row, 2),
                         email: hot.getDataAtCell(row, 3),
-                        whatsapp: hot.getDataAtCell(row, 4),
-                        llamada: hot.getDataAtCell(row, 5),
-                        emailEnviado: hot.getDataAtCell(row, 6),
-                        estado: hot.getDataAtCell(row, 7),
+                        whatsapp: hot.getDataAtCell(row, 4) || false,
+                        llamada: hot.getDataAtCell(row, 5) || false,
+                        emailEnviado: hot.getDataAtCell(row, 6) || false,
+                        estadoNombre: hot.getDataAtCell(row, 7),
                         fechaCreacion: hot.getDataAtCell(row, 8),
                         observacion: hot.getDataAtCell(row, 9),
-                        usuario: 1
                     };
 
-                    // Llama a la función actualizarRegistro y maneja la respuesta
-                    actualizarRegistro(id, registro)
-                        .then(function (response) {
-                            console.log('Registro actualizado con éxito:', response.data);
-                        })
-                        .catch(function (error) {
-                            console.error('Error al actualizar el registro:', error);
-                        });
+
+                    const camposObligatorios = ['nombre', 'whatsapp', 'llamada', 'emailEnviado', 'estadoNombre', 'fechaCreacion'];
+                    const registroCompleto = camposObligatorios.every((campo) => registro[campo] !== null && registro[campo] !== undefined && registro[campo] !== '');
+
+                    if (registroCompleto) {
+                        console.log("Actualizando registro");
+                        // Llama a la función actualizarRegistro y maneja la respuesta
+                        actualizarRegistro(id, registro)
+                            .then(function (response) {
+                                console.log('Registro actualizado con éxito:', response.data);
+                            })
+                            .catch(function (error) {
+                                console.error('Error al actualizar el registro:', error);
+                            });
+                    } else {
+                        console.log('No se puede guardar el registro, faltan datos.');
+                    }
+                } else {
+                    // Crea un nuevo registro a partir de los datos de la fila
+                    const registro = {
+                        id: hot.getDataAtCell(row, 0) || -1,
+                        nombre: hot.getDataAtCell(row, 1),
+                        telefono: hot.getDataAtCell(row, 2),
+                        email: hot.getDataAtCell(row, 3),
+                        whatsapp: hot.getDataAtCell(row, 4) || false,
+                        llamada: hot.getDataAtCell(row, 5) || false,
+                        emailEnviado: hot.getDataAtCell(row, 6) || false,
+                        estadoNombre: hot.getDataAtCell(row, 7),
+                        fechaCreacion: hot.getDataAtCell(row, 8),
+                        observacion: hot.getDataAtCell(row, 9),
+                    };
+
+                    const camposObligatorios = ['nombre', 'whatsapp', 'llamada', 'emailEnviado', 'estadoNombre', 'fechaCreacion'];
+                    const registroCompleto = camposObligatorios.every((campo) => registro[campo] !== null && registro[campo] !== undefined && registro[campo] !== '');
+
+                    if (registroCompleto) {
+
+                        if (registro.id !== -1) {
+                            console.log("Actualizando registro");
+                            // Llama a la función actualizarRegistro y maneja la respuesta
+                            actualizarRegistro(registro.id, registro)
+                                .then(function (response) {
+                                    console.log('Registro actualizado con éxito:', response.data);
+                                })
+                                .catch(function (error) {
+                                    console.error('Error al actualizar el registro:', error);
+                                });
+                        } else {
+                            console.log("Creando nuevo registro");
+                            // Llama a la función guardarRegistro y maneja la respuesta
+                            guardarRegistro(registro)
+                                .then(function (response) {
+                                    console.log('Registro guardado con éxito:', response.data);
+                                })
+                                .catch(function (error) {
+                                    console.error('Error al guardar el registro:', error);
+                                });
+
+                            console.log('Se ha añadido una nueva fila en el índice:', row);
+                            // Código para añadir una nueva fila
+                        }
+                        ;
+                    } else {
+                        console.log('No se puede guardar el registro, faltan datos.');
+                    }
                 }
-            }
+            },
         });
 
+        /*
+        hot.addHook('afterCreateRow', function (index, amount) {
+
+        });*/
+
+        function isLastRow(row) {
+            const lastRow = hot.countRows() - 2;
+            return row === lastRow;
+        }
+
         function guardarRegistro(registro) {
-            return axios.post('http://localhost:8080/api/leads', registro, {
+            return axios.post('https://presupuestaya-production.up.railway.app/api/leads', registro, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -170,7 +220,7 @@
         }
 
         function actualizarRegistro(id, registro) {
-            return axios.put(`http://localhost:8080/api/leads/${id}`, registro, {
+            return axios.put(`https://presupuestaya-production.up.railway.app/api/leads/${id}`, registro, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -200,6 +250,39 @@
                 loadData();
             };
             // ...
+        }
+
+        const botonEliminar = document.getElementById('eliminar-fila');
+        const eliminarFilaBtn = document.getElementById('eliminar-fila');
+        eliminarFilaBtn.addEventListener('mousedown', (event) => {
+            event.stopPropagation();
+        });
+        botonEliminar.addEventListener('click', eliminarFilaSeleccionada);
+
+        async function eliminarFilaSeleccionada() {
+            // Obtén la fila seleccionada
+            const filaSeleccionada = hot.getSelectedLast();
+
+            // Comprueba si se ha seleccionado una fila
+            if (filaSeleccionada) {
+                const row = filaSeleccionada[0];
+
+                // Comprueba si no es la última fila (la fila de "nuevo registro")
+                const id = hot.getDataAtCell(row, 0);
+
+                // Elimina el registro en el servidor
+                try {
+                    await axios.delete(`https://presupuestaya-production.up.railway.app/api/leads/${id}`);
+                    console.log(`Registro con ID ${id} eliminado con éxito`);
+
+                    // Elimina la fila de la tabla
+                    hot.alter('remove_row', row);
+                } catch (error) {
+                    console.error(`Error al eliminar el registro con ID ${id}:`, error);
+                }
+            } else {
+                console.log('No se ha seleccionado ninguna fila');
+            }
         }
 
 
