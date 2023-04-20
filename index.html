@@ -226,20 +226,20 @@ $('#inputBoton2').click(function () {
     const password = "password1";
 
     $.ajax({
-    url: `https://presupuestaya-production.up.railway.app/api/leads`,
-    type: 'POST',
-    async: false,
-    contentType: 'application/json',
-    dataType: 'jsonp',
-    username: username,
-    password: password,
-    data: JSON.stringify({
-        "nombre": nombre2,
-        "telefono": telefono2,
-        "email": nombreempresa2,
-        "tipoDeNegocio": tipoDeNegocio2,
-        "mensaje": observaciones2
-    }),
+        url: `https://presupuestaya-production.up.railway.app/api/clientes-potenciales`,
+        type: 'POST',
+        async: false,
+        contentType: 'application/json',
+        dataType: 'jsonp',
+        username: username,
+        password: password,
+        data: JSON.stringify({
+            "nombres": nombre2,
+            "telefono": telefono2,
+            "email": nombreempresa2,
+            "nombreEmpresa": tipoDeNegocio2,
+            "observaciones": observaciones2,
+        }),
     success: function (data) {
         console.log('okey');
     }
