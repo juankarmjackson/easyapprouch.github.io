@@ -21,11 +21,36 @@
 </head>
 <body>
 <header>
-    <h1>Bienvenido <span id="nombrecliente"></span></h1>
+   <div class="capa">
+    <h1>Bienvenido Juan Carlos</h1>
+   </div>
 </header>
 
+<section class="resultados">
+    <div class="resultado">
+        <h1>Nº DE LEADS</h1>
+        <div id="resultado"></div>
+    </div>
+    <div class="resultado">
+        <h1>CONTACTADOS</h1>
+        <div id="contactados"></div>
+    </div>
+    <div class="resultado">
+        <h1>NEGOCIACIONES</h1>
+        <div id="negociacion"></div>
+    </div>
+    <div class="resultado">
+        <h1>CIERRES</h1>
+        <div id="cierres"></div>
+    </div>
+    <div class="resultado">
+        <h1>TASA</h1>
+        <div id="tasa"></div>
+    </div>
+</section>
 
-<button id="eliminar-fila" class="eliminar-fila">Eliminar fila seleccionada</button>
+
+<button id="eliminar-fila" class="eliminar-fila">Eliminar fila seleccionada <i class="fa-solid fa-trash"></i></button>
 
 <div id="example-table"></div>
 <div class="page-limit">
@@ -66,54 +91,58 @@
 
         const response = await axios.get('https://presupuestaya-production.up.railway.app/api/leads/findAllByUsuarioIdAndFechaCreacionDesc/1?page=0&size=50');
         const data = response.data;
+        console.log(data);
+        
 
         const container = document.getElementById('example-table');
-const hot = new Handsontable(container, {
-  data: data,
-  rowHeaders: true,
-  colHeaders: ['ID', 'Nombre', 'Teléfono', 'Email', 'WhatsApp', 'Llamada', 'Email Enviado', 'Estado', 'Fecha de Registro', 'Observación'],
-  columns: [
-    {data: 'id'},
-    {data: 'nombre'},
-    {data: 'telefono'},
-    {data: 'email'},
-    {
-        data: 'whatsapp',
-        type: 'checkbox'
-        },
-    {data: 'llamada', type: 'checkbox'},
-    {data: 'emailEnviado', type: 'checkbox'},
-    {
-      data: 'estadoNombre',
-      type: 'dropdown',
-      source: estados,
-      title: 'Estado',
-      width: 150,
-      renderer: function(instance, td, row, col, prop, value, cellProperties) {
-        switch(value) {
-          case 'Cerrado':
-            td.style.backgroundColor = 'green';
-            td.style.color = 'white';
-            break;
-          case 'Descartado':
-            td.style.backgroundColor = 'red';
-            td.style.color = 'white';
-            break;
-          case 'En Negociacion':
-            td.style.backgroundColor = 'orange';
-            td.style.color = 'white';
-            break;
-          case 'Contactado':
-            td.style.backgroundColor = 'grey';
-            td.style.color = 'white';
-            break;
-        }
-        Handsontable.renderers.TextRenderer.apply(this, arguments);
-      }
-    },
-    {data: 'fechaCreacion', type: 'date'},
-    {data: 'observacion'},
-  ],
+        const hot = new Handsontable(container, {
+        data: data,
+        
+        rowHeaders: true,
+        colHeaders: ['ID', 'Nombre', 'Teléfono', 'Email', 'WhatsApp', 'Llamada', 'Email Enviado', 'Estado', 'Fecha de Registro', 'Observación'],
+        columns: [
+            {data: 'id'},
+            {data: 'nombre'},
+            {data: 'telefono'},
+            {data: 'email'},
+            {
+                data: 'whatsapp',
+                type: 'checkbox'
+                },
+            {data: 'llamada', type: 'checkbox'},
+            {data: 'emailEnviado', type: 'checkbox'},
+            {
+            data: 'estadoNombre',
+            type: 'dropdown',
+            source: estados,
+            title: 'Estado',
+            width: 150,
+            renderer: function(instance, td, row, col, prop, value, cellProperties) {
+                switch(value) {
+                case 'Cerrado':
+                    td.style.backgroundColor = 'green';
+                    td.style.color = 'white';
+                    break;
+                case 'Descartado':
+                    td.style.backgroundColor = 'red';
+                    td.style.color = 'white';
+                    break;
+                case 'En Negociacion':
+                    td.style.backgroundColor = 'orange';
+                    td.style.color = 'white';
+                    break;
+                case 'Contactado':
+                    td.style.backgroundColor = 'grey';
+                    td.style.color = 'white';
+                    break;
+                }
+                Handsontable.renderers.TextRenderer.apply(this, arguments);
+            }
+            },
+            {data: 'fechaCreacion', type: 'date'},
+            {data: 'observacion'},
+        ],
+
 
             
             manualRowMove: true,
@@ -226,6 +255,63 @@ const hot = new Handsontable(container, {
                 }
             },
         });
+
+        // CONTADOR TOTAL
+
+        let count = 0;
+        for (let i = 0; i < data.length; i++) {
+        if (data[i][0] !== null && data[i][0] !== '') {
+            count++;
+        }
+        }
+
+        const numeroTotal = document.getElementById('resultado');
+        numeroTotal.innerHTML =+ count;
+
+        // CONTACTADOS TOTAL
+
+        let contactados = 0;
+        for (let i = 0; i < hot.countRows(); i++) {
+        if (data[i].estadoNombre === 'Contactado') {
+            contactados++;
+        }
+        }
+
+        const contactadosTotal = document.getElementById('contactados');
+        contactadosTotal.innerHTML =+ contactados;
+
+        // EN NEGOCIACION
+        let countEnNegociacion = 0;
+        for (let i = 0; i < hot.countRows(); i++) {
+        if (data[i].estadoNombre === 'En Negociacion') {
+            countEnNegociacion++;
+        }
+        }
+
+        const enNegociacion = document.getElementById('negociacion');
+        enNegociacion.innerHTML =+ countEnNegociacion;
+
+
+        // EN CIERRES
+        let countCierres = 0;
+        for (let i = 0; i < hot.countRows(); i++) {
+        if (data[i].estadoNombre === 'Cerrado') {
+            countCierres++;
+        }
+
+        console.log(hot.countRows());
+        }
+
+        
+
+        const cierres = document.getElementById('cierres');
+        cierres.innerHTML =+ countCierres;
+
+        //TASA
+
+        let tasa = Number(count / countCierres).toFixed(1);
+        const tasaCierre = document.getElementById('tasa');
+        tasaCierre.innerHTML =+ tasa;
 
         /*
         hot.addHook('afterCreateRow', function (index, amount) {
