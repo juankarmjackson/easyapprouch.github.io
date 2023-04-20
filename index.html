@@ -215,11 +215,11 @@ inputBoton.addEventListener('click', function(){
 });
 
 $('#inputBoton2').click(function () {
-    const nombre2 = document.getElementById('nombre2').value;
-    const telefono2 = document.getElementById('telefono2').value;
-    const nombreempresa2 = document.getElementById('nombreempresa2').value;
-    const observaciones2 = document.getElementById('observaciones2').value;
-    const tipoDeNegocio2 = "Agencia de Marketing";
+    const nombre = document.getElementById('nombre').value;
+    const telefono = document.getElementById('telefono').value;
+    const nombreempresa = document.getElementById('nombreempresa').value;
+    const observaciones = document.getElementById('observaciones').value;
+    const tipoDeNegocio = "Agencia de Marketing";
 
 
     const username = "username1";
@@ -230,17 +230,17 @@ $('#inputBoton2').click(function () {
         type: 'POST',
         async: false,
         contentType: 'application/json',
-        dataType: 'jsonp',
+        dataType: 'json',
         username: username,
         password: password,
         data: JSON.stringify({
-            "nombres": nombre2,
-            "telefono": telefono2,
-            "email": nombreempresa2,
-            "nombreEmpresa": tipoDeNegocio2,
-            "observaciones": observaciones2,
+            "nombres": "Juan Perez",
+            "telefono": "555-1234",
+            "email": "juan.perez@example.com",
+            "nombreEmpresa": "Mi empresa",
+            "observaciones": "Este cliente potencial está interesado en nuestro producto"
         }),
-    success: function (data) {
+        success: function (data) {
         console.log('okey');
     }
 
