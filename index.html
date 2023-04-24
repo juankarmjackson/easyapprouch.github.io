@@ -172,43 +172,33 @@ console.log(inputBoton);
 
 inputBoton.addEventListener('click', function(){
     const nombre = document.getElementById('nombre').value;
-    const email = document.getElementById('email').value
     const telefono = document.getElementById('telefono').value;
-    // const nombreempresa = document.getElementById('nombreempresa').value;
-    // const observaciones = document.getElementById('observaciones').value;
-    const hora = new Date();
-    
+    const email = document.getElementById('email').value
+    const nombreempresa = document.getElementById('nombreempresa').value;
+    const observaciones = document.getElementById('observaciones').value;
 
 
     const username = "username1";
     const password = "password1";
 
     $.ajax({
-    url: 'https://presupuestaya-production.up.railway.app/api/leads',
-    type: 'POST',
-    async: false,
-    contentType: 'application/json',
-    dataType: 'jsonp',
-    username: username,
-    password: password,
-    data: JSON.stringify({
-        "nombre": nombre,
-        "telefono": telefono,
-        "email": email,
-        "whatsapp": "none",
-        "llamada": false,
-        "estatus": "no contactado",
-        "fechaCreacion": hora,
-    }),
-
-    // error: function (request, error) {
-    //     console.log(arguments);
-    //     alert(" Can't do because: " + error);
-    // },
-
-    success: function (data) {
-        console.log('okey');
-    }
+        url: `https://presupuestaya-production.up.railway.app/api/clientes-potenciales`,
+        type: 'POST',
+        async: false,
+        contentType: 'application/json',
+        dataType: 'json',
+        username: username,
+        password: password,
+        data: JSON.stringify({
+            "nombres": nombre,
+            "telefono": telefono,
+            "email": email,
+            "nombreEmpresa": nombreempresa,
+            "observaciones": observaciones
+        }),
+        success: function (data) {
+            console.log('okey');
+        }
 
     })
 
@@ -226,7 +216,7 @@ $('#inputBoton2').click(function () {
     const password = "password1";
 
     $.ajax({
-        url: `https://presupuestaya-production.up.railway.app/api/clientes-potenciales`,
+        url: `http://localhost:8080/api/clientes-potenciales`,
         type: 'POST',
         async: false,
         contentType: 'application/json',
@@ -234,11 +224,10 @@ $('#inputBoton2').click(function () {
         username: username,
         password: password,
         data: JSON.stringify({
-            "nombres": "Juan Perez",
-            "telefono": "555-1234",
-            "email": "juan.perez@example.com",
-            "nombreEmpresa": "Mi empresa",
-            "observaciones": "Este cliente potencial está interesado en nuestro producto"
+            "nombres": nombre,
+            "telefono": telefono,
+            "nombreEmpresa": nombreempresa,
+            "observaciones": observaciones
         }),
         success: function (data) {
         console.log('okey');
