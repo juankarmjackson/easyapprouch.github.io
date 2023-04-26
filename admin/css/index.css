@@ -11,7 +11,7 @@ header {
     background-size: cover;
 }
 
-header .capa{
+header #nombreBienvenida {
     padding: 10px;
     margin: 10px;
     background: rgb(86 125 181 / 58%);
@@ -20,7 +20,7 @@ header .capa{
     border-radius: 30px;
 }
 
-header .capa h1{
+header #nombreBienvenida h1 {
     color: white;
     padding: 10px;
 }

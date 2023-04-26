@@ -45,75 +45,33 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script type="module">
 
-
-
         $('#inputBoton').click(function () {
-            const nombre = document.getElementById('nombre').value;
-            const telefono = document.getElementById('telefono').value;
-            const nombreempresa = document.getElementById('nombreempresa').value;
-            const observaciones = document.getElementById('observaciones').value;
-            const tipoDeNegocio = "Agencia de Marketing";
 
-
-            const username = "username1";
-            const password = "password1";
+            const username = document.getElementById('nombre').value;
+            const password = document.getElementById('password').value;
 
             $.ajax({
-            url: `https://presupuestaya-production.up.railway.app/api/leads`,
-            type: 'POST',
-            async: false,
-            contentType: 'application/json',
-            dataType: 'jsonp',
-            username: username,
-            password: password,
-            data: JSON.stringify({
-                "nombre": nombre,
-                "email": telefono,
-                "webNegocio": nombreempresa,
-                "tipoDeNegocio": tipoDeNegocio,
-                "mensaje": observaciones
-            }),
-            success: function (data) {
-                console.log('okey');
-            }
+                url: `https://presupuestaya-production.up.railway.app/api/authenticate`, // Cambia esta URL a la ruta de autenticación en tu servidor
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    "username": username,
+                    "password": password
+                }),
+                success: function (data) {
+                    // Si la autenticación es exitosa, redirige al usuario a la página de leads
+                    localStorage.setItem('authToken', data.jwt);
 
-            })
+                    window.location.href = '/easyapprouch.github.io/admin/index.html'; // Cambia esta URL a la ruta de la página de leads en tu aplicación
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    // Si hay un error, muestra un mensaje al usuario
+                    alert('Error al iniciar sesión. Por favor, verifica tus credenciales e intenta nuevamente.');
+                }
+            });
 
         });
 
-        $('#inputBoton2').click(function () {
-            const nombre2 = document.getElementById('nombre2').value;
-            const telefono2 = document.getElementById('telefono2').value;
-            const nombreempresa2 = document.getElementById('nombreempresa2').value;
-            const observaciones2 = document.getElementById('observaciones2').value;
-            const tipoDeNegocio2 = "Agencia de Marketing";
-
-
-            const username = "username1";
-            const password = "password1";
-
-            $.ajax({
-            url: `https://presupuestaya-production.up.railway.app/api/leads`,
-            type: 'POST',
-            async: false,
-            contentType: 'application/json',
-            dataType: 'jsonp',
-            username: username,
-            password: password,
-            data: JSON.stringify({
-                "nombre": nombre2,
-                "email": telefono2,
-                "webNegocio": nombreempresa2,
-                "tipoDeNegocio": tipoDeNegocio2,
-                "mensaje": observaciones2
-            }),
-            success: function (data) {
-                console.log('okey');
-            }
-
-            })
-
-});
     </script>
 
 </body>
