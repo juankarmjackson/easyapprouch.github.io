@@ -2,9 +2,13 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     let estados = [];
     const authToken = localStorage.getItem('authToken');
+    /*
+                const raizUrl = 'http://localhost:8080';
+    */
+    const raizUrl = 'https://presupuestaya-production.up.railway.app';
 
     try {
-        const response = await axios.get('https://presupuestaya-production.up.railway.app/usuarios/obtenerUsuarioIdByAutentication', {
+        const response = await axios.get(raizUrl + '/usuarios/obtenerUsuarioIdByAutentication', {
             headers: {
                 'Authorization': `Bearer ` + authToken
             }
@@ -17,7 +21,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     try {
-        const response = await axios.get('https://presupuestaya-production.up.railway.app/usuarios/obtenerUsernameByAutentication', {
+        const response = await axios.get(raizUrl + '/usuarios/obtenerUsernameByAutentication', {
             headers: {
                 'Authorization': `Bearer ` + authToken
             }
@@ -45,7 +49,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     async function fetchEstados() {
         try {
-            const response = await axios.get('https://presupuestaya-production.up.railway.app/api/estados', {
+            const response = await axios.get(raizUrl + '/api/estados', {
                 headers: {
                     'Authorization': `Bearer ` + authToken
                 }
@@ -80,7 +84,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 
         try {
-            await axios.put(`https://presupuestaya-production.up.railway.app/api/configuracionRejilla/${usuarioId}`, registroConfiguracionRejilla, {
+            await axios.put(raizUrl + `/api/configuracionRejilla/${usuarioId}`, registroConfiguracionRejilla, {
                 headers: {
                     'Authorization': `Bearer ` + authToken,
                     'Content-Type': 'application/json'
@@ -105,7 +109,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         const paginaInput = document.getElementById('pagina');
         const limiteInput = document.getElementById('limite');
 
-        const urlConfiguracionRejilla = `https://presupuestaya-production.up.railway.app/api/configuracionRejilla/usuario/${usuarioId}`;
+        const urlConfiguracionRejilla = raizUrl + `/api/configuracionRejilla/usuario/${usuarioId}`;
         const responseConfiguracionRejilla = await axios.get(urlConfiguracionRejilla, {
             headers: {
                 'Authorization': `Bearer ` + authToken
@@ -126,7 +130,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             tablaContenedor.innerHTML = '';
 
             //Actualizamos la Tabla
-            const url = `https://presupuestaya-production.up.railway.app/api/leads/findAllByUsuarioIdAndFechaCreacionDesc/${usuarioId}?page=${page}&size=${size}`;
+            const url = raizUrl + `/api/leads/findAllByUsuarioIdAndFechaCreacionDesc/${usuarioId}?page=${page}&size=${size}`;
             const response = await axios.get(url, {
                 headers: {
                     'Authorization': `Bearer ` + authToken
@@ -144,8 +148,15 @@ document.addEventListener('DOMContentLoaded', async function () {
                 columns: [
                     {data: 'id'},
                     {data: 'nombre'},
-                    {data: 'telefono'},
-                    {data: 'email'},
+                    {
+                        data: 'telefono',
+                        width: 150,
+                        renderer: whatsappRenderer
+                    },
+                    {
+                        data: 'email',
+                        width: 200,
+                    },
                     {
                         data: 'whatsapp',
                         type: 'checkbox'
@@ -296,6 +307,13 @@ document.addEventListener('DOMContentLoaded', async function () {
                 },
             });
 
+            function whatsappRenderer(instance, td, row, col, prop, value, cellProperties) {
+                if (value === null || value === '') {
+                    td.innerHTML = '';
+                } else {
+                    td.innerHTML = '<a href="https://wa.me/' + value + '">' + value + '</a>';
+                }
+            }
 
             // CONTADOR TOTAL
 
@@ -364,7 +382,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             }
 
             function guardarRegistro(registro) {
-                return axios.post('https://presupuestaya-production.up.railway.app/api/leads', registro, {
+                return axios.post(raizUrl + '/api/leads', registro, {
                     headers: {
                         'Authorization': `Bearer ` + authToken,
                         'Content-Type': 'application/json'
@@ -373,7 +391,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             }
 
             function actualizarRegistro(id, registro) {
-                return axios.put(`https://presupuestaya-production.up.railway.app/api/leads/${id}`, registro, {
+                return axios.put(raizUrl + `/api/leads/${id}`, registro, {
                     headers: {
                         'Authorization': `Bearer ` + authToken,
                         'Content-Type': 'application/json'
@@ -402,7 +420,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
                     // Elimina el registro en el servidor
                     try {
-                        await axios.delete(`https://presupuestaya-production.up.railway.app/api/leads/${id}`, {
+                        await axios.delete(raizUrl + `/api/leads/${id}`, {
                             headers: {
                                 'Authorization': `Bearer ` + authToken
                             }
