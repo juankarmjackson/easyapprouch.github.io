@@ -311,7 +311,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 if (value === null || value === '') {
                     td.innerHTML = '';
                 } else {
-                    td.innerHTML = '<a href="https://wa.me/' + value + '">' + value + '</a>';
+                    td.innerHTML = '<a href="https://wa.me/' + value + '" target="_blank">' + value + '</a>';
                 }
             }
 
