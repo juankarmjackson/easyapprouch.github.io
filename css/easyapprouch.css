@@ -1,0 +1,30 @@
+body{
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.slider-principal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+    background-image: url(../img/positivenation6.gif);
+    background-size: cover;
+    position: relative;
+}
+
+.slider-principal .capa{
+    position: absolute;
+    width: 100%;
+    top: 0;
+    height: 100vh;
+    background: #4479cfdb;
+}
+
+.slider-principal .title{
+    z-index: 2;
+    color: white;
+    width: 90%;
+    margin: auto;
+}

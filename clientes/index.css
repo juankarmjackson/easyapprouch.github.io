@@ -1,0 +1,93 @@
+body{
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url();
+    background-size: cover;
+}
+
+header .capa{
+    padding: 10px;
+    margin: 10px;
+    background: rgb(86 125 181 / 58%);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(50px);
+    border-radius: 30px;
+}
+
+header .capa h1{
+    color: white;
+    padding: 10px;
+}
+
+.resultados{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.resultados .resultado{
+    border: 3px solid rgb(32, 138, 199);
+    border-radius: 10px;
+    color: rgb(32, 138, 199);
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+}
+
+#resultado{
+    font-size: 40px;
+    background-color: #9DB4D4;
+    color: white;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+#contactados{
+    font-size: 40px;
+    background-color: grey;
+    color: white;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+#negociacion{
+    font-size: 40px;
+    background-color: orange;
+    color: white;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+#cierres{
+    font-size: 40px;
+    background-color: green;
+    color: white;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+#tasa{
+    font-size: 40px;
+    background-color: rgb(17, 111, 182);
+    color: white;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+
+
+#eliminar-fila{
+    padding: 10px;
+    margin: 10px;
+    background: rgb(86 125 181 / 58%);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(50px);
+    border-radius: 30px;
+    color: white;
+}
