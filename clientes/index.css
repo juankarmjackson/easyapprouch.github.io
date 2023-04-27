@@ -100,6 +100,8 @@ footer {
     align-items: center;
     position: fixed;
     bottom: 0;
+    margin: auto;
+    width: 100%;
 }
 
 footer .box-footer {
@@ -117,4 +119,17 @@ footer .box-footer {
 footer .box-footer div a{
     color: white;
     text-decoration: none;
+}
+
+/* MEDIAS QUERY */
+
+@media (max-width: 1080px) {
+    .resultados .resultado h1 {
+        font-size: 15px;
+    }
+
+    .resultados .resultado div{
+        font-size: 30px ;
+        padding: none;
+    }
 }

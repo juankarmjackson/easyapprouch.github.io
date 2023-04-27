@@ -102,7 +102,7 @@ footer {
     align-items: center;
     position: fixed;
     bottom: 0;
-    margin: auto;
+    width: 100%;
 }
 
 footer .box-footer {
