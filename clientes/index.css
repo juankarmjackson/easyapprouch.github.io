@@ -113,3 +113,8 @@ footer .box-footer {
     align-items: center;
     color: white;
 }
+
+footer .box-footer div a{
+    color: white;
+    text-decoration: none;
+}
