@@ -11,34 +11,84 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <script src="jquery.min.js"></script>
+    <script src="../../assets/librerias/JS/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/0a7198e186.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" type="image/jpg" href="img/favicon2.png"/>
-    <link rel="stylesheet" href="css/handsontable.full.min.css">
-    <script src="handsontable.full.min.js"></script>
+    <link rel="stylesheet" href="../../assets/librerias/CSS/handsontable.full.min.css">
+    <script src="../../assets/librerias/JS/handsontable.full.min.js"></script>
     <link rel="stylesheet" href="index.css">
     <title>Easy Approuch | Dashboard</title>
+
 </head>
 <body>
 <header>
-   <div class="capa">
-    <h1>Nuevos Clientes EasyMarketing</h1>
-   </div>
+    <div id="nombreBienvenida">
+
+    </div>
 </header>
-    <zing-grid caption="Nuevos Clientes" editor-controls="all" pager="" page-size="5" layout="row" role="grid" editor="inline" viewport="tablet-portrait">
-    <zg-data src="https://presupuestaya-production.up.railway.app/api/clientes-potenciales"></zg-data>
-    </zing-grid>
-    <!-- basic options with function reference for body --><zg-param name="readOptions" value='{"body": "_fncStringReference"}'></zg-param><zg-param name="createOptions" value='{"body": "_fncStringReference"}'></zg-param><zg-param name="updateOptions" value='{"body": "_fncStringReference"}'></zg-param><zg-param name="deleteOptions" value='{"body": "_fncStringReference"}'></zg-param>
+
+<section class="resultados">
+    <div class="resultado">
+        <h1>Nº DE LEADS</h1>
+        <div id="resultado"></div>
+    </div>
+    <div class="resultado">
+        <h1>CONTACTADOS</h1>
+        <div id="contactados"></div>
+    </div>
+    <div class="resultado">
+        <h1>NEGOCIACIONES</h1>
+        <div id="negociacion"></div>
+    </div>
+    <div class="resultado">
+        <h1>CIERRES</h1>
+        <div id="cierres"></div>
+    </div>
+    <div class="resultado">
+        <h1>TASA</h1>
+        <div id="tasa"></div>
+    </div>
+</section>
+
+
+<button id="eliminar-fila" class="eliminar-fila">Eliminar fila seleccionada <i class="fa-solid fa-trash"></i></button>
+
+<div id="tabla-contenedor"></div>
+
+
+<div>
+    <label for="limite">Límite de registros por página:</label>
+    <select id="limite">
+        <option value="5" selected>5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+        <option value="20">20</option>
+    </select>
+</div>
+
+<div>
+    <label for="pagina">Página:</label>
+    <input type="number" id="pagina" min="1" value="1">
+</div>
+
 <footer>
-    <ul>
-        <li>Políticas de Empresa</li>
-        <li>Preguntas Frecuentes</li>
-        <li>Aviso Legal</li>
-    </ul>
-</footer>
-
+    <div class="box-footer">
+        <div>
+      <i class="fa-solid fa-person"></i>
+        <a href="leadCRM.html"><span>CRM Leads</span></a>
+      </div>
+      <div>
+        <i class="fa-solid fa-money-bill"></i>
+        <a href="#"><span>Presupuestos</span></a>
+      </div>
+      <div>
+        <i class="fa-solid fa-money-bill"></i>
+        <a href="#"><span>Contratos</span></a>
+      </div>
+    </div>
+  </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
-<script src="https://cdn.zinggrid.com/zinggrid.min.js"></script>
-<script>
-
-</script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="../../assets/JS/rejilla.js"></script>
+</body>
+</html>

@@ -91,3 +91,25 @@ header .capa h1{
     border-radius: 30px;
     color: white;
 }
+
+/* FOOTER */
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+}
+
+footer .box-footer {
+    background: #04A1FF;
+    width: 90vw;
+    margin: auto;
+    padding: 10px;
+    border-radius: 30px 30px 0 0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    color: white;
+}
