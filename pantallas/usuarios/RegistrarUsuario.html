@@ -13,14 +13,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/0a7198e186.js" crossorigin="anonymous"></script>
-    <link rel="shortcut icon" type="image/jpg" href="img/favicon2.png"/>
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="shortcut icon" type="image/jpg" href="assets/img/favicon2.png"/>
+    <link rel="stylesheet" href="../../assets/CSS/index.css">
     <title>Easy Approuch | Login</title>
 </head>
 <body>
 <section class="slider">
     <div class="title">
-        <img src="img/easy4.png" alt="Easy Approuch | Proposal System">
+        <img src="../../assets/img/easy4.png" alt="Easy Approuch | Proposal System">
     </div>
     <div class="formulario plan">
         <div class="form">
@@ -63,7 +63,7 @@
                 // Si la autenticación es exitosa, redirige al usuario a la página de leads
                 localStorage.setItem('authToken', data.jwt);
 
-                window.location.href = '/easyapprouch.github.io/admin/index.html'; // Cambia esta URL a la ruta de la página de leads en tu aplicación
+                window.location.href = '../../index.html'; // Cambia esta URL a la ruta de la página de leads en tu aplicación
             },
             error: function (xhr, textStatus, errorThrown) {
                 // Si hay un error, muestra un mensaje al usuario
