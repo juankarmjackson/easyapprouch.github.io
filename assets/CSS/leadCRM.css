@@ -27,13 +27,27 @@ header #nombreBienvenida h1 {
     padding: 10px;
 }
 
-.resultados{
+header #tituloPantalla {
+    padding: 10px;
+    margin: 10px;
+    background: rgb(86 125 181 / 58%);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(50px);
+    border-radius: 30px;
+}
+
+header #tituloPantalla h1 {
+    color: white;
+    padding: 10px;
+}
+
+.resultados {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.resultados .resultado{
+.resultados .resultado {
     border: 3px solid rgb(32, 138, 199);
     border-radius: 10px;
     color: rgb(32, 138, 199);

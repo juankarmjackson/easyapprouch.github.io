@@ -3,29 +3,20 @@ document.addEventListener('DOMContentLoaded', async function () {
     let estados = [];
     const authToken = localStorage.getItem('authToken');
     const raizUrl = 'http://localhost:8080';
-    /*
-        const raizUrl = 'https://presupuestaya-production.up.railway.app';
-    */
+    /*const raizUrl = 'https://presupuestaya-production.up.railway.app';*/
+
     try {
         const response = await axios.get(raizUrl + '/usuarios/obtenerUsuarioIdByAutentication', {
             headers: {
                 'Authorization': `Bearer ` + authToken
             }
         });
-        const usuarioId = response.data;
+        localStorage.setItem('usuarioId', response.data);
 
-        if (Number.isInteger(usuarioId)) {
-            localStorage.setItem('usuarioId', usuarioId);
-        } else {
-            window.location.href = '../../pantallas/usuarios/login.html';
-            console.error('El usuarioId no es un entero:', usuarioId);
-        }
 
     } catch (error) {
-        window.location.href = '../../pantallas/usuarios/login.html';
         console.error('Error al obtener usuarioId:', error);
     }
-
 
     try {
         const response = await axios.get(raizUrl + '/usuarios/obtenerUsernameByAutentication', {
@@ -137,7 +128,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             tablaContenedor.innerHTML = '';
 
             //Actualizamos la Tabla
-            const url = raizUrl + `/api/leads/findAllByUsuarioIdAndFechaCreacionDesc/${usuarioId}?page=${page}&size=${size}`;
+            const url = raizUrl + `/api/clientes-potenciales`;
             const response = await axios.get(url, {
                 headers: {
                     'Authorization': `Bearer ` + authToken
@@ -151,10 +142,10 @@ document.addEventListener('DOMContentLoaded', async function () {
                 data: data,
 
                 rowHeaders: true,
-                colHeaders: ['ID', 'Nombre', 'Teléfono', 'Email', 'WhatsApp', 'Llamada', 'Email Enviado', 'Estado', 'Fecha de Registro', 'Observación'],
+                colHeaders: ['ID', 'Nombres', 'Teléfono', 'Email', 'Nombre Empresa', 'Observaciones', 'Convertido en Usuario', 'Usuario ID'],
                 columns: [
                     {data: 'id'},
-                    {data: 'nombre'},
+                    {data: 'nombres'},
                     {
                         data: 'telefono',
                         width: 150,
@@ -165,44 +156,14 @@ document.addEventListener('DOMContentLoaded', async function () {
                         width: 200,
                     },
                     {
-                        data: 'whatsapp',
-                        type: 'checkbox'
+                        data: 'nombreEmpresa',
                     },
-                    {data: 'llamada', type: 'checkbox'},
-                    {data: 'emailEnviado', type: 'checkbox'},
                     {
-                        data: 'estadoNombre',
-                        type: 'dropdown',
-                        source: estados,
-                        title: 'Estado',
-                        width: 150,
-                        renderer: function (instance, td, row, col, prop, value, cellProperties) {
-                            switch (value) {
-                                case 'Cerrado':
-                                    td.style.backgroundColor = 'green';
-                                    td.style.color = 'white';
-                                    break;
-                                case 'Descartado':
-                                    td.style.backgroundColor = 'red';
-                                    td.style.color = 'white';
-                                    break;
-                                case 'En Negociacion':
-                                    td.style.backgroundColor = 'orange';
-                                    td.style.color = 'white';
-                                    break;
-                                case 'Contactado':
-                                    td.style.backgroundColor = 'grey';
-                                    td.style.color = 'white';
-                                    break;
-                            }
-                            Handsontable.renderers.TextRenderer.apply(this, arguments);
-                        }
+                        data: 'observaciones',
                     },
-                    {data: 'fechaCreacion', type: 'date'},
-                    {data: 'observacion'},
+                    {data: 'convertidoEnUsuario', type: 'checkbox'},
+                    {data: 'usuarioId'},
                 ],
-
-
                 manualRowMove: true,
                 manualColumnMove: true,
                 contextMenu: ['row_above', 'row_below', 'remove_row', 'undo', 'redo'],
@@ -318,7 +279,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 if (value === null || value === '') {
                     td.innerHTML = '';
                 } else {
-                    td.innerHTML = '<a href="https://wa.me/' + value + '" target="_blank">' + value + '</a>';
+                    td.innerHTML = '<a href="https://wa.me/' + value + '">' + value + '</a>';
                 }
             }
 
@@ -389,7 +350,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             }
 
             function guardarRegistro(registro) {
-                return axios.post(raizUrl + '/api/leads', registro, {
+                return axios.post(raizUrl + '/api/clientes-potenciales', registro, {
                     headers: {
                         'Authorization': `Bearer ` + authToken,
                         'Content-Type': 'application/json'
@@ -398,7 +359,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             }
 
             function actualizarRegistro(id, registro) {
-                return axios.put(raizUrl + `/api/leads/${id}`, registro, {
+                return axios.put(raizUrl + `/api/clientes-potenciales/${id}`, registro, {
                     headers: {
                         'Authorization': `Bearer ` + authToken,
                         'Content-Type': 'application/json'
@@ -427,7 +388,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
                     // Elimina el registro en el servidor
                     try {
-                        await axios.delete(raizUrl + `/api/leads/${id}`, {
+                        await axios.delete(raizUrl + `/api/clientes-potenciales/${id}`, {
                             headers: {
                                 'Authorization': `Bearer ` + authToken
                             }
@@ -451,6 +412,9 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
 
+    /*
+    * Botones de administración
+    * */
     try {
         const response = await axios.get(raizUrl + '/usuarios/comprobarRoleAdministrador', {
             headers: {
@@ -469,15 +433,15 @@ document.addEventListener('DOMContentLoaded', async function () {
             const contendorBienvenida = document.getElementById('botones-admin');
             contendorBienvenida.innerHTML = "\n" +
                 "\n" +
-                "    <button id=\"clientes-potenciales\" class=\"clientes-potenciales\">Rejilla Clientes Potenciales</button>\n" +
-                "    <button id=\"usuarios\" class=\"usuarios\">Rejilla Usuarios</button>\n";
+                "    <button id=\"leads\" class=\"leads\">Leads CRM</button>\n" +
+                "    <button id=\"usuarios\" class=\"usuarios\">Usuarios</button>\n";
 
         }
 
-        document.getElementById('clientes-potenciales').addEventListener('click', redirigirRejillaClientesPotenciales);
+        document.getElementById('leads').addEventListener('click', redirigirRejillaLeads);
 
-        async function redirigirRejillaClientesPotenciales() {
-            window.location.href = '../clientePotenciales/rejillaClientesPotenciales.html';
+        async function redirigirRejillaLeads() {
+            window.location.href = '../leads/leadCRM.html';
         }
 
         document.getElementById('usuarios').addEventListener('click', redirigirRejillaUsuario);
@@ -486,14 +450,15 @@ document.addEventListener('DOMContentLoaded', async function () {
             window.location.href = '../usuarios/rejillaUsuarios.html';
         }
 
-        document.getElementById('logout').addEventListener('click', redirigirLogout);
-
-        async function redirigirLogout() {
-            window.location.href = '../usuarios/login.html';
-        }
-
     } catch (error) {
         console.error('Error al obtener usuarioId:', error);
     }
+
+    document.getElementById('usuarios').addEventListener('click', redirigirRejillaUsuario);
+
+    async function redirigirRejillaUsuario() {
+        window.location.href = '../usuarios/rejillaUsuarios.html';
+    }
+
 
 });

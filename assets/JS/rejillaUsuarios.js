@@ -3,29 +3,20 @@ document.addEventListener('DOMContentLoaded', async function () {
     let estados = [];
     const authToken = localStorage.getItem('authToken');
     const raizUrl = 'http://localhost:8080';
-    /*
-        const raizUrl = 'https://presupuestaya-production.up.railway.app';
-    */
+    /*const raizUrl = 'https://presupuestaya-production.up.railway.app';*/
+
     try {
         const response = await axios.get(raizUrl + '/usuarios/obtenerUsuarioIdByAutentication', {
             headers: {
                 'Authorization': `Bearer ` + authToken
             }
         });
-        const usuarioId = response.data;
+        localStorage.setItem('usuarioId', response.data);
 
-        if (Number.isInteger(usuarioId)) {
-            localStorage.setItem('usuarioId', usuarioId);
-        } else {
-            window.location.href = '../../pantallas/usuarios/login.html';
-            console.error('El usuarioId no es un entero:', usuarioId);
-        }
 
     } catch (error) {
-        window.location.href = '../../pantallas/usuarios/login.html';
         console.error('Error al obtener usuarioId:', error);
     }
-
 
     try {
         const response = await axios.get(raizUrl + '/usuarios/obtenerUsernameByAutentication', {
@@ -137,7 +128,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             tablaContenedor.innerHTML = '';
 
             //Actualizamos la Tabla
-            const url = raizUrl + `/api/leads/findAllByUsuarioIdAndFechaCreacionDesc/${usuarioId}?page=${page}&size=${size}`;
+            const url = raizUrl + `/usuarios/all`;
             const response = await axios.get(url, {
                 headers: {
                     'Authorization': `Bearer ` + authToken
@@ -146,63 +137,39 @@ document.addEventListener('DOMContentLoaded', async function () {
             const data = response.data;
             console.log(data);
 
+            function rolesRenderer(instance, td, row, col, prop, value, cellProperties) {
+                // Puedes cambiar la siguiente lógica de renderizado según tus necesidades
+                let rolesString = value[0].name;
+
+                // Establecer el valor de la celda y aplicar estilos si es necesario
+                td.innerHTML = rolesString;
+                td.style.fontWeight = 'bold';
+                td.style.color = 'blue';
+
+                return td;
+            }
+
+            // Registrar el renderizador personalizado
+            Handsontable.renderers.registerRenderer('rolesRenderer', rolesRenderer);
+
+
             const container = document.getElementById('tabla-contenedor');
             const hot = new Handsontable(container, {
                 data: data,
-
                 rowHeaders: true,
-                colHeaders: ['ID', 'Nombre', 'Teléfono', 'Email', 'WhatsApp', 'Llamada', 'Email Enviado', 'Estado', 'Fecha de Registro', 'Observación'],
+                colHeaders: ['ID', 'Nombre de usuario', 'Contraseña', 'Roles'],
                 columns: [
                     {data: 'id'},
-                    {data: 'nombre'},
+                    {data: 'username'},
                     {
-                        data: 'telefono',
-                        width: 150,
-                        renderer: whatsappRenderer
+                        data: 'password',
+                        renderer: 'password',
                     },
                     {
-                        data: 'email',
-                        width: 200,
+                        data: 'roles',
+                        renderer: 'rolesRenderer',
                     },
-                    {
-                        data: 'whatsapp',
-                        type: 'checkbox'
-                    },
-                    {data: 'llamada', type: 'checkbox'},
-                    {data: 'emailEnviado', type: 'checkbox'},
-                    {
-                        data: 'estadoNombre',
-                        type: 'dropdown',
-                        source: estados,
-                        title: 'Estado',
-                        width: 150,
-                        renderer: function (instance, td, row, col, prop, value, cellProperties) {
-                            switch (value) {
-                                case 'Cerrado':
-                                    td.style.backgroundColor = 'green';
-                                    td.style.color = 'white';
-                                    break;
-                                case 'Descartado':
-                                    td.style.backgroundColor = 'red';
-                                    td.style.color = 'white';
-                                    break;
-                                case 'En Negociacion':
-                                    td.style.backgroundColor = 'orange';
-                                    td.style.color = 'white';
-                                    break;
-                                case 'Contactado':
-                                    td.style.backgroundColor = 'grey';
-                                    td.style.color = 'white';
-                                    break;
-                            }
-                            Handsontable.renderers.TextRenderer.apply(this, arguments);
-                        }
-                    },
-                    {data: 'fechaCreacion', type: 'date'},
-                    {data: 'observacion'},
                 ],
-
-
                 manualRowMove: true,
                 manualColumnMove: true,
                 contextMenu: ['row_above', 'row_below', 'remove_row', 'undo', 'redo'],
@@ -318,9 +285,10 @@ document.addEventListener('DOMContentLoaded', async function () {
                 if (value === null || value === '') {
                     td.innerHTML = '';
                 } else {
-                    td.innerHTML = '<a href="https://wa.me/' + value + '" target="_blank">' + value + '</a>';
+                    td.innerHTML = '<a href="https://wa.me/' + value + '">' + value + '</a>';
                 }
             }
+
 
             // CONTADOR TOTAL
 
@@ -389,7 +357,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             }
 
             function guardarRegistro(registro) {
-                return axios.post(raizUrl + '/api/leads', registro, {
+                return axios.post(raizUrl + '/usuarios/save', registro, {
                     headers: {
                         'Authorization': `Bearer ` + authToken,
                         'Content-Type': 'application/json'
@@ -398,7 +366,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             }
 
             function actualizarRegistro(id, registro) {
-                return axios.put(raizUrl + `/api/leads/${id}`, registro, {
+                return axios.put(raizUrl + `/usuarios/${id}`, registro, {
                     headers: {
                         'Authorization': `Bearer ` + authToken,
                         'Content-Type': 'application/json'
@@ -427,7 +395,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
                     // Elimina el registro en el servidor
                     try {
-                        await axios.delete(raizUrl + `/api/leads/${id}`, {
+                        await axios.delete(raizUrl + `/usuarios/${id}`, {
                             headers: {
                                 'Authorization': `Bearer ` + authToken
                             }
@@ -450,7 +418,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
     }
 
-
     try {
         const response = await axios.get(raizUrl + '/usuarios/comprobarRoleAdministrador', {
             headers: {
@@ -468,10 +435,15 @@ document.addEventListener('DOMContentLoaded', async function () {
 
             const contendorBienvenida = document.getElementById('botones-admin');
             contendorBienvenida.innerHTML = "\n" +
-                "\n" +
-                "    <button id=\"clientes-potenciales\" class=\"clientes-potenciales\">Rejilla Clientes Potenciales</button>\n" +
-                "    <button id=\"usuarios\" class=\"usuarios\">Rejilla Usuarios</button>\n";
+                "    <button id=\"leads\" class=\"leads\">Leads CRM</button>\n" +
+                "    <button id=\"clientes-potenciales\" class=\"clientes-potenciales\">Rejilla Clientes Potenciales</button>\n"
 
+        }
+
+        document.getElementById('leads').addEventListener('click', redirigirRejillaLeads);
+
+        async function redirigirRejillaLeads() {
+            window.location.href = '../leads/leadCRM.html';
         }
 
         document.getElementById('clientes-potenciales').addEventListener('click', redirigirRejillaClientesPotenciales);
@@ -480,20 +452,14 @@ document.addEventListener('DOMContentLoaded', async function () {
             window.location.href = '../clientePotenciales/rejillaClientesPotenciales.html';
         }
 
-        document.getElementById('usuarios').addEventListener('click', redirigirRejillaUsuario);
-
-        async function redirigirRejillaUsuario() {
-            window.location.href = '../usuarios/rejillaUsuarios.html';
-        }
-
-        document.getElementById('logout').addEventListener('click', redirigirLogout);
-
-        async function redirigirLogout() {
-            window.location.href = '../usuarios/login.html';
-        }
-
     } catch (error) {
         console.error('Error al obtener usuarioId:', error);
+    }
+
+    document.getElementById('logout').addEventListener('click', redirigirLogout);
+
+    async function redirigirLogout() {
+        window.location.href = '../usuarios/login.html';
     }
 
 });
