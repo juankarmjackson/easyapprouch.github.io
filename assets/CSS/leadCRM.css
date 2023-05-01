@@ -5,11 +5,11 @@ body{
 
 header {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
-    /*
-    background-image: url();
-    */
+    
+    background-image: url(../img/positivenation6.gif);
+   
     background-size: cover;
 }
 
@@ -25,6 +25,7 @@ header #nombreBienvenida {
 header #nombreBienvenida h1 {
     color: white;
     padding: 10px;
+    font-size: 15px;
 }
 
 header #tituloPantalla {
@@ -41,59 +42,70 @@ header #tituloPantalla h1 {
     padding: 10px;
 }
 
-.resultados {
+.panel {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin: auto;
+}
+
+.panel .results {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 50%;
+}
+.panel .results .leyenda{
+    display: flex;
+    flex-direction: column;
+}
+
+.panel .results .leyenda span{
+    margin: 5px;
+}
+
+.panel .results .cifra{
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.resultados .resultado {
-    border: 3px solid rgb(32, 138, 199);
-    border-radius: 10px;
-    color: rgb(32, 138, 199);
-    padding: 10px;
-    margin: 10px;
-    text-align: center;
+.panel .results .cifra span{
+    margin: 5px;
 }
 
-#resultado{
-    font-size: 40px;
-    background-color: #9DB4D4;
-    color: white;
-    border-radius: 20px;
-    padding: 10px;
+.panel .notificaciones{
+    width: 50%;
 }
 
-#contactados{
-    font-size: 40px;
-    background-color: grey;
+.panel .cifra #resultado {
     color: white;
-    border-radius: 20px;
-    padding: 10px;
+    background-color: rgb(22, 187, 220) ;
+    padding: 8px;
+    border-radius: 30px;
 }
 
-#negociacion{
-    font-size: 40px;
-    background-color: orange;
+.panel .cifra #contactados {
     color: white;
-    border-radius: 20px;
-    padding: 10px;
+    background-color: grey ;
+    padding: 8px;
+    border-radius: 30px;
 }
 
-#cierres{
-    font-size: 40px;
-    background-color: green;
+.panel .cifra #negociacion {
     color: white;
-    border-radius: 20px;
-    padding: 10px;
+    background-color: orange ;
+    padding: 8px;
+    border-radius: 30px;
 }
 
-#tasa{
-    font-size: 40px;
-    background-color: rgb(17, 111, 182);
+.panel .cifra #cierres {
     color: white;
-    border-radius: 20px;
-    padding: 10px;
+    background-color: green ;
+    padding: 8px;
+    border-radius: 30px;
 }
 
 
@@ -101,11 +113,39 @@ header #tituloPantalla h1 {
 #eliminar-fila{
     padding: 10px;
     margin: 10px;
-    background: rgb(86 125 181 / 58%);
+    background-image: url(../img/positivenation4.png);
+    background-size: cover;
+    background-position: center;
     border: 1px solid rgba(255, 255, 255, 0.18);
-    backdrop-filter: blur(50px);
     border-radius: 30px;
     color: white;
+}
+
+#logout {
+    font-size: 20px;
+    border-radius: 30px;
+    padding: 10px;
+    border: 1px solid grey;
+}
+
+.tools{
+    display: flex;
+    align-items: center;
+}
+
+.tools .tool img{
+    width: 40px;
+}
+
+.opciones{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 10px;
+}
+
+.opciones input[type=number]{
+    width: 30px;
 }
 
 /* FOOTER */
@@ -120,7 +160,9 @@ footer {
 }
 
 footer .box-footer {
-    background: #04A1FF;
+    background-image: url(../img/positivenation4.png);
+    background-size: cover;
+    background-position: center;
     width: 90vw;
     margin: auto;
     padding: 10px;
@@ -129,9 +171,34 @@ footer .box-footer {
     justify-content: space-evenly;
     align-items: center;
     color: white;
+    height: 50px;
 }
 
 footer .box-footer div a{
     color: white;
     text-decoration: none;
+}
+
+@media (max-width: 500px) {
+    .panel{
+        display: block;
+    }
+
+    .panel .results {
+        width: 90%;
+        margin: auto;
+    }
+
+    .panel .notificaciones {
+        width: 90%;
+        margin: auto;
+    }
+
+    footer .box-footer div .enlace{
+        display: none;
+    }
+
+    footer .box-footer div i{
+        font-size: 25px;
+    }
 }

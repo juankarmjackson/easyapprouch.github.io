@@ -24,11 +24,13 @@
 <body>
 <header>
     <div id="nombreBienvenida">
-
+    </div>
+    <div id="botones-usuarios">
+        <button id="logout" class="logout"><i class="fa-solid fa-power-off"></i></button>
     </div>
 </header>
 
-<section class="resultados">
+<!-- <section class="resultados">
     <div class="resultado">
         <h1>Nº DE LEADS</h1>
         <div id="resultado"></div>
@@ -49,50 +51,78 @@
         <h1>TASA</h1>
         <div id="tasa"></div>
     </div>
+</section> -->
+
+<section class="panel">
+    <div class="results">
+        <div class="leyenda">
+            <h2>Panel</h2>
+            <span id="leads">Número de Leads Totales</span>
+            <span>Contactados</span>
+            <span>En Fase de Negociación</span>
+            <span>Cerrado</span>
+        </div>
+        <div class="cifra">
+            <h2 style="color: white;">Puntos</h2>
+            <span id="resultado"></span>
+            <span id="contactados"></span>
+            <span id="negociacion"></span>
+            <span id="cierres"></span>
+        </div>
+    </div>
+    <div class="notificaciones">
+        <h1>Notificaciones</h1>
+        <span>🚀 Descubre las 3 Mejores Formas de cualificar los leads</span><br>
+        <span>🚀 Sácale provecho a nuestro sistema EASY</span><br>
+        <span>🚀 Las Agencias de Marketing tienen una tasa de cierre de 2 Puntos.</span><br>
+        <span>🚀 Hacer una buena propuesta se tarda de media 2h y tiene un alto coste en esfuerzos sino se cierra</span>
+    </div>
 </section>
 
 <div id="botones-admin">
 
 </div>
-
-<div id="botones-usuarios">
-    <button id="logout" class="logout">Cerrar Sesión</button>
+<div class="tools">
+    <div class="tool">
+        <button id="eliminar-fila" class="eliminar-fila">Eliminar filas seleccionadas <i class="fa-solid fa-trash"></i></button>
+        <img src="../../assets/img/fb.png" alt="Conectarse con Facebook">
+        <img src="../../assets/img/google.png" alt="Conectarse con Google">
+    </div>
+    <div></div>
 </div>
-
-
-<button id="eliminar-fila" class="eliminar-fila">Eliminar fila seleccionada <i class="fa-solid fa-trash"></i></button>
 
 <div id="tabla-contenedor"></div>
-
-
-<div>
-    <label for="limite">Límite de registros por página:</label>
-    <select id="limite">
-        <option value="5" selected>5</option>
-        <option value="10">10</option>
-        <option value="15">15</option>
-        <option value="20">20</option>
-    </select>
+<div class="opciones">
+    <div>
+        <label for="pagina">Página:</label>
+        <input type="number" id="pagina" min="1" value="1">
+    </div>
+    <div>
+        <label for="limite">Límite de registros por página:</label>
+        <select id="limite">
+            <option value="5" selected>5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+        </select>
+    </div>
 </div>
 
-<div>
-    <label for="pagina">Página:</label>
-    <input type="number" id="pagina" min="1" value="1">
-</div>
+<div style="height: 80px"></div>
 
 <footer>
     <div class="box-footer">
         <div>
-      <i class="fa-solid fa-person"></i>
-        <a href="leadCRM.html"><span>CRM Leads</span></a>
+      <i class="fa-solid fa-person"><a href="leadCRM.html"></a></i>
+        <a class="enlace" href="leadCRM.html"><span>CRM</span></a>
       </div>
       <div>
         <i class="fa-solid fa-money-bill"></i>
-        <a href="#"><span>Presupuestos</span></a>
+        <a  class="enlace" href="#"><span>Presupuestos</span></a>
       </div>
       <div>
-        <i class="fa-solid fa-money-bill"></i>
-        <a href="#"><span>Contratos</span></a>
+        <i class="fa-solid fa-pen-nib"></i>
+        <a class="enlace" href="#"><span>Contratos</span></a>
       </div>
     </div>
   </footer>
