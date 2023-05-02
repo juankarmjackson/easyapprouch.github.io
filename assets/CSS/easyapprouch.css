@@ -36,6 +36,8 @@ body{
 .copy{
     width: 90%;
     margin: auto;
+    max-width: 1000px;
+    padding: 10px;
 }
 
 .gainpoints{
@@ -73,6 +75,27 @@ body{
     width: 90%;
     margin: auto;
 }
+
+.adquisicion {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.adquisicion .flyer {
+    width: 50%;
+}
+
+.adquisicion .flyer img{
+    width: 80%;
+}
+
+.adquisicion .historia {
+    width: 50%;
+}
+
 
 /* FOOTER */
 
