@@ -1,3 +1,9 @@
+const authToken = localStorage.getItem('authToken');
+const raizUrl = 'http://localhost:8080';
+/*
+    const raizUrl = 'https://presupuestaya-production.up.railway.app';
+*/
+
 document.addEventListener('DOMContentLoaded', async function () {
 
     let estados = [];
@@ -497,4 +503,79 @@ document.addEventListener('DOMContentLoaded', async function () {
         console.error('Error al obtener usuarioId:', error);
     }
 
+});
+
+
+// Carga el SDK de Facebook de manera asíncrona
+(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+// Inicializa el SDK de Facebook
+window.fbAsyncInit = function () {
+    FB.init({
+        appId: 'yourAppId', // Reemplaza con tu App ID de Facebook
+        cookie: true,
+        xfbml: true,
+        version: 'v12.0'
+    });
+};
+
+
+// Función para manejar el inicio de sesión con Facebook
+function loginWithFacebook() {
+
+    FB.init({
+        appId: '188091867431061',
+        autoLogAppEvents: true,
+        xfbml: true,
+        version: 'v12.0'
+    });
+
+    console.log("Iniciando sesión con Facebook");
+
+    FB.login(function (response) {
+        if (response.authResponse) {
+            // ... (código anterior)
+
+            // Si el inicio de sesión es exitoso, redirige al usuario al punto final de tu aplicación Spring Boot
+            const url = raizUrl + `/login/facebook?accessToken=${response.authResponse.accessToken}`;
+            axios.get(url, {
+                headers: {
+                    'Authorization': `Bearer ` + authToken
+                }
+            }).then(axiosResponse => {
+                const data = axiosResponse.status;
+                console.log(data);
+                location.reload();
+
+                /*
+                                if (data === true) {
+                                    location.reload();
+                                }else {
+                                    location.reload();
+                                }
+                */
+
+            }).catch(error => {
+                console.error('Error al realizar la solicitud a la API: ', error);
+                location.reload();
+            });
+
+        } else {
+            // Manejar el caso en que el usuario no complete el inicio de sesión
+        }
+    }, {scope: 'public_profile,email'}); // Añade otros permisos aquí si es necesario
+
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const botonFacebook = document.getElementById("boton-facebook");
+
+    botonFacebook.addEventListener("click", loginWithFacebook);
 });
