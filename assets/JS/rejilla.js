@@ -8,10 +8,6 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     let estados = [];
     const authToken = localStorage.getItem('authToken');
-    /*
-        const raizUrl = 'http://localhost:8080';
-    */
-    const raizUrl = 'https://presupuestaya-production.up.railway.app';
 
     try {
         const response = await axios.get(raizUrl + '/usuarios/obtenerUsuarioIdByAutentication', {
