@@ -96,6 +96,46 @@ body{
     width: 50%;
 }
 
+/* LANDING */
+
+.palancas-compra {
+    padding: 10px;
+    margin: 10px;
+    min-height: 500px;
+}
+
+.palancas-compra .texto-compra h1{
+    font-weight: bolder;
+    font-size: 30px;
+    color: black;
+    padding: 10px;
+    max-width: 400px;
+}
+
+.palancas{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.palanca {
+    margin: 20px;
+    padding: 10px;
+    min-height: 250px;
+}
+
+.palanca h2{
+    color:red;
+    font-size: 25px;
+}
+
+.videoask{
+    margin: 10px auto;
+    padding: 50px;
+}
+
 
 /* FOOTER */
 
