@@ -515,7 +515,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 // Inicializa el SDK de Facebook
 window.fbAsyncInit = function () {
     FB.init({
-        appId: 'yourAppId', // Reemplaza con tu App ID de Facebook
+        appId: '598094998940576', // Reemplaza con tu App ID de Facebook
         cookie: true,
         xfbml: true,
         version: 'v12.0'
@@ -527,7 +527,7 @@ window.fbAsyncInit = function () {
 function loginWithFacebook() {
 
     FB.init({
-        appId: '188091867431061',
+        appId: '598094998940576',
         autoLogAppEvents: true,
         xfbml: true,
         version: 'v12.0'
@@ -566,7 +566,7 @@ function loginWithFacebook() {
         } else {
             // Manejar el caso en que el usuario no complete el inicio de sesión
         }
-    }, {scope: 'public_profile,email'}); // Añade otros permisos aquí si es necesario
+    }, {scope: 'public_profile,email,pages_show_list,leads_retrieval'}); // Añade otros permisos aquí si es necesario
 
 }
 
