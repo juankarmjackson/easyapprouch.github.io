@@ -169,6 +169,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     {
                         data: 'email',
                         width: 200,
+                        renderer: emailRenderer // Añade esta línea para usar el renderer de correo electrónico
                     },
                     {
                         data: 'whatsapp',
@@ -333,6 +334,14 @@ document.addEventListener('DOMContentLoaded', async function () {
                     td.innerHTML = '';
                 } else {
                     td.innerHTML = '<a href="https://wa.me/' + value + '" target="_blank">' + value + '</a>';
+                }
+            }
+
+            function emailRenderer(instance, td, row, col, prop, value, cellProperties) {
+                if (value === null || value === '') {
+                    td.innerHTML = '';
+                } else {
+                    td.innerHTML = '<a href="https://mail.google.com/mail/u/0/?view=cm&fs=1&to=' + value + '" target="_blank">' + value + '</a>';
                 }
             }
 
