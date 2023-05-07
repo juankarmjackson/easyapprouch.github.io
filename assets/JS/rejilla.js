@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     /*
-    * Paginación de registros
+    * HandSomeTable
     * */
 
     async function loadData() {
@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                         }
                     },
                     {
-                        data: 'fechaCreacion',
+                        data: 'fecha',
                         width: 150,
                         type: 'date'
                     },
@@ -254,12 +254,12 @@ document.addEventListener('DOMContentLoaded', async function () {
                             llamada: hot.getDataAtCell(row, 5) || false,
                             emailEnviado: hot.getDataAtCell(row, 6) || false,
                             estadoNombre: hot.getDataAtCell(row, 7),
-                            fechaCreacion: hot.getDataAtCell(row, 8),
+                            fecha: hot.getDataAtCell(row, 8),
                             observacion: hot.getDataAtCell(row, 9),
                         };
 
 
-                        const camposObligatorios = ['nombre', 'whatsapp', 'llamada', 'emailEnviado', 'estadoNombre', 'fechaCreacion'];
+                        const camposObligatorios = ['nombre', 'whatsapp', 'llamada', 'emailEnviado', 'estadoNombre', 'fecha'];
                         const registroCompleto = camposObligatorios.every((campo) => registro[campo] !== null && registro[campo] !== undefined && registro[campo] !== '');
 
                         if (registroCompleto) {
@@ -286,11 +286,11 @@ document.addEventListener('DOMContentLoaded', async function () {
                             llamada: hot.getDataAtCell(row, 5) || false,
                             emailEnviado: hot.getDataAtCell(row, 6) || false,
                             estadoNombre: hot.getDataAtCell(row, 7),
-                            fechaCreacion: hot.getDataAtCell(row, 8),
+                            fecha: hot.getDataAtCell(row, 8),
                             observacion: hot.getDataAtCell(row, 9),
                         };
 
-                        const camposObligatorios = ['nombre', 'whatsapp', 'llamada', 'emailEnviado', 'estadoNombre', 'fechaCreacion'];
+                        const camposObligatorios = ['nombre', 'whatsapp', 'llamada', 'emailEnviado', 'estadoNombre', 'fecha'];
                         const registroCompleto = camposObligatorios.every((campo) => registro[campo] !== null && registro[campo] !== undefined && registro[campo] !== '');
 
                         if (registroCompleto) {
@@ -311,6 +311,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                                 guardarRegistro(registro)
                                     .then(function (response) {
                                         console.log('Registro guardado con éxito:', response.data);
+                                        actualizarRejilla();
                                     })
                                     .catch(function (error) {
                                         console.error('Error al guardar el registro:', error);
@@ -512,6 +513,48 @@ document.addEventListener('DOMContentLoaded', async function () {
         console.error('Error al obtener usuarioId:', error);
     }
 
+
+    /*
+    * Actualizar rejilla
+    * */
+    function actualizarRejilla() {
+        // Guarda el tamaño actual del contenedor antes de eliminar la tabla
+        var container = document.getElementById('tabla-contenedor');
+        lastContainerHeight = container.offsetHeight;
+
+        // Elimina la tabla Handsontable
+        while (container.firstChild) {
+            container.removeChild(container.firstChild);
+        }
+
+        // Actualiza el tamaño del contenedor antes de recargar la tabla
+        /*        if (lastContainerHeight) {
+                    container.style.height = lastContainerHeight + 'px';
+                } else {
+                    container.style.height = 'auto';
+                }*/
+
+        loadData();
+    }
+
+
+    function removeHandsontable() {
+        var container = document.getElementById('tabla-contenedor');
+        lastContainerHeight = container.offsetHeight;
+
+        while (container.firstChild) {
+            container.removeChild(container.firstChild);
+        }
+    }
+
+    function updateContainerSize() {
+        var container = document.getElementById('tabla-contenedor');
+        if (lastContainerHeight) {
+            container.style.height = lastContainerHeight + 'px';
+        } else {
+            container.style.height = 'auto';
+        }
+    }
 });
 
 

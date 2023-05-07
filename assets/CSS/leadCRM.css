@@ -229,11 +229,17 @@ footer .box-footer div a{
         margin: auto;
     }
 
-    footer .box-footer div .enlace{
+    footer .box-footer div .enlace {
         display: none;
     }
 
-    footer .box-footer div i{
+    footer .box-footer div i {
         font-size: 25px;
     }
 }
+
+/*.tabla-contenedor-fixed {
+    background-color: #d5ffc7;
+}*/
+
+
