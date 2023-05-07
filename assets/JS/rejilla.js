@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     },
                     {
                         data: 'email',
-                        width: 200,
+                        width: 250,
                         renderer: emailRenderer // Añade esta línea para usar el renderer de correo electrónico
                     },
                     {
@@ -207,7 +207,6 @@ document.addEventListener('DOMContentLoaded', async function () {
                     },
                     {
                         data: 'fecha',
-                        width: 150,
                         type: 'date'
                     },
                     {
