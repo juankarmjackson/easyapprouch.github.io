@@ -157,7 +157,10 @@ document.addEventListener('DOMContentLoaded', async function () {
                 colHeaders: ['ID', 'Nombre', 'Teléfono', 'Email', 'WhatsApp', 'Llamada', 'Email Enviado', 'Estado', 'Fecha de Registro', 'Observación'],
                 columns: [
                     {data: 'id'},
-                    {data: 'nombre'},
+                    {
+                        data: 'nombre',
+                        width: 150,
+                    },
                     {
                         data: 'telefono',
                         width: 150,
@@ -201,8 +204,15 @@ document.addEventListener('DOMContentLoaded', async function () {
                             Handsontable.renderers.TextRenderer.apply(this, arguments);
                         }
                     },
-                    {data: 'fechaCreacion', type: 'date'},
-                    {data: 'observacion'},
+                    {
+                        data: 'fechaCreacion',
+                        width: 150,
+                        type: 'date'
+                    },
+                    {
+                        data: 'observacion',
+                        width: 250
+                    },
                 ],
 
 
@@ -489,12 +499,15 @@ document.addEventListener('DOMContentLoaded', async function () {
             window.location.href = '../usuarios/rejillaUsuarios.html';
         }
 
-        document.getElementById('logout').addEventListener('click', redirigirLogout);
+        /*
 
-        async function redirigirLogout() {
-            window.location.href = '../usuarios/login.html';
-        }
+                document.getElementById('logout').addEventListener('click', redirigirLogout);
 
+                async function redirigirLogout() {
+                    window.location.href = '../usuarios/login.html';
+                }
+
+        */
     } catch (error) {
         console.error('Error al obtener usuarioId:', error);
     }
@@ -574,4 +587,23 @@ document.addEventListener("DOMContentLoaded", function () {
     const botonFacebook = document.getElementById("boton-facebook");
 
     botonFacebook.addEventListener("click", loginWithFacebook);
+});
+
+
+document.getElementById('logout').addEventListener('click', function () {
+    fetch(raizUrl + '/api/logout', {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ` + authToken
+        },
+    })
+        .then(function (response) {
+            if (response.status === 200) {
+                console.log('Sesión cerrada correctamente');
+                window.location.href = '../../pantallas/usuarios/login.html';
+                // Aquí puedes redirigir al usuario a la página de inicio de sesión o realizar otras acciones
+            } else {
+                console.log('Error al cerrar la sesión');
+            }
+        });
 });
