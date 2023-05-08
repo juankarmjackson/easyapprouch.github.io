@@ -29,6 +29,22 @@ document.addEventListener('DOMContentLoaded', async function () {
         console.error('Error al obtener usuarioId:', error);
     }
 
+    try {
+        const response = await axios.get(raizUrl + '/api/token_miro/findByUsuario', {
+            headers: {
+                'Authorization': `Bearer ` + authToken
+            }
+        });
+        const tokenMiro = response.data;
+
+        const contenedorMiro = document.getElementById('miro');
+        contenedorMiro.innerHTML = '<iframe src="' + tokenMiro + '" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>';
+
+
+    } catch (error) {
+        console.error('No se encuentra el token de acceso al miro:', error);
+    }
+
 
     try {
         const response = await axios.get(raizUrl + '/usuarios/obtenerUsernameByAutentication', {

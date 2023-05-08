@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             const hot = new Handsontable(container, {
                 data: data,
                 rowHeaders: true,
-                colHeaders: ['ID', 'Nombre de usuario', 'Contraseña', 'Roles'],
+                colHeaders: ['ID', 'Nombre de usuario', 'Contraseña', 'Roles', 'Link Miro'],
                 columns: [
                     {data: 'id'},
                     {data: 'username'},
@@ -171,15 +171,20 @@ document.addEventListener('DOMContentLoaded', async function () {
                         data: 'roles',
                         renderer: 'rolesRenderer',
                     },
+                    {
+                        data: 'tokenMiro',
+                        width: 300,
+                    },
                 ],
                 manualRowMove: true,
                 manualColumnMove: true,
                 contextMenu: ['row_above', 'row_below', 'remove_row', 'undo', 'redo'],
                 licenseKey: 'non-commercial-and-evaluation',
                 minSpareRows: 1,
-                hiddenColumns: {
+                hiddenColumns: {/*
                     columns: [0], // Agrega esta línea para ocultar la columna ID
                     indicators: false // Desactiva los indicadores visuales de las columnas ocultas
+                */
                 },
                 beforeCopy: function (data, coords) {
                     for (let i = 0; i < data.length; i++) {
@@ -203,19 +208,14 @@ document.addEventListener('DOMContentLoaded', async function () {
                         * */
                         const id = hot.getDataAtCell(row, 0) || -1; // Asegúrate de que la columna 0 contiene el ID
                         const registro = {
-                            nombre: hot.getDataAtCell(row, 1),
-                            telefono: hot.getDataAtCell(row, 2),
-                            email: hot.getDataAtCell(row, 3),
-                            whatsapp: hot.getDataAtCell(row, 4) || false,
-                            llamada: hot.getDataAtCell(row, 5) || false,
-                            emailEnviado: hot.getDataAtCell(row, 6) || false,
-                            estadoNombre: hot.getDataAtCell(row, 7),
-                            fechaCreacion: hot.getDataAtCell(row, 8),
-                            observacion: hot.getDataAtCell(row, 9),
+                            username: hot.getDataAtCell(row, 1),
+                            password: hot.getDataAtCell(row, 2),
+                            roles: hot.getDataAtCell(row, 3),
+                            tokenMiro: hot.getDataAtCell(row, 4),
                         };
 
 
-                        const camposObligatorios = ['nombre', 'whatsapp', 'llamada', 'emailEnviado', 'estadoNombre', 'fechaCreacion'];
+                        const camposObligatorios = ['username', 'password', 'roles'];
                         const registroCompleto = camposObligatorios.every((campo) => registro[campo] !== null && registro[campo] !== undefined && registro[campo] !== '');
 
                         if (registroCompleto) {
@@ -234,19 +234,14 @@ document.addEventListener('DOMContentLoaded', async function () {
                     } else {
                         // Crea un nuevo registro a partir de los datos de la fila
                         const registro = {
-                            id: hot.getDataAtCell(row, 0) || -1,
-                            nombre: hot.getDataAtCell(row, 1),
-                            telefono: hot.getDataAtCell(row, 2),
-                            email: hot.getDataAtCell(row, 3),
-                            whatsapp: hot.getDataAtCell(row, 4) || false,
-                            llamada: hot.getDataAtCell(row, 5) || false,
-                            emailEnviado: hot.getDataAtCell(row, 6) || false,
-                            estadoNombre: hot.getDataAtCell(row, 7),
-                            fechaCreacion: hot.getDataAtCell(row, 8),
-                            observacion: hot.getDataAtCell(row, 9),
+                            username: hot.getDataAtCell(row, 1),
+                            password: hot.getDataAtCell(row, 2),
+                            roles: hot.getDataAtCell(row, 3),
+                            tokenMiro: hot.getDataAtCell(row, 4),
                         };
 
-                        const camposObligatorios = ['nombre', 'whatsapp', 'llamada', 'emailEnviado', 'estadoNombre', 'fechaCreacion'];
+
+                        const camposObligatorios = ['username', 'password', 'roles'];
                         const registroCompleto = camposObligatorios.every((campo) => registro[campo] !== null && registro[campo] !== undefined && registro[campo] !== '');
 
                         if (registroCompleto) {
@@ -435,8 +430,8 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         async function crearBotones() {
 
-            const contendorBienvenida = document.getElementById('botones-admin');
-            contendorBienvenida.innerHTML = "\n" +
+            const botonesAdmin = document.getElementById('botones-admin');
+            botonesAdmin.innerHTML = "\n" +
                 "    <button id=\"leads\" class=\"leads\">Leads CRM</button>\n" +
                 "    <button id=\"clientes-potenciales\" class=\"clientes-potenciales\">Rejilla Clientes Potenciales</button>\n"
 
