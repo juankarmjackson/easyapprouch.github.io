@@ -234,6 +234,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     } else {
                         // Crea un nuevo registro a partir de los datos de la fila
                         const registro = {
+                            id: hot.getDataAtCell(row, 0) || -1,
                             username: hot.getDataAtCell(row, 1),
                             password: hot.getDataAtCell(row, 2),
                             roles: hot.getDataAtCell(row, 3),
