@@ -131,6 +131,21 @@ body{
     font-size: 25px;
 }
 
+.palanca button{
+    margin: auto;
+    display: flex;
+    background: red;
+    padding: 10px;
+    border-radius: 30px;
+    font-size: 20px;
+    border: none;
+}
+
+.palanca button a{
+    text-decoration: none;
+    color: white;
+}
+
 .videoask{
     margin: 10px auto;
     padding: 50px;
@@ -160,4 +175,11 @@ footer .box-footer {
 }
 
 
+/* MEDIAS QUERYS */
 
+@media (max-width: 850px) {
+    .palancas {
+        display: block;
+    }
+
+}
