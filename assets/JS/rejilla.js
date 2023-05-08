@@ -280,7 +280,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                             emailEnviado: hot.getDataAtCell(row, 6) || false,
                             estadoNombre: hot.getDataAtCell(row, 7),
                             fecha: hot.getDataAtCell(row, 8),
-                            observacion: hot.getDataAtCell(row, 9),
+                            observacion: hot.getDataAtCell(row, 10),
                         };
 
 
@@ -313,7 +313,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                             emailEnviado: hot.getDataAtCell(row, 6) || false,
                             estadoNombre: hot.getDataAtCell(row, 7),
                             fecha: hot.getDataAtCell(row, 8),
-                            observacion: hot.getDataAtCell(row, 9),
+                            observacion: hot.getDataAtCell(row, 10),
                         };
 
                         const camposObligatorios = ['nombre', 'whatsapp', 'llamada', 'emailEnviado'];
@@ -337,7 +337,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                                 guardarRegistro(registro)
                                     .then(function (response) {
                                         console.log('Registro guardado con éxito:', response.data);
-                                        alert('Registro guardado con éxito con Id:' + response.data.id);
+                                        console.log('Registro guardado con éxito con Id:' + response.data.id);
                                         actualizarRejilla();
                                     })
                                     .catch(function (error) {
