@@ -36,13 +36,11 @@ document.addEventListener('DOMContentLoaded', async function () {
             }
         });
         var tokenMiro = response.data;
-        if (tokenMiro !== null) {
-            var contenedorMiro = document.getElementById('contenedorMiro');
-            contenedorMiro.innerHTML = '\n' +
-                '    <div class="miro">\n' +
-                '        <iframe src="' + tokenMiro + '" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>\n' +
-                '    </div>';
-        }
+        var contenedorMiro = document.getElementById('contenedorMiro');
+        contenedorMiro.innerHTML = '\n' +
+            '    <div class="miro">\n' +
+            '        <iframe src="' + tokenMiro + '" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>\n' +
+            '    </div>';
 
     } catch (error) {
         console.error('No se encuentra el token de acceso al miro:', error);
