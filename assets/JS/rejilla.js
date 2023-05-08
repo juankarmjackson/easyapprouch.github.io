@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 data: data,
 
                 rowHeaders: true,
-                colHeaders: ['ID', 'Nombre', 'Teléfono', 'Email', 'WhatsApp', 'Llamada', 'Email Enviado', 'Estado', 'Fecha de Registro', 'Observación'],
+                colHeaders: ['ID', 'Nombre', 'Teléfono', 'Email', 'WhatsApp', 'Llamada', 'Email Enviado', 'Estado', 'Fecha', 'Fecha de Registro', 'Observación'],
                 columns: [
                     {data: 'id'},
                     {
@@ -210,6 +210,11 @@ document.addEventListener('DOMContentLoaded', async function () {
                         type: 'date'
                     },
                     {
+                        data: 'fechaRegistro',
+                        type: 'date',
+                        readOnly: true // Añade esta línea para hacer la columna de solo lectura
+                    },
+                    {
                         data: 'observacion',
                         width: 250
                     },
@@ -221,9 +226,10 @@ document.addEventListener('DOMContentLoaded', async function () {
                 contextMenu: ['row_above', 'row_below', 'remove_row', 'undo', 'redo'],
                 licenseKey: 'non-commercial-and-evaluation',
                 minSpareRows: 1,
-                hiddenColumns: {
+                hiddenColumns: {/*
                     columns: [0], // Agrega esta línea para ocultar la columna ID
                     indicators: false // Desactiva los indicadores visuales de las columnas ocultas
+               */
                 },
                 beforeCopy: function (data, coords) {
                     for (let i = 0; i < data.length; i++) {
@@ -259,7 +265,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                         };
 
 
-                        const camposObligatorios = ['nombre', 'whatsapp', 'llamada', 'emailEnviado', 'estadoNombre', 'fecha'];
+                        const camposObligatorios = ['nombre', 'whatsapp', 'llamada', 'emailEnviado'];
                         const registroCompleto = camposObligatorios.every((campo) => registro[campo] !== null && registro[campo] !== undefined && registro[campo] !== '');
 
                         if (registroCompleto) {
@@ -267,6 +273,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                             // Llama a la función actualizarRegistro y maneja la respuesta
                             actualizarRegistro(id, registro)
                                 .then(function (response) {
+                                    console.log('Registro actualizado con éxito:', response.data);
                                     console.log('Registro actualizado con éxito:', response.data);
                                 })
                                 .catch(function (error) {
@@ -290,7 +297,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                             observacion: hot.getDataAtCell(row, 9),
                         };
 
-                        const camposObligatorios = ['nombre', 'whatsapp', 'llamada', 'emailEnviado', 'estadoNombre', 'fecha'];
+                        const camposObligatorios = ['nombre', 'whatsapp', 'llamada', 'emailEnviado'];
                         const registroCompleto = camposObligatorios.every((campo) => registro[campo] !== null && registro[campo] !== undefined && registro[campo] !== '');
 
                         if (registroCompleto) {
@@ -311,6 +318,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                                 guardarRegistro(registro)
                                     .then(function (response) {
                                         console.log('Registro guardado con éxito:', response.data);
+                                        alert('Registro guardado con éxito con Id:' + response.data.id);
                                         actualizarRejilla();
                                     })
                                     .catch(function (error) {
