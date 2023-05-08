@@ -156,7 +156,10 @@ document.addEventListener('DOMContentLoaded', async function () {
                 rowHeaders: true,
                 colHeaders: ['ID', 'Nombre', 'Teléfono', 'Email', 'WhatsApp', 'Llamada', 'Email Enviado', 'Estado', 'Fecha', 'Fecha de Registro', 'Observación'],
                 columns: [
-                    {data: 'id'},
+                    {
+                        data: 'id',
+                        readOnly: true // Añade esta línea para hacer la columna de solo lectura
+                    },
                     {
                         data: 'nombre',
                         width: 150,
