@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content= "width=device-width, user-scalable=no">
+	<meta name="referrer" content="no-referrer">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link href="https://fonts.cdnfonts.com/css/lovelo" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <link rel="shortcut icon" type="image/jpg" href="/assets/img/easyapprouch.png"/>
+    <link rel="stylesheet" href="assets/CSS/easyapprouch.css">
+    <title>Easy Approuch</title>
+</head>
+<body>
+   <section class="slider-principal">
+       <div class="title">
+            <h1>Copia y Pega el Sistema de Ventas que está funcionando para tu negocio</h1>
+            <span>Duplica tus resultados con nuestra guía GRATUITA.</span>
+       </div>
+       <div class="capa"></div>
+   </section>
+<section class="palancas-compra">
+    <div class="texto-compra">
+        <h2 style="color: red">Rellena el Formulario.</h2>
+    </div>
+    <div class="palancas">
+        <div class="palanca">
+           <div>
+            <label for="">Nombre Completo</label><br>
+            <input type="text" placeholder="Escribe Tu Nombre" id="nombre" required style="width: 90%; padding: 10px; border-radius: 10px; margin: 10px; border: none"><br><br>
+           </div>
+           <div>
+            <label for="">Teléfono</label><br>
+            <input type="text" placeholder="Escribe Tu Teléfono" id="telefono" required style="width: 90%; padding: 10px; border-radius: 10px; margin: 10px; border: none"><br><br>
+           </div>
+           <div>
+            <label for="">Email</label><br>
+            <input type="text" placeholder="¿Dónde te enviamos nuestra guía?" id="email" required style="width: 90%; padding: 10px; border-radius: 10px; margin: 10px; border: none"><br><br>
+           </div>
+           <div>
+                <p id="inputBoton" style="cursor: pointer; color:white; background: red; border-radius: 30px; padding: 10px; width: 90%">Enviar</p>
+           </div>
+        </div>
+        <div class="palanca">
+            <img src="assets/img/pdf.png" alt="Copia y Pegua método de duplicar facturación">
+        </div>
+    </div>
+</section>
+    <script type="module">
+        const inputBoton = document.getElementById('inputBoton');
+console.log(inputBoton);
+
+
+inputBoton.addEventListener('click', function(){
+    const nombre = document.getElementById('nombre').value;
+    const telefono = document.getElementById('telefono').value;
+    const email = document.getElementById('email').value
+    const nombreempresa = "Registro QR";
+    const observaciones = "Registro QR";
+
+    const username = "username1";
+    const password = "password1";
+
+    $.ajax({
+        url: `https://presupuestaya-production.up.railway.app/api/clientes-potenciales`,
+        type: 'POST',
+        async: false,
+        contentType: 'application/json',
+        dataType: 'json',
+        username: username,
+        password: password,
+        data: JSON.stringify({
+            "nombres": nombre,
+            "telefono": telefono,
+            "email": email,
+            "nombreEmpresa": nombreempresa,
+            "observaciones": observaciones
+        }),
+        success: function (data) {
+            console.log('okey');
+        }
+
+    })
+
+});
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+   
+
+</body>
+</html>
