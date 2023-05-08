@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', async function () {
 
-    let estados = [];
+    let roles = [];
+    let rolesString = [];
     const authToken = localStorage.getItem('authToken');
     /*
         const raizUrl = 'http://localhost:8080';
@@ -45,18 +46,33 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     }
 
-    fetchEstados();
+    fetchRoles();
 
-    async function fetchEstados() {
+    async function fetchRoles() {
         try {
-            const response = await axios.get(raizUrl + '/api/estados', {
+            const response = await axios.get(raizUrl + '/api/roles', {
                 headers: {
                     'Authorization': `Bearer ` + authToken
                 }
             });
-            estados = response.data.map(estado => (estado.nombre));
+            roles = response.data;
         } catch (error) {
-            console.error('Error al obtener los estados:', error);
+            console.error('Error al obtener los roles:', error);
+        }
+    }
+
+    fetchRolesString();
+
+    async function fetchRolesString() {
+        try {
+            const response = await axios.get(raizUrl + '/api/roles', {
+                headers: {
+                    'Authorization': `Bearer ` + authToken
+                }
+            });
+            rolesString = response.data.map(role => (role.name));
+        } catch (error) {
+            console.error('Error al obtener los roles:', error);
         }
     }
 
@@ -140,16 +156,14 @@ document.addEventListener('DOMContentLoaded', async function () {
             console.log(data);
 
             function rolesRenderer(instance, td, row, col, prop, value, cellProperties) {
-                // Puedes cambiar la siguiente lógica de renderizado según tus necesidades
-                let rolesString = value[0].name;
-
-                // Establecer el valor de la celda y aplicar estilos si es necesario
-                td.innerHTML = rolesString;
-                td.style.fontWeight = 'bold';
-                td.style.color = 'blue';
-
-                return td;
+                if (value && Array.isArray(value)) {
+                    Handsontable.renderers.TextRenderer.apply(this, arguments);
+                    td.textContent = value.map(role => role.name).join(', ');
+                } else {
+                    Handsontable.renderers.TextRenderer.apply(this, arguments);
+                }
             }
+
 
             // Registrar el renderizador personalizado
             Handsontable.renderers.registerRenderer('rolesRenderer', rolesRenderer);
@@ -170,6 +184,25 @@ document.addEventListener('DOMContentLoaded', async function () {
                     {
                         data: 'roles',
                         renderer: 'rolesRenderer',
+                        editor: 'select',
+                        selectOptions: rolesString,
+                        multiple: true,
+                        strict: true,
+                        onBeforeChange: function rolesAfterChange(changes, source) {
+                            if (source === 'edit' || source === 'autofill') {
+                                for (const change of changes) {
+                                    const row = change[0];
+                                    const col = change[1];
+                                    const oldValue = change[2];
+                                    const newValue = change[3];
+
+                                    if (col === 'roles') {
+                                        const selectedRoles = newValue.split(',').map(roleName => roles.find(role => role.name === roleName.trim()));
+                                        hot.setDataAtCell(row, col, selectedRoles);
+                                    }
+                                }
+                            }
+                        },
                     },
                     {
                         data: 'tokenMiro',
@@ -263,6 +296,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                                 guardarRegistro(registro)
                                     .then(function (response) {
                                         console.log('Registro guardado con éxito:', response.data);
+                                        actualizarRejilla();
                                     })
                                     .catch(function (error) {
                                         console.error('Error al guardar el registro:', error);
@@ -278,76 +312,6 @@ document.addEventListener('DOMContentLoaded', async function () {
                     }
                 },
             });
-
-            function whatsappRenderer(instance, td, row, col, prop, value, cellProperties) {
-                if (value === null || value === '') {
-                    td.innerHTML = '';
-                } else {
-                    td.innerHTML = '<a href="https://wa.me/' + value + '">' + value + '</a>';
-                }
-            }
-
-
-            // CONTADOR TOTAL
-
-            let count = 0;
-            for (let i = 0; i < data.length; i++) {
-                if (data[i][0] !== null && data[i][0] !== '') {
-                    count++;
-                }
-            }
-
-            const numeroTotal = document.getElementById('resultado');
-            numeroTotal.innerHTML = +count;
-
-            // CONTACTADOS TOTAL
-
-            let contactados = 0;
-            for (let i = 0; i < hot.countRows(); i++) {
-                if (data[i].estadoNombre === 'Contactado') {
-                    contactados++;
-                }
-            }
-
-            const contactadosTotal = document.getElementById('contactados');
-            contactadosTotal.innerHTML = +contactados;
-
-            // EN NEGOCIACION
-            let countEnNegociacion = 0;
-            for (let i = 0; i < hot.countRows(); i++) {
-                if (data[i].estadoNombre === 'En Negociacion') {
-                    countEnNegociacion++;
-                }
-            }
-
-            const enNegociacion = document.getElementById('negociacion');
-            enNegociacion.innerHTML = +countEnNegociacion;
-
-
-            // EN CIERRES
-            let countCierres = 0;
-            for (let i = 0; i < hot.countRows(); i++) {
-                if (data[i].estadoNombre === 'Cerrado') {
-                    countCierres++;
-                }
-
-                console.log(hot.countRows());
-            }
-
-
-            const cierres = document.getElementById('cierres');
-            cierres.innerHTML = +countCierres;
-
-            //TASA
-
-            let tasa = Number(count / countCierres).toFixed(1);
-            const tasaCierre = document.getElementById('tasa');
-            tasaCierre.innerHTML = +tasa;
-
-            /*
-            hot.addHook('afterCreateRow', function (index, amount) {
-
-            });*/
 
             function isLastRow(row) {
                 const lastRow = hot.countRows() - 2;
@@ -372,6 +336,48 @@ document.addEventListener('DOMContentLoaded', async function () {
                 });
             }
 
+
+            /*
+            * Actualizar rejilla
+            * */
+            function actualizarRejilla() {
+                // Guarda el tamaño actual del contenedor antes de eliminar la tabla
+                var container = document.getElementById('tabla-contenedor');
+                lastContainerHeight = container.offsetHeight;
+
+                // Elimina la tabla Handsontable
+                while (container.firstChild) {
+                    container.removeChild(container.firstChild);
+                }
+
+                // Actualiza el tamaño del contenedor antes de recargar la tabla
+                /*        if (lastContainerHeight) {
+                            container.style.height = lastContainerHeight + 'px';
+                        } else {
+                            container.style.height = 'auto';
+                        }*/
+
+                loadData();
+            }
+
+
+            function removeHandsontable() {
+                var container = document.getElementById('tabla-contenedor');
+                lastContainerHeight = container.offsetHeight;
+
+                while (container.firstChild) {
+                    container.removeChild(container.firstChild);
+                }
+            }
+
+            function updateContainerSize() {
+                var container = document.getElementById('tabla-contenedor');
+                if (lastContainerHeight) {
+                    container.style.height = lastContainerHeight + 'px';
+                } else {
+                    container.style.height = 'auto';
+                }
+            }
 
             const botonEliminar = document.getElementById('eliminar-fila');
             const eliminarFilaBtn = document.getElementById('eliminar-fila');
