@@ -22,87 +22,57 @@
 </head>
 <body>
 <header>
-    <div id="tituloPantalla">
-        <h1>Clientes Potenciales</h1>
-    </div>
-
-    <div id="nombreBienvenida">
-
+    <div id="nombreBienvenida"></div>
+    <div id="botones-usuarios">
+        <button id="logout" class="logout">Cerrar Sesión</button>
     </div>
 </header>
-
-<section class="resultados">
-    <div class="resultado">
-        <h1>Nº DE LEADS</h1>
-        <div id="resultado"></div>
-    </div>
-    <div class="resultado">
-        <h1>CONTACTADOS</h1>
-        <div id="contactados"></div>
-    </div>
-    <div class="resultado">
-        <h1>NEGOCIACIONES</h1>
-        <div id="negociacion"></div>
-    </div>
-    <div class="resultado">
-        <h1>CIERRES</h1>
-        <div id="cierres"></div>
-    </div>
-    <div class="resultado">
-        <h1>TASA</h1>
-        <div id="tasa"></div>
-    </div>
-</section>
-
-
 <div id="botones-admin">
-
 </div>
 
-<div id="botones-usuarios">
-    <button id="logout" class="logout">Cerrar Sesión</button>
-</div>
+
 
 <button id="eliminar-fila" class="eliminar-fila">Eliminar fila seleccionada <i class="fa-solid fa-trash"></i></button>
 
 <div id="tabla-contenedor"></div>
 
 
-<div>
-    <label for="limite">Límite de registros por página:</label>
-    <select id="limite">
-        <option value="5" selected>5</option>
-        <option value="10">10</option>
-        <option value="15">15</option>
-        <option value="20">20</option>
-    </select>
+<div class="opciones">
+    <div>
+        <label for="pagina">Página:</label>
+        <input type="number" id="pagina" min="1" value="1">
+    </div>
+    <div>
+        <label for="limite">Límite de registros por página:</label>
+        <select id="limite">
+            <option value="100" selected>100</option>
+            <option value="200">200</option>
+            <option value="300">300</option>
+            <option value="1000">1000</option>
+        </select>
+    </div>
 </div>
 
-<div>
-    <label for="pagina">Página:</label>
-    <input type="number" id="pagina" min="1" value="1">
-</div>
+<div style="height: 80px"></div>
 
+<footer>
+    <div class="box-footer">
+        <div>
+            <i class="fa-solid fa-person"><a href="leadCRM.html"></a></i>
+            <a class="enlace" href="leadCRM.html"><span>CRM</span></a>
+        </div>
+        <div>
+            <i class="fa-solid fa-money-bill"></i>
+            <a class="enlace" href="#"><span>Presupuestos</span></a>
+        </div>
+        <div>
+            <i class="fa-solid fa-pen-nib"></i>
+            <a class="enlace" href="#"><span>Contratos</span></a>
+        </div>
+    </div>
+</footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="../../assets/JS/rejillaClientesPotenciales.js"></script>
-
-
-<script>
-
-</script>
-
-<script>
-</script>
-
-<br>
-<br>
-<br>
-
-<footer>
-    <ul>
-        <li>Políticas de Empresa</li>
-        <li>Preguntas Frecuentes</li>
-        <li>Aviso Legal</li>
-    </ul>
-</footer>
+</body>
+</html>

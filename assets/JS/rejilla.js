@@ -519,8 +519,8 @@ document.addEventListener('DOMContentLoaded', async function () {
             const contendorBienvenida = document.getElementById('botones-admin');
             contendorBienvenida.innerHTML = "\n" +
                 "\n" +
-                "    <button id=\"clientes-potenciales\" class=\"clientes-potenciales\">Rejilla Clientes Potenciales</button>\n" +
-                "    <button id=\"usuarios\" class=\"usuarios\">Rejilla Usuarios</button>\n";
+                "    <button id=\"clientes-potenciales\" class=\"clientes-potenciales\">Clientes Potenciales</button>\n" +
+                "    <button id=\"usuarios\" class=\"usuarios\">Usuarios</button>\n";
 
         }
 

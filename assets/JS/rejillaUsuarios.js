@@ -440,7 +440,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             const botonesAdmin = document.getElementById('botones-admin');
             botonesAdmin.innerHTML = "\n" +
                 "    <button id=\"leads\" class=\"leads\">Leads CRM</button>\n" +
-                "    <button id=\"clientes-potenciales\" class=\"clientes-potenciales\">Rejilla Clientes Potenciales</button>\n"
+                "    <button id=\"clientes-potenciales\" class=\"clientes-potenciales\">Clientes Potenciales</button>\n"
 
         }
 

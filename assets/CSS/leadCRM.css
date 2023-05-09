@@ -158,6 +158,17 @@ header #tituloPantalla h1 {
     width: 40px;
 }
 
+#botones-admin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+#botones-admin button{
+    margin: 10px;
+}
+
 .opciones{
     display: flex;
     justify-content: space-evenly;
