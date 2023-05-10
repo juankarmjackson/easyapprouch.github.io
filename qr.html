@@ -58,29 +58,21 @@ inputBoton.addEventListener('click', function(){
     const nombre = document.getElementById('nombre').value;
     const telefono = document.getElementById('telefono').value;
     const email = document.getElementById('email').value
-    const nombreempresa = "Registro QR";
-    const observaciones = "Registro QR";
-
-    const username = "username1";
-    const password = "password1";
 
     $.ajax({
-        url: `https://presupuestaya-production.up.railway.app/api/clientes-potenciales`,
+        url: `https://presupuestaya-production.up.railway.app/api/leads/script`,
         type: 'POST',
         async: false,
         contentType: 'application/json',
         dataType: 'json',
-        username: username,
-        password: password,
         data: JSON.stringify({
-            "nombres": nombre,
+            "nombre": nombre,
             "telefono": telefono,
             "email": email,
-            "nombreEmpresa": nombreempresa,
-            "observaciones": observaciones
+            "username": "admin",
         }),
         success: function (data) {
-            console.log('okey');
+            console.log('Enviado correctamente');
         }
 
     })
