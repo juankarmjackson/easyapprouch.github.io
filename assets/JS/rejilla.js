@@ -151,6 +151,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         const size = parseInt(limiteInput.value, 10);
 
         try {
+            let isPasting = false;
+            let pastedData = [];
             const tablaContenedor = document.getElementById('tabla-contenedor');
 
             // Vacía el contenedor de la tabla
@@ -251,10 +253,11 @@ document.addEventListener('DOMContentLoaded', async function () {
                     indicators: false // Desactiva los indicadores visuales de las columnas ocultas
                */
                 },
-                beforeCopy: function (data, coords) {
+                beforeCopy: function (data, coords) {/*
                     for (let i = 0; i < data.length; i++) {
                         data[i][0] = ''; // Establece el primer elemento (ID) de cada fila copiada como vacío
                     }
+                */
                 },
                 afterChange: function (changes, source) {
                     if (source === 'loadData') {
@@ -265,96 +268,150 @@ document.addEventListener('DOMContentLoaded', async function () {
                     const row = changes[0][0];
                     const column = changes[0][1];
 
-                    // Comprueba si es la última fila (la fila de "nuevo registro")
-                    if (!isLastRow(row)) {
-                        // Actualizar registros existentes
-                        /*
-                        * Tener cuidado con el ID 0, si existe en BDD puede ser una putada
-                        * */
-                        const id = hot.getDataAtCell(row, 0) || -1; // Asegúrate de que la columna 0 contiene el ID
-                        const registro = {
-                            nombre: hot.getDataAtCell(row, 1),
-                            telefono: hot.getDataAtCell(row, 2),
-                            email: hot.getDataAtCell(row, 3),
-                            whatsapp: hot.getDataAtCell(row, 4) || false,
-                            llamada: hot.getDataAtCell(row, 5) || false,
-                            emailEnviado: hot.getDataAtCell(row, 6) || false,
-                            estadoNombre: hot.getDataAtCell(row, 7),
-                            fecha: hot.getDataAtCell(row, 8),
-                            observacion: hot.getDataAtCell(row, 10),
-                        };
+                    // Si estamos pegando, agregamos los cambios al array de datos pegados.
+                    if (isPasting) {
+                        pastedData.push(...changes);
 
-
-                        const camposObligatorios = ['nombre', 'whatsapp', 'llamada', 'emailEnviado'];
-                        const registroCompleto = camposObligatorios.every((campo) => registro[campo] !== null && registro[campo] !== undefined && registro[campo] !== '');
-
-                        if (registroCompleto) {
-                            console.log("Actualizando registro");
-                            // Llama a la función actualizarRegistro y maneja la respuesta
-                            actualizarRegistro(id, registro)
-                                .then(function (response) {
-                                    console.log('Registro actualizado con éxito:', response.data);
-                                    console.log('Registro actualizado con éxito:', response.data);
-                                })
-                                .catch(function (error) {
-                                    console.error('Error al actualizar el registro:', error);
-                                });
-                        } else {
-                            console.log('No se puede guardar el registro, faltan datos.');
+                        // Si hemos terminado de pegar, guardamos todas las filas.
+                        if (source === 'CopyPaste.paste') {
+                            isPasting = false;
+                            const rowsToSave = groupChangesByRow(pastedData);
+                            rowsToSave.forEach(row => {
+                                guardarFilaMultiple(row);
+                            });
+                            actualizarRejilla();
+                            pastedData = [];
+                        } else if (!isPasting) {
+                            // Tu lógica de guardar una sola fila.
+                            guardarFila(row);
                         }
                     } else {
-                        // Crea un nuevo registro a partir de los datos de la fila
-                        const registro = {
-                            id: hot.getDataAtCell(row, 0) || -1,
-                            nombre: hot.getDataAtCell(row, 1),
-                            telefono: hot.getDataAtCell(row, 2),
-                            email: hot.getDataAtCell(row, 3),
-                            whatsapp: hot.getDataAtCell(row, 4) || false,
-                            llamada: hot.getDataAtCell(row, 5) || false,
-                            emailEnviado: hot.getDataAtCell(row, 6) || false,
-                            estadoNombre: hot.getDataAtCell(row, 7),
-                            fecha: hot.getDataAtCell(row, 8),
-                            observacion: hot.getDataAtCell(row, 10),
-                        };
 
-                        const camposObligatorios = ['nombre', 'whatsapp', 'llamada', 'emailEnviado'];
-                        const registroCompleto = camposObligatorios.every((campo) => registro[campo] !== null && registro[campo] !== undefined && registro[campo] !== '');
-
-                        if (registroCompleto) {
-
-                            if (registro.id !== -1) {
-                                console.log("Actualizando registro");
-                                // Llama a la función actualizarRegistro y maneja la respuesta
-                                actualizarRegistro(registro.id, registro)
-                                    .then(function (response) {
-                                        console.log('Registro actualizado con éxito:', response.data);
-                                    })
-                                    .catch(function (error) {
-                                        console.error('Error al actualizar el registro:', error);
-                                    });
-                            } else {
-                                console.log("Creando nuevo registro");
-                                // Llama a la función guardarRegistro y maneja la respuesta
-                                guardarRegistro(registro)
-                                    .then(function (response) {
-                                        console.log('Registro guardado con éxito:', response.data);
-                                        console.log('Registro guardado con éxito con Id:' + response.data.id);
-                                        actualizarRejilla();
-                                    })
-                                    .catch(function (error) {
-                                        console.error('Error al guardar el registro:', error);
-                                    });
-
-                                console.log('Se ha añadido una nueva fila en el índice:', row);
-                                // Código para añadir una nueva fila
-                            }
-                            ;
+                        // Comprueba si es la última fila (la fila de "nuevo registro")
+                        if (!isLastRow(row)) {
+                            actualizarFila(row);
                         } else {
-                            console.log('No se puede guardar el registro, faltan datos.');
+                            guardarFila(row);
                         }
+
                     }
+
+
                 },
             });
+
+            function guardarFila(row) {
+                // Crea un nuevo registro a partir de los datos de la fila
+                const registro = {
+                    id: hot.getDataAtCell(row, 0) || -1,
+                    nombre: hot.getDataAtCell(row, 1),
+                    telefono: hot.getDataAtCell(row, 2),
+                    email: hot.getDataAtCell(row, 3),
+                    whatsapp: hot.getDataAtCell(row, 4) || false,
+                    llamada: hot.getDataAtCell(row, 5) || false,
+                    emailEnviado: hot.getDataAtCell(row, 6) || false,
+                    estadoNombre: hot.getDataAtCell(row, 7),
+                    fecha: hot.getDataAtCell(row, 8),
+                    observacion: hot.getDataAtCell(row, 10),
+                };
+
+                const camposObligatorios = ['nombre', 'whatsapp', 'llamada', 'emailEnviado'];
+                const registroCompleto = camposObligatorios.every((campo) => registro[campo] !== null && registro[campo] !== undefined && registro[campo] !== '');
+
+                if (registroCompleto) {
+                    console.log("Creando nuevo registro");
+                    // Llama a la función guardarRegistro y maneja la respuesta
+                    guardarRegistro(registro)
+                        .then(function (response) {
+                            console.log('Registro guardado con éxito:', response.data);
+                            console.log('Registro guardado con éxito con Id:' + response.data.id);
+                            actualizarRejilla();
+                        })
+                        .catch(function (error) {
+                            console.error('Error al guardar el registro:', error);
+                        });
+
+                    console.log('Se ha añadido una nueva fila en el índice:', row);
+                } else {
+                    console.log('No se puede guardar el registro, faltan datos.');
+                }
+            }
+
+            function actualizarFila(row) {
+                // Actualizar registros existentes
+                /*
+                * Tener cuidado con el ID 0, si existe en BDD puede ser una putada
+                * */
+                const id = hot.getDataAtCell(row, 0) || -1; // Asegúrate de que la columna 0 contiene el ID
+                const registro = {
+                    nombre: hot.getDataAtCell(row, 1),
+                    telefono: hot.getDataAtCell(row, 2),
+                    email: hot.getDataAtCell(row, 3),
+                    whatsapp: hot.getDataAtCell(row, 4) || false,
+                    llamada: hot.getDataAtCell(row, 5) || false,
+                    emailEnviado: hot.getDataAtCell(row, 6) || false,
+                    estadoNombre: hot.getDataAtCell(row, 7),
+                    fecha: hot.getDataAtCell(row, 8),
+                    observacion: hot.getDataAtCell(row, 10),
+                };
+
+
+                const camposObligatorios = ['nombre', 'whatsapp', 'llamada', 'emailEnviado'];
+                const registroCompleto = camposObligatorios.every((campo) => registro[campo] !== null && registro[campo] !== undefined && registro[campo] !== '');
+
+                if (registroCompleto) {
+                    console.log("Actualizando registro");
+                    // Llama a la función actualizarRegistro y maneja la respuesta
+                    actualizarRegistro(id, registro)
+                        .then(function (response) {
+                            console.log('Registro actualizado con éxito:', response.data);
+                            console.log('Registro actualizado con éxito:', response.data);
+                        })
+                        .catch(function (error) {
+                            console.error('Error al actualizar el registro:', error);
+                        });
+                } else {
+                    console.log('No se puede guardar el registro, faltan datos.');
+                }
+            }
+
+            function guardarFilaMultiple(row) {
+                // Aquí llamarías a tu función para guardar la fila en la base de datos.
+                // Asumiendo que la columna 0 contiene el ID
+                const registro = {
+                    id: row['id'] || -1,
+                    nombre: row['nombre'],
+                    telefono: row['telefono'],
+                    email: row['email'],
+                    whatsapp: row['whatsapp'] || false,
+                    llamada: row['llamada'] || false,
+                    emailEnviado: row['emailEnviado'] || false,
+                    estadoNombre: row['estadoNombre'],
+                    fecha: row['fecha'],
+                    observacion: row['observacion'],
+                };
+
+
+                const camposObligatorios = ['nombre', 'whatsapp', 'llamada', 'emailEnviado'];
+                const registroCompleto = camposObligatorios.every((campo) => registro[campo] !== null && registro[campo] !== undefined && registro[campo] !== '');
+
+                if (registroCompleto) {
+                    console.log('Empezando guardado');
+
+                    // Llama a la función guardarRegistro y maneja la respuesta
+                    guardarRegistro(registro)
+                        .then(function (response) {
+                            console.log('Registro guardado con éxito:', response.data);
+                            console.log('Registro guardado con éxito con Id:' + response.data.id);
+                        })
+                        .catch(function (error) {
+                            console.error('Error al guardar el registro:', error);
+                        });
+                } else {
+                    console.log('No se puede guardar el registro, faltan datos.');
+                }
+            }
+
 
             function whatsappRenderer(instance, td, row, col, prop, value, cellProperties) {
                 if (value === null || value === '') {
@@ -370,6 +427,25 @@ document.addEventListener('DOMContentLoaded', async function () {
                 } else {
                     td.innerHTML = '<a href="https://mail.google.com/mail/u/0/?view=cm&fs=1&to=' + value + '" target="_blank">' + value + '</a>';
                 }
+            }
+
+            // Evento para marcar cuando se inicia una operación de pegado
+            hot.addHook('beforeChange', (changes, source) => {
+                if (source === 'CopyPaste.paste') {
+                    isPasting = true;
+                }
+            });
+
+            // Función para agrupar cambios por fila
+            function groupChangesByRow(changes) {
+                const rows = {};
+                changes.forEach(([row, prop, oldValue, newValue]) => {
+                    if (!(row in rows)) {
+                        rows[row] = {};
+                    }
+                    rows[row][prop] = newValue;
+                });
+                return Object.values(rows);
             }
 
             // CONTADOR TOTAL
