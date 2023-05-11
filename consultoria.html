@@ -23,6 +23,33 @@
        <div class="capa"></div>
    </section>
    <section class="palancas-compra">
+    <div class="texto-compra">
+        <h2 style="color: red">X2 En Tu Facturación.</h2>
+    </div>
+    <div class="palancas">
+        <div class="palanca">
+           <div>
+            <label for="">Nombre Completo</label><br>
+            <input type="text" placeholder="Escribe Tu Nombre" id="nombre" required style="width: 90%; padding: 10px; border-radius: 10px; margin: 10px; border: none"><br><br>
+           </div>
+           <div>
+            <label for="">Teléfono</label><br>
+            <input type="text" placeholder="Escribe Tu Teléfono" id="telefono" required style="width: 90%; padding: 10px; border-radius: 10px; margin: 10px; border: none"><br><br>
+           </div>
+           <div>
+            <label for="">Email</label><br>
+            <input type="text" placeholder="Escribe Email Principal" id="email" required style="width: 90%; padding: 10px; border-radius: 10px; margin: 10px; border: none"><br><br>
+           </div>
+           <div>
+                <p id="inputBoton" style="cursor: pointer; color:white; background: red; border-radius: 30px; padding: 10px; width: 90%"> >> Duplicar Facturación </p>
+           </div>
+        </div>
+        <div class="palanca">
+            <img src="assets/img/pdf.png" style="width: 90%;" alt="Copia y Pegua método de duplicar facturación">
+        </div>
+    </div>
+</section>
+   <section class="palancas-compra">
         <div class="texto-compra">
             <h1>¿Te sientes identificado?.</h1>
         </div>
@@ -63,6 +90,14 @@
             <h2>Paso 4</h2>
             <span>Prepararemos tus procesos de email marketing, sms marketing y whatsapp marketing.</span>
         </div>
+    </div>
+</section>
+<section class="palancas-compra">
+    <div class="texto-compra">
+        <h1>La Metodología que usan los Grandes como Tesla ahora pensada para tu negocio 🔥🚀🏎️<h1>
+    </div>
+    <div class="palancas">
+        <iframe style="width: 100%; height: 600px; border-radius: 30px;" src="https://www.youtube.com/embed/zQBOo61kQC0" title="Metodología Easy Approuch | Crece como Tesla" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>        
     </div>
 </section>
 
@@ -126,22 +161,62 @@
 </section>
 <section class="palancas-compra">
     <div class="texto-compra">
-        <h1>Precios.</h1>
+        <h2 style="color: red">Contáctanos.</h2>
     </div>
     <div class="palancas">
         <div class="palanca">
-            <h2>299€ pago único</h2>
-            <ul>
-                <li>En 2 Sesión de Videollamada completaremos nuestro sistema de mapeo de todos tus procesos: Publicidad Online, Captación, Seguimiento y Comunicación.</li>
-            </ul>
+           <div>
+            <label for="">Nombre Completo</label><br>
+            <input type="text" placeholder="Escribe Tu Nombre" id="nombre" required style="width: 90%; padding: 10px; border-radius: 10px; margin: 10px; border: none"><br><br>
+           </div>
+           <div>
+            <label for="">Teléfono</label><br>
+            <input type="text" placeholder="Escribe Tu Teléfono" id="telefono" required style="width: 90%; padding: 10px; border-radius: 10px; margin: 10px; border: none"><br><br>
+           </div>
+           <div>
+            <label for="">Email</label><br>
+            <input type="text" placeholder="Escribe Email Principal" id="email" required style="width: 90%; padding: 10px; border-radius: 10px; margin: 10px; border: none"><br><br>
+           </div>
+           <div>
+                <p id="inputBoton" style="cursor: pointer; color:white; background: red; border-radius: 30px; padding: 10px; width: 90%">Enviar</p>
+           </div>
         </div>
         <div class="palanca">
-            <button>
-                <a href="https://buy.stripe.com/9AQg1K9Hs9oTbxCdQT">Duplicar Mi Facturación este Mes</a>
-            </button>
+            <img src="assets/img/pdf.png" style="width: 90%;" alt="Copia y Pegua método de duplicar facturación">
         </div>
     </div>
 </section>
+    <script type="module">
+        const inputBoton = document.getElementById('inputBoton');
+console.log(inputBoton);
+
+
+inputBoton.addEventListener('click', function(){
+    const nombre = document.getElementById('nombre').value;
+    const telefono = document.getElementById('telefono').value;
+    const email = document.getElementById('email').value
+
+    $.ajax({
+        url: `https://presupuestaya-production.up.railway.app/api/leads/script`,
+        type: 'POST',
+        async: false,
+        contentType: 'application/json',
+        dataType: 'json',
+        data: JSON.stringify({
+            "nombre": nombre,
+            "telefono": telefono,
+            "email": email,
+            "username": "admin",
+        }),
+        success: function (data) {
+            console.log('Enviado correctamente');
+        }
+
+    })
+
+});
+
+    </script>
 <!-- Meta Pixel Code -->
 <script>
     !function(f,b,e,v,n,t,s)
@@ -159,79 +234,7 @@
     src="https://www.facebook.com/tr?id=358894079750562&ev=PageView&noscript=1"
     /></noscript>
     <!-- End Meta Pixel Code -->
-    <script type="module">
-        const inputBoton = document.getElementById('inputBoton');
-console.log(inputBoton);
-
-
-inputBoton.addEventListener('click', function(){
-    const nombre = document.getElementById('nombre').value;
-    const telefono = document.getElementById('telefono').value;
-    const email = document.getElementById('email').value
-    const nombreempresa = document.getElementById('nombreempresa').value;
-    const observaciones = document.getElementById('observaciones').value;
-
-
-    const username = "username1";
-    const password = "password1";
-
-    $.ajax({
-        url: `https://presupuestaya-production.up.railway.app/api/clientes-potenciales`,
-        type: 'POST',
-        async: false,
-        contentType: 'application/json',
-        dataType: 'json',
-        username: username,
-        password: password,
-        data: JSON.stringify({
-            "nombres": nombre,
-            "telefono": telefono,
-            "email": email,
-            "nombreEmpresa": nombreempresa,
-            "observaciones": observaciones
-        }),
-        success: function (data) {
-            console.log('okey');
-        }
-
-    })
-
-});
-
-$('#inputBoton2').click(function () {
-    const nombre = document.getElementById('nombre').value;
-    const telefono = document.getElementById('telefono').value;
-    const nombreempresa = document.getElementById('nombreempresa').value;
-    const observaciones = document.getElementById('observaciones').value;
-    const tipoDeNegocio = "Agencia de Marketing";
-
-
-    const username = "username1";
-    const password = "password1";
-
-    $.ajax({
-        url: `http://localhost:8080/api/clientes-potenciales`,
-        type: 'POST',
-        async: false,
-        contentType: 'application/json',
-        dataType: 'json',
-        username: username,
-        password: password,
-        data: JSON.stringify({
-            "nombres": nombre,
-            "telefono": telefono,
-            "nombreEmpresa": nombreempresa,
-            "observaciones": observaciones
-        }),
-        success: function (data) {
-        console.log('okey');
-    }
-
-    })
-
-});
-
-    </script>
+   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
    
