@@ -126,6 +126,11 @@ body{
     min-height: 250px;
 }
 
+.palanca img{
+    width: 550px;
+    border-radius: 10px;
+}
+
 .palanca h2{
     color:red;
     font-size: 25px;
@@ -180,6 +185,10 @@ footer .box-footer {
 @media (max-width: 850px) {
     .palancas {
         display: block;
+    }
+
+    .palancas .palanca img {
+        width: 350px;
     }
 
 }
