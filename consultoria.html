@@ -24,7 +24,7 @@
    </section>
    <section class="palancas-compra">
     <div class="texto-compra">
-        <h2 style="color: red">X2 En Tu Facturación.</h2>
+        <h1 style="color: red">X2 En Tu Facturación.</h1>
     </div>
     <div class="palancas">
         <div class="palanca">
@@ -42,10 +42,11 @@
            </div>
            <div>
                 <p id="inputBoton" style="cursor: pointer; color:white; background: red; border-radius: 30px; padding: 10px; width: 90%"> >> Duplicar Facturación </p>
+                <p id="respuesta" style="display:none;background: green; color: white; padding: 10px;">Formulario Enviado</p>
            </div>
         </div>
         <div class="palanca">
-            <img src="assets/img/pdf.png" style="width: 90%;" alt="Copia y Pegua método de duplicar facturación">
+            <img src="assets/img/positivenation3.gif" style="width: 80%; border-radius: 10px;" alt="Copia y Pegua método de duplicar facturación">
         </div>
     </div>
 </section>
@@ -161,35 +162,34 @@
 </section>
 <section class="palancas-compra">
     <div class="texto-compra">
-        <h2 style="color: red">Contáctanos.</h2>
+        <h2 style="color: red">Contáctanos para CRM.</h2>
     </div>
     <div class="palancas">
         <div class="palanca">
            <div>
             <label for="">Nombre Completo</label><br>
-            <input type="text" placeholder="Escribe Tu Nombre" id="nombre" required style="width: 90%; padding: 10px; border-radius: 10px; margin: 10px; border: none"><br><br>
+            <input type="text" placeholder="Escribe Tu Nombre" id="nombre2" required style="width: 90%; padding: 10px; border-radius: 10px; margin: 10px; border: none"><br><br>
            </div>
            <div>
             <label for="">Teléfono</label><br>
-            <input type="text" placeholder="Escribe Tu Teléfono" id="telefono" required style="width: 90%; padding: 10px; border-radius: 10px; margin: 10px; border: none"><br><br>
+            <input type="text" placeholder="Escribe Tu Teléfono" id="telefono2" required style="width: 90%; padding: 10px; border-radius: 10px; margin: 10px; border: none"><br><br>
            </div>
            <div>
             <label for="">Email</label><br>
-            <input type="text" placeholder="Escribe Email Principal" id="email" required style="width: 90%; padding: 10px; border-radius: 10px; margin: 10px; border: none"><br><br>
+            <input type="text" placeholder="Escribe Email Principal" id="email2" required style="width: 90%; padding: 10px; border-radius: 10px; margin: 10px; border: none"><br><br>
            </div>
            <div>
-                <p id="inputBoton" style="cursor: pointer; color:white; background: red; border-radius: 30px; padding: 10px; width: 90%">Enviar</p>
+                <p id="inputBoton2" style="cursor: pointer; color:white; background: red; border-radius: 30px; padding: 10px; width: 90%">Enviar</p>
+                <p id="respuesta2" style="display:none;background: green; color: white; padding: 10px;">Formulario Enviado</p>
            </div>
         </div>
         <div class="palanca">
-            <img src="assets/img/pdf.png" style="width: 90%;" alt="Copia y Pegua método de duplicar facturación">
+            <iframe style="width: 300px; height: 500px; border-radius: 30px;" src="https://www.youtube.com/embed/UJomHH_mqug" title="CRM Funcionalidad | Procesos" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
     </div>
 </section>
     <script type="module">
         const inputBoton = document.getElementById('inputBoton');
-console.log(inputBoton);
-
 
 inputBoton.addEventListener('click', function(){
     const nombre = document.getElementById('nombre').value;
@@ -209,7 +209,37 @@ inputBoton.addEventListener('click', function(){
             "username": "admin",
         }),
         success: function (data) {
-            console.log('Enviado correctamente');
+            const respuesta = document.getElementById('respuesta');
+            respuesta.style.display = "block";
+
+        }
+
+    })
+
+});
+
+const inputBoton2 = document.getElementById('inputBoton2');
+
+inputBoton2.addEventListener('click', function(){
+    const nombre2 = document.getElementById('nombre2').value;
+    const telefono2 = document.getElementById('telefono2').value;
+    const email2 = document.getElementById('email2').value
+
+    $.ajax({
+        url: `https://presupuestaya-production.up.railway.app/api/leads/script`,
+        type: 'POST',
+        async: false,
+        contentType: 'application/json',
+        dataType: 'json',
+        data: JSON.stringify({
+            "nombre": nombre2,
+            "telefono": telefono2,
+            "email": email2,
+            "username": "admin",
+        }),
+        success: function (data) {
+            const respuesta = document.getElementById('respuesta2');
+            respuesta.style.display = "block";
         }
 
     })
@@ -234,6 +264,16 @@ inputBoton.addEventListener('click', function(){
     src="https://www.facebook.com/tr?id=358894079750562&ev=PageView&noscript=1"
     /></noscript>
     <!-- End Meta Pixel Code -->
+    <script type="module">
+        (function(h,o,t,j,a,r){
+            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+            h._hjSettings={hjid:3482523,hjsv:6};
+            a=o.getElementsByTagName('head')[0];
+            r=o.createElement('script');r.async=1;
+            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+    </script>
    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
