@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta name="referrer" content="no-referrer">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.cdnfonts.com/css/lovelo" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <script src="../../assets/librerias/JS/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/0a7198e186.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" type="image/jpg" href="https://juankarmjackson.github.io/easyapprouch.github.io/assets/img/easyapprouch.png"/>
+    <link rel="stylesheet" href="../../assets/librerias/CSS/handsontable.full.min.css">
+    <script src="../../assets/librerias/JS/handsontable.full.min.js"></script>
+    <link rel="stylesheet" href="../../assets/CSS/leadCRM.css">
+    
+    <title>Easy Approuch | Dashboard </title>
+
+</head>
+<body>
+<header>
+    <div id="nombreBienvenida">
+    </div>
+    <div id="botones-usuarios">
+        <button id="logout" class="logout"><i class="fa-solid fa-power-off"></i></button>
+    </div>
+</header>
+
+<!-- <section class="resultados">
+    <div class="resultado">
+        <h1>Nº DE LEADS</h1>
+        <div id="resultado"></div>
+    </div>
+    <div class="resultado">
+        <h1>CONTACTADOS</h1>
+        <div id="contactados"></div>
+    </div>
+    <div class="resultado">
+        <h1>NEGOCIACIONES</h1>
+        <div id="negociacion"></div>
+    </div>
+    <div class="resultado">
+        <h1>CIERRES</h1>
+        <div id="cierres"></div>
+    </div>
+    <div class="resultado">
+        <h1>TASA</h1>
+        <div id="tasa"></div>
+    </div>
+</section> -->
+
+<section class="panel">
+    <div class="results">
+        <div class="leyenda">
+            <h2>Panel</h2>
+            <span id="leads">Número de Leads Totales</span>
+            <span>Contactados</span>
+            <span>En Fase de Negociación</span>
+            <span>Cerrado</span>
+        </div>
+        <div class="cifra">
+            <h2 style="color: white;">Puntos</h2>
+            <span id="resultado"></span>
+            <span id="contactados"></span>
+            <span id="negociacion"></span>
+            <span id="cierres"></span>
+        </div>
+    </div>
+    <div class="notificaciones">
+        <h1>Notificaciones</h1>
+        <span>🚀 Descubre las 3 Mejores Formas de cualificar los leads</span><br>
+        <span>🚀 Sácale provecho a nuestro sistema EASY</span><br>
+        <span>🚀 Las Agencias de Marketing tienen una tasa de cierre de 2 Puntos.</span><br>
+        <span>🚀 Hacer una buena propuesta se tarda de media 2h y tiene un alto coste en esfuerzos sino se cierra</span>
+    </div>
+</section>
+
+<div id="contenedorMiro">
+</div>
+
+<div class="tools">
+    <div class="tool">
+        <button id="eliminar-fila" class="eliminar-fila">Eliminar filas seleccionadas <i class="fa-solid fa-trash"></i>
+        </button>
+        <button id="boton-facebook"><img src="../../assets/img/fb.png" alt="Conectarse con Facebook"></button>
+        
+        <img src="../../assets/img/google.png" alt="Conectarse con Google">
+    </div>
+    <div></div>
+</div>
+
+<div id="botones-admin">
+
+</div>
+
+<div id="tabla-contenedor" class="tabla-contenedor-fixed"></div>
+<br>
+<div class="opciones">
+    <div>
+        <label for="pagina">Página:</label>
+        <input type="number" id="pagina" min="1" value="1">
+    </div>
+    <div>
+        <label for="limite">Límite de registros por página:</label>
+        <select id="limite">
+            <option value="100" selected>100</option>
+            <option value="200">200</option>
+            <option value="300">300</option>
+            <option value="1000">1000</option>
+        </select>
+    </div>
+</div>
+
+<div style="height: 80px"></div>
+
+<footer>
+    <div class="box-footer">
+        <div>
+      <i class="fa-solid fa-person"><a href="leadCRM.html"></a></i>
+        <a class="enlace" href="leadCRM.html"><span>CRM</span></a>
+      </div>
+      <div>
+        <i class="fa-solid fa-money-bill"></i>
+        <a  class="enlace" href="#"><span>Presupuestos</span></a>
+      </div>
+      <div>
+        <i class="fa-solid fa-pen-nib"></i>
+        <a class="enlace" href="#"><span>Contratos</span></a>
+      </div>
+    </div>
+  </footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="../../assets/JS/rejilla.js"></script>
+<script type="module">
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:3482523,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+</body>
+</html>

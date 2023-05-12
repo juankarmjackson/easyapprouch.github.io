@@ -1,0 +1,194 @@
+body{
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.slider-principal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 50vh;
+    background-image: url(../img/positivenation6.gif);
+    background-size: cover;
+    position: relative;
+}
+
+.slider-principal .capa{
+    position: absolute;
+    width: 100%;
+    top: 0;
+    height: 50vh;
+    
+}
+
+.slider-principal .title{
+    z-index: 2;
+    padding: 10px;
+    color: white;
+    width: 90%;
+    margin: auto;
+    background: rgba(13, 45, 190, 0.73);
+    border-radius: 30px;
+    max-width: 500px;
+}
+
+.copy{
+    width: 90%;
+    margin: auto;
+    max-width: 1000px;
+    padding: 10px;
+}
+
+.gainpoints{
+    margin: auto;
+    width: 90%;
+    text-align: center;
+}
+
+.ventajas {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+
+.gainpoints .ventajas .ventaja span{
+    background: rgba(13, 45, 190, 0.73);
+    border-radius: 30px;
+    color: white;
+    padding: 10px;
+}
+
+.ventajas .ventaja{
+    background-image: url(../img/points.png);
+    background-size: cover;
+    width:  100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.ejemplos {
+    width: 90%;
+    margin: auto;
+}
+
+.adquisicion {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.adquisicion .flyer {
+    width: 50%;
+}
+
+.adquisicion .flyer img{
+    width: 80%;
+}
+
+.adquisicion .historia {
+    width: 50%;
+}
+
+/* LANDING */
+
+.palancas-compra {
+    padding: 10px;
+    margin: 10px;
+    min-height: 500px;
+}
+
+.palancas-compra .texto-compra h1{
+    font-weight: bolder;
+    font-size: 30px;
+    color: black;
+    padding: 10px;
+    max-width: 400px;
+}
+
+.palancas{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.palanca {
+    margin: 20px;
+    padding: 10px;
+    min-height: 250px;
+}
+
+.palanca img{
+    width: 550px;
+    border-radius: 10px;
+}
+
+.palanca h2{
+    color:red;
+    font-size: 25px;
+}
+
+.palanca button{
+    margin: auto;
+    display: flex;
+    background: red;
+    padding: 10px;
+    border-radius: 30px;
+    font-size: 20px;
+    border: none;
+}
+
+.palanca button a{
+    text-decoration: none;
+    color: white;
+}
+
+.videoask{
+    margin: 10px auto;
+    padding: 50px;
+}
+
+
+/* FOOTER */
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+}
+
+footer .box-footer {
+    background: #04A1FF;
+    width: 90vw;
+    margin: auto;
+    padding: 10px;
+    border-radius: 30px 30px 0 0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    color: white;
+}
+
+
+/* MEDIAS QUERYS */
+
+@media (max-width: 850px) {
+    .palancas {
+        display: block;
+    }
+
+    .palancas .palanca img {
+        width: 350px;
+    }
+
+}
