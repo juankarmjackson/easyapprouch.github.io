@@ -147,26 +147,8 @@ header #tituloPantalla h1 {
     cursor: pointer;
 }
 
-.tools{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 90%;
-}
-
-.tools .tool img{
+.botones-herramientas img {
     width: 40px;
-}
-
-#botones-admin {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-}
-
-#botones-admin button{
-    margin: 10px;
 }
 
 .opciones{
@@ -254,4 +236,27 @@ footer .box-footer div a{
     background-color: #d5ffc7;
 }*/
 
+
+/*
+* handsometable CSS
+*/
+/*
+.handsontable td, .handsontable th {
+    border: none;
+}*/
+#tabla-contenedor {
+    width: 100%; /* Ajusta al 100% del ancho del padre */
+    height: 70vb; /* Define una altura fija, puedes cambiar este valor a tu necesidad */
+    overflow: auto;
+}
+
+/* WhatsApp en verde */
+.whatsapp-link {
+    color: green !important;
+}
+
+/* Correo electrónico en marrón */
+.email-link {
+    color: brown !important;
+}
 

@@ -90,22 +90,30 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     loadData();
 
+    /*
+    * Cambio en Configuracion Rejilla
+    * */
+
     const paginaInput = document.getElementById('pagina');
     const limiteInput = document.getElementById('limite');
+    const smsPersonalizable = document.getElementById('smsPersonalizable');
 
-    paginaInput.addEventListener('change', cambioPaginado);
-    limiteInput.addEventListener('change', cambioPaginado);
+    paginaInput.addEventListener('change', cambioConfiguracionRejilla);
+    limiteInput.addEventListener('change', cambioConfiguracionRejilla);
+    smsPersonalizable.addEventListener('change', cambioConfiguracionRejilla);
 
 
-    async function cambioPaginado() {
+    async function cambioConfiguracionRejilla() {
 
         const paginaInput = document.getElementById('pagina');
         const limiteInput = document.getElementById('limite');
+        const mensajeSMS = document.getElementById('smsPersonalizable');
 
         const registroConfiguracionRejilla = {
             id: null,
             limiteDePaginas: limiteInput.value,
             pagina: paginaInput.value,
+            mensajeSMS: mensajeSMS.value,
             usuarioId: usuarioId,
         };
 
@@ -124,6 +132,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
     }
 
+
     /*
     * HandSomeTable
     * */
@@ -135,6 +144,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         * */
         const paginaInput = document.getElementById('pagina');
         const limiteInput = document.getElementById('limite');
+        const smsEjemplo = document.getElementById('smsEjemplo');
+        const smsPersonalizable = document.getElementById('smsPersonalizable');
 
         const urlConfiguracionRejilla = raizUrl + `/api/configuracionRejilla/usuario/${usuarioId}`;
         const responseConfiguracionRejilla = await axios.get(urlConfiguracionRejilla, {
@@ -146,6 +157,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         paginaInput.value = dataConfiguracionRejilla.pagina;
         limiteInput.value = dataConfiguracionRejilla.limiteDePaginas;
+        smsPersonalizable.value = dataConfiguracionRejilla.mensajeSMS;
 
         const page = parseInt(paginaInput.value, 10) - 1; // Restamos 1 porque la API espera un índice base 0
         const size = parseInt(limiteInput.value, 10);
@@ -171,9 +183,9 @@ document.addEventListener('DOMContentLoaded', async function () {
             const container = document.getElementById('tabla-contenedor');
             const hot = new Handsontable(container, {
                 data: data,
-
                 rowHeaders: true,
-                colHeaders: ['ID', 'Nombre', 'Teléfono', 'Email', 'WhatsApp', 'Llamada', 'Email Enviado', 'Estado', 'Fecha', 'Fecha de Registro', 'Observación'],
+                colHeaders: ['ID', 'Nombre', 'Teléfono', 'Email', 'WhatsApp', 'Llamada', 'Email Enviado',
+                    'Estado', 'Fecha', 'Fecha de Registro', 'Observación', 'SMS Enviado', 'Mensaje SMS'],
                 columns: [
                     {
                         data: 'id',
@@ -240,9 +252,15 @@ document.addEventListener('DOMContentLoaded', async function () {
                         data: 'observacion',
                         width: 250
                     },
+                    {
+                        data: 'smsEnviado',
+                        type: 'checkbox',
+                    },
+                    {
+                        data: 'mensajeSMS',
+                        width: 150
+                    },
                 ],
-
-
                 manualRowMove: true,
                 manualColumnMove: true,
                 contextMenu: ['row_above', 'row_below', 'remove_row', 'undo', 'redo'],
@@ -295,10 +313,21 @@ document.addEventListener('DOMContentLoaded', async function () {
                         }
 
                     }
-
-
+                },
+                afterGetColHeader: function (col, TH) {
+                    if (col === 11) { // Índice de la columna 'SMS Enviado'
+                        addTooltip(TH, 'Si se quiere enviar un SMS, marque esta casilla. Pero solo se puede hacer una vez.');
+                    } else if (col === 12) { // Índice de la columna 'Mensaje SMS'
+                        addTooltip(TH, 'Este es el mensaje que se enviará en los SMS.');
+                    }
                 },
             });
+
+            function addTooltip(element, message) {
+                element.setAttribute('data-bs-toggle', 'tooltip');
+                element.setAttribute('title', message);
+                new bootstrap.Tooltip(element);
+            }
 
             function guardarFila(row) {
                 // Crea un nuevo registro a partir de los datos de la fila
@@ -313,6 +342,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                     estadoNombre: hot.getDataAtCell(row, 7),
                     fecha: hot.getDataAtCell(row, 8),
                     observacion: hot.getDataAtCell(row, 10),
+                    smsEnviado: hot.getDataAtCell(row, 11) || false,
+                    mensajeSMS: hot.getDataAtCell(row, 12),
                 };
 
                 const camposObligatorios = ['nombre', 'whatsapp', 'llamada', 'emailEnviado'];
@@ -353,6 +384,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                     estadoNombre: hot.getDataAtCell(row, 7),
                     fecha: hot.getDataAtCell(row, 8),
                     observacion: hot.getDataAtCell(row, 10),
+                    smsEnviado: hot.getDataAtCell(row, 11) || false,
+                    mensajeSMS: hot.getDataAtCell(row, 12),
                 };
 
 
@@ -389,6 +422,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                     estadoNombre: row['estadoNombre'],
                     fecha: row['fecha'],
                     observacion: row['observacion'],
+                    smsEnviado: row['smsEnviado'],
+                    mensajeSMS: row['mensajeSMS'],
                 };
 
 
@@ -417,7 +452,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 if (value === null || value === '') {
                     td.innerHTML = '';
                 } else {
-                    td.innerHTML = '<a href="https://wa.me/' + value + '" target="_blank">' + value + '</a>';
+                    td.innerHTML = '<a class="whatsapp-link" href="https://wa.me/' + value + '" target="_blank">' + value + '</a>';
                 }
             }
 
@@ -425,7 +460,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 if (value === null || value === '') {
                     td.innerHTML = '';
                 } else {
-                    td.innerHTML = '<a href="https://mail.google.com/mail/u/0/?view=cm&fs=1&to=' + value + '" target="_blank">' + value + '</a>';
+                    td.innerHTML = '<a class="email-link" href="https://mail.google.com/mail/u/0/?view=cm&fs=1&to=' + value + '" target="_blank">' + value + '</a>';
                 }
             }
 
@@ -448,8 +483,11 @@ document.addEventListener('DOMContentLoaded', async function () {
                 return Object.values(rows);
             }
 
-            // CONTADOR TOTAL
+            /*
+            * Estilos Diseño
+            * */
 
+            // CONTADOR TOTAL
             let count = 0;
             for (let i = 0; i < data.length; i++) {
                 if (data[i][0] !== null && data[i][0] !== '') {
@@ -510,7 +548,13 @@ document.addEventListener('DOMContentLoaded', async function () {
             });*/
 
             function isLastRow(row) {
-                const lastRow = hot.countRows() - 2;
+                const id = hot.getDataAtCell(row, 0) || -1; // Asegúrate de que la columna 0 contiene el ID
+                if (id === null || id === '' || id === -1) {
+                    row = row + 2;
+                } else {
+                    row = row + 1;
+                }
+                const lastRow = hot.countRows();
                 return row === lastRow;
             }
 
@@ -591,19 +635,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         crearBotones();
 
         async function crearBotones() {
-
             const contendorBienvenida = document.getElementById('botones-admin');
-            contendorBienvenida.innerHTML = "\n" +
-                "\n" +
-                "    <button id=\"clientes-potenciales\" class=\"clientes-potenciales\">Clientes Potenciales</button>\n" +
-                "    <button id=\"usuarios\" class=\"usuarios\">Usuarios</button>\n";
-
-        }
-
-        document.getElementById('clientes-potenciales').addEventListener('click', redirigirRejillaClientesPotenciales);
-
-        async function redirigirRejillaClientesPotenciales() {
-            window.location.href = '../clientePotenciales/rejillaClientesPotenciales.html';
+            contendorBienvenida.innerHTML = "<button  type=\"button\" id=\"usuarios\" class=\"usuarios btn btn-warning\">Usuarios</button>";
         }
 
         document.getElementById('usuarios').addEventListener('click', redirigirRejillaUsuario);
