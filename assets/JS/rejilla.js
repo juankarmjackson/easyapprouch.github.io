@@ -1,8 +1,6 @@
 const authToken = localStorage.getItem('authToken');
-/*
 const raizUrl = 'http://localhost:8080';
-*/
-    const raizUrl = 'https://presupuestaya-production.up.railway.app';
+/*const raizUrl = 'https://presupuestaya-production.up.railway.app';*/
 
 document.addEventListener('DOMContentLoaded', async function () {
 
@@ -265,7 +263,6 @@ document.addEventListener('DOMContentLoaded', async function () {
                 manualColumnMove: true,
                 contextMenu: ['row_above', 'row_below', 'remove_row', 'undo', 'redo'],
                 licenseKey: 'non-commercial-and-evaluation',
-                minSpareRows: 1,
                 hiddenColumns: {/*
                     columns: [0], // Agrega esta línea para ocultar la columna ID
                     indicators: false // Desactiva los indicadores visuales de las columnas ocultas
@@ -306,11 +303,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     } else {
 
                         // Comprueba si es la última fila (la fila de "nuevo registro")
-                        if (!isLastRow(row)) {
-                            actualizarFila(row);
-                        } else {
-                            guardarFila(row);
-                        }
+                        actualizarFila(row);
 
                     }
                 },
@@ -323,6 +316,28 @@ document.addEventListener('DOMContentLoaded', async function () {
                 },
             });
 
+            /*
+            * Añadir fila
+            * */
+            var addRowHandler = function () {
+                hot.alter('insert_row', 0);
+
+                // Obtén los datos de la nueva fila
+                var newRowData = hot.getDataAtRow(0);
+                hot.setDataAtCell(0, 1, "NuevaFila");
+                // Llama a tu función para guardar la nueva fila
+                guardarFilaFirst("NuevaFila", newRowData);
+            };
+
+// Utiliza jQuery para asignar el evento
+            $('#add-row').off('click').on('click', addRowHandler);
+
+            $('#actualizarRejilla').off('click').on('click', actualizarRejilla);
+
+
+            /*
+            * Añadir mensaje atravez de toolip de bootstrap
+            * */
             function addTooltip(element, message) {
                 element.setAttribute('data-bs-toggle', 'tooltip');
                 element.setAttribute('title', message);
@@ -368,6 +383,38 @@ document.addEventListener('DOMContentLoaded', async function () {
                 }
             }
 
+            function guardarFilaFirst(TextoGuardado) {
+                // Crea un nuevo registro a partir de los datos de la fila
+                const registro = {
+                    id: null,
+                    nombre: TextoGuardado,
+                    telefono: null,
+                    email: null,
+                    whatsapp: false,
+                    llamada: false,
+                    emailEnviado: false,
+                    estadoNombre: null,
+                    fecha: null,
+                    observacion: null,
+                    smsEnviado: false,
+                    mensajeSMS: null,
+                };
+
+
+                console.log("Creando nuevo registro");
+                // Llama a la función guardarRegistro y maneja la respuesta
+                guardarRegistro(registro)
+                    .then(function (response) {
+                        console.log('Registro guardado con éxito con Id:' + response.data.id);
+
+                        actualizarRejilla();
+                    })
+                    .catch(function (error) {
+                        console.error('Error al guardar el registro:', error);
+                    });
+            }
+
+
             function actualizarFila(row) {
                 // Actualizar registros existentes
                 /*
@@ -392,7 +439,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 const camposObligatorios = ['nombre', 'whatsapp', 'llamada', 'emailEnviado'];
                 const registroCompleto = camposObligatorios.every((campo) => registro[campo] !== null && registro[campo] !== undefined && registro[campo] !== '');
 
-                if (registroCompleto) {
+                if (registroCompleto && id !== -1) {
                     console.log("Actualizando registro");
                     // Llama a la función actualizarRegistro y maneja la respuesta
                     actualizarRegistro(id, registro)
@@ -404,7 +451,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                             console.error('Error al actualizar el registro:', error);
                         });
                 } else {
-                    console.log('No se puede guardar el registro, faltan datos.');
+                    console.log('No se puede guardar el registro, faltan datos o el Id no es correcto.');
                 }
             }
 
@@ -558,6 +605,11 @@ document.addEventListener('DOMContentLoaded', async function () {
                 return row === lastRow;
             }
 
+            function isFirstRow(row) {
+                // Retorna 'true' si la fila es la primera (índice 0), 'false' en caso contrario.
+                return row === 0;
+            }
+
             function guardarRegistro(registro) {
                 return axios.post(raizUrl + '/api/leads', registro, {
                     headers: {
@@ -636,8 +688,9 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         async function crearBotones() {
             const contendorBienvenida = document.getElementById('botones-admin');
-            contendorBienvenida.innerHTML = "<button  type=\"button\" id=\"usuarios\" class=\"usuarios btn btn-warning\">Usuarios</button>";
+            contendorBienvenida.innerHTML = "<button id=\"usuarios\" class=\"usuarios btn btn-warning\">Usuarios</button>";
         }
+
 
         document.getElementById('usuarios').addEventListener('click', redirigirRejillaUsuario);
 
