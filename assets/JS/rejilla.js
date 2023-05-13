@@ -1,6 +1,8 @@
 const authToken = localStorage.getItem('authToken');
+/*
 const raizUrl = 'http://localhost:8080';
-/*const raizUrl = 'https://presupuestaya-production.up.railway.app';*/
+*/
+const raizUrl = 'https://presupuestaya-production.up.railway.app';
 
 document.addEventListener('DOMContentLoaded', async function () {
 
