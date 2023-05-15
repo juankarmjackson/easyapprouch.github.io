@@ -185,7 +185,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                 data: data,
                 rowHeaders: true,
                 colHeaders: ['ID', 'Nombre', 'Teléfono', 'Email', 'WhatsApp', 'Llamada', 'Email Enviado',
-                    'Estado', 'Fecha', 'Fecha de Registro', 'Observación', 'SMS Enviado', 'Mensaje SMS'],
+                    'Estado', 'Fecha', 'Fecha de Registro', 'Observación', 'SMS Enviado', 'Mensaje SMS',
+                    'Origen Lead'],
                 columns: [
                     {
                         data: 'id',
@@ -259,6 +260,10 @@ document.addEventListener('DOMContentLoaded', async function () {
                     {
                         data: 'mensajeSMS',
                         width: 150
+                    },
+                    {
+                        data: 'origen',
+                        readOnly: true // Añade esta línea para hacer la columna de solo lectura
                     },
                 ],
                 manualRowMove: true,

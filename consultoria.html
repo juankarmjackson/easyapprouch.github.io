@@ -196,8 +196,13 @@ inputBoton.addEventListener('click', function(){
     const telefono = document.getElementById('telefono').value;
     const email = document.getElementById('email').value
 
+    /*
+        const raizUrl = 'http://localhost:8080';
+    */
+    const raizUrl = 'https://presupuestaya-production.up.railway.app';
+
     $.ajax({
-        url: `https://presupuestaya-production.up.railway.app/api/leads/script`,
+        url: raizUrl + `/api/leads/script`,
         type: 'POST',
         async: false,
         contentType: 'application/json',
@@ -206,6 +211,7 @@ inputBoton.addEventListener('click', function(){
             "nombre": nombre,
             "telefono": telefono,
             "email": email,
+            "origen": "LandingPage",
             "username": "admin",
         }),
         success: function (data) {
@@ -220,13 +226,18 @@ inputBoton.addEventListener('click', function(){
 
 const inputBoton2 = document.getElementById('inputBoton2');
 
-inputBoton2.addEventListener('click', function(){
+inputBoton2.addEventListener('click', function() {
     const nombre2 = document.getElementById('nombre2').value;
     const telefono2 = document.getElementById('telefono2').value;
     const email2 = document.getElementById('email2').value
 
+    /*
+        const raizUrl = 'http://localhost:8080';
+    */
+    const raizUrl = 'https://presupuestaya-production.up.railway.app';
+
     $.ajax({
-        url: `https://presupuestaya-production.up.railway.app/api/leads/script`,
+        url: raizUrl + `/api/leads/script`,
         type: 'POST',
         async: false,
         contentType: 'application/json',
@@ -235,6 +246,7 @@ inputBoton2.addEventListener('click', function(){
             "nombre": nombre2,
             "telefono": telefono2,
             "email": email2,
+            "origen": "LandingPage",
             "username": "admin",
         }),
         success: function (data) {
