@@ -105,13 +105,11 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         const paginaInput = document.getElementById('pagina');
         const limiteInput = document.getElementById('limite');
-        const mensajeSMS = document.getElementById('smsPersonalizable');
 
         const registroConfiguracionRejilla = {
             id: null,
             limiteDePaginas: limiteInput.value,
             pagina: paginaInput.value,
-            mensajeSMS: mensajeSMS.value,
             usuarioId: usuarioId,
         };
 
