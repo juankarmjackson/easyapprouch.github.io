@@ -540,84 +540,62 @@ document.addEventListener('DOMContentLoaded', async function () {
             /*
             * Estilos Diseño
             * */
+            async function fetchKPIs() {
+                try {
+                    const response = await axios.get(raizUrl + '/api/leads/kpi', {
+                        headers: {
+                            'Authorization': 'Bearer ' + authToken
+                        }
+                    });
 
-            // CONTADOR TOTAL
-            let count = 0;
-            for (let i = 0; i < data.length; i++) {
-                if (data[i][0] !== null && data[i][0] !== '') {
-                    count++;
+                    const kpis = response.data;
+
+                    // CONTADOR TOTAL
+                    const numeroTotal = document.getElementById('resultado');
+                    numeroTotal.innerHTML = kpis.numeroLeadTotales;
+
+                    // CONTACTADOS TOTAL
+                    const contactadosTotal = document.getElementById('contactados');
+                    contactadosTotal.innerHTML = kpis.numeroLeadsContactados;
+
+                    // EN NEGOCIACION
+                    const enNegociacion = document.getElementById('negociacion');
+                    enNegociacion.innerHTML = kpis.numeroLeadsFaseNegociacion;
+
+                    // EN CIERRES
+                    const cierres = document.getElementById('cierres');
+                    cierres.innerHTML = kpis.numeroLeadsCerrados;
+
+                    // TASA
+                    let tasa = Number(kpis.numeroLeadTotales / kpis.numeroLeadsCerrados).toFixed(1);
+                    const tasaCierre = document.getElementById('tasa');
+                    tasaCierre.innerHTML = tasa + '%';
+
+                } catch (error) {
+                    console.error(`Error al obtener los KPIs:`, error);
                 }
             }
 
-            const numeroTotal = document.getElementById('resultado');
-            numeroTotal.innerHTML = +count;
+            // Llama a la función cuando la página se carga
+            fetchKPIs();
 
-            // CONTACTADOS TOTAL
-
-            let contactados = 0;
-            for (let i = 0; i < hot.countRows(); i++) {
-                if (data[i].estadoNombre === 'Contactado') {
-                    contactados++;
-                }
-            }
-
-            const contactadosTotal = document.getElementById('contactados');
-            contactadosTotal.innerHTML = +contactados;
-
-            // EN NEGOCIACION
-            let countEnNegociacion = 0;
-            for (let i = 0; i < hot.countRows(); i++) {
-                if (data[i].estadoNombre === 'En Negociacion') {
-                    countEnNegociacion++;
-                }
-            }
-
-            const enNegociacion = document.getElementById('negociacion');
-            enNegociacion.innerHTML = +countEnNegociacion;
-
-
-            // EN CIERRES
-            let countCierres = 0;
-            for (let i = 0; i < hot.countRows(); i++) {
-                if (data[i].estadoNombre === 'Cerrado') {
-                    countCierres++;
-                }
-
-                console.log(hot.countRows());
-            }
-
-
-            const cierres = document.getElementById('cierres');
-            cierres.innerHTML = +countCierres;
-
-            //TASA
-
-            let tasa = Number(count / countCierres).toFixed(1);
-            const tasaCierre = document.getElementById('tasa');
             /*
-                        tasaCierre.innerHTML = +tasa;
+                        function isLastRow(row) {
+                            const id = hot.getDataAtCell(row, 0) || -1; // Asegúrate de que la columna 0 contiene el ID
+                            if (id === null || id === '' || id === -1) {
+                                row = row + 2;
+                            } else {
+                                row = row + 1;
+                            }
+                            const lastRow = hot.countRows();
+                            return row === lastRow;
+                        }
+
+                        function isFirstRow(row) {
+                            // Retorna 'true' si la fila es la primera (índice 0), 'false' en caso contrario.
+                            return row === 0;
+                        }
             */
-
-            /*
-            hot.addHook('afterCreateRow', function (index, amount) {
-
-            });*/
-
-            function isLastRow(row) {
-                const id = hot.getDataAtCell(row, 0) || -1; // Asegúrate de que la columna 0 contiene el ID
-                if (id === null || id === '' || id === -1) {
-                    row = row + 2;
-                } else {
-                    row = row + 1;
-                }
-                const lastRow = hot.countRows();
-                return row === lastRow;
-            }
-
-            function isFirstRow(row) {
-                // Retorna 'true' si la fila es la primera (índice 0), 'false' en caso contrario.
-                return row === 0;
-            }
 
             function guardarRegistro(registro) {
                 return axios.post(raizUrl + '/api/leads', registro, {
@@ -637,7 +615,9 @@ document.addEventListener('DOMContentLoaded', async function () {
                 });
             }
 
-
+            /*
+            * Eliminar Fila
+            * */
             const botonEliminar = document.getElementById('eliminar-fila');
             const eliminarFilaBtn = document.getElementById('eliminar-fila');
             eliminarFilaBtn.addEventListener('mousedown', (event) => {
@@ -682,6 +662,9 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
 
+    /*
+    * Comprobar si el usuario es administrador
+    * */
     try {
         const response = await axios.get(raizUrl + '/usuarios/comprobarRoleAdministrador', {
             headers: {
