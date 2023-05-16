@@ -19,19 +19,22 @@
 </head>
 <body>
     <section class="slider">
-            <div class="title">
-                <img src="../../assets/img/easy4.png" alt="Easy Approuch | Proposal System">
-            </div>
-            <div class="formulario plan">
+        <div class="title">
+            <img src="../../assets/img/easy4.png" alt="Easy Approuch | Proposal System">
+        </div>
+        <div class="formulario plan">
+            <form id="loginForm">
                 <div class="form">
                     <label for="">Nombre</label>
                     <input type="text" placeholder="Escriba su Nombre" id="nombre">
                     <label for="">Contraseña</label>
-                    <input type="text" id="password" placeholder="Escribe su contraseña">
-                    <button id="inputBoton">Acceder</button>
+                    <input type="password" id="password" placeholder="Escribe su contraseña">
+                    <button type="submit" id="inputBoton">Acceder</button>
                 </div>
-            </div>
+            </form>
+        </div>
     </section>
+
    
 <footer>
     <ul>
@@ -45,7 +48,9 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script type="module">
 
-        $('#inputBoton').click(function () {
+        document.getElementById('loginForm').addEventListener('submit', async function (event) {
+            // Previene el comportamiento predeterminado del formulario
+            event.preventDefault();
 
             const username = document.getElementById('nombre').value;
             const password = document.getElementById('password').value;
