@@ -109,62 +109,45 @@
                     </div>
                     <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-end">
 
-                        <button id="boton-facebook" class="btn">
-                            <img src="../../assets/img/fb.png" alt="Conectarse con Facebook"/>
-                        </button>
+                        <div style="display: none">
+                            <button id="boton-facebook" class="btn">
+                                <img src="../../assets/img/fb.png" alt="Conectarse con Facebook"/>
+                            </button>
 
-                        <button id="boton-google" class="btn">
-                            <img src="../../assets/img/google.png" alt="Conectarse con Google"/>
-                        </button>
+                            <button id="boton-google" class="btn">
+                                <img src="../../assets/img/google.png" alt="Conectarse con Google"/>
+                            </button>
+                        </div>
 
                         <div id="botones-herramientas">
                             <button id="actualizarRejilla" class="btn btn-warning">Actualizar Rejilla</button>
                         </div>
                         &nbsp;
-                        <div id="botones-admin">
-                            <button id="usuarios" class="usuarios btn btn-warning">Usuarios</button>
-                        </div>
+
                         <div>
-                            <!--
-                                                    <button type="button" class="btn btn-success" onclick="toggleCodigo()">Herramientas SMS</button>
-                            -->
+                            <button type="button" class="btn btn-success" onclick="toggleCodigo()">Herramientas
+                                Mensajes
+                            </button>
                             <div id="codigo" style="display:none;">
                                 <div class="row">
-                                    <div class="col-6">
-                                        <label for="smsEjemplo">Mensaje de ejemplo:</label>
+                                    <div class="col-12">
+                                        <label for="mensajeEjemplo">Mensaje de ejemplo:</label>
                                         <br>
-                                        <textarea id="smsEjemplo" readonly></textarea>
-                                    </div>
-                                    <div class="col-6">
-                                        <label for="smsPersonalizable">Mensaje personalizado:</label>
-                                        <br>
-                                        <textarea id="smsPersonalizable"></textarea>
+                                        <textarea id="mensajeEjemplo">
+¡Hola ${nombre}! Descubre nuestras ofertas exclusivas en nuestra tienda online. ¡No esperes más y ahorra hoy! Visítanos en https://easyapprouch.com/consultoria.html
+                                        </textarea>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="row">
-                                        <div class="col-6">
-                                            <button id="enviarSMS" type="button" class="btn btn btn-success">Enviar SMS
-                                            </button>
-                                        </div>
-                                        <div class="col-6">
+                                        <div class="col-12">
 
-                                            <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip"
+                                            <button type="button" class="btn btn-success" data-bs-toggle="tooltip"
                                                     data-bs-placement="right"
-                                                    title="Esta es la información de la función."
-                                                    id="tooltipExample">
-                                                ?
+                                                    title="Generar un mensaje para enviar un SMS"
+                                                    id="generarMensaje" disabled>
+                                                Generar
                                             </button>
-
-                                            <script>
-                                                document.addEventListener("DOMContentLoaded", function () {
-                                                    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-                                                    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                                                        return new bootstrap.Tooltip(tooltipTriggerEl)
-                                                    })
-                                                });
-                                            </script>
-
 
                                         </div>
                                     </div>
@@ -173,6 +156,10 @@
                                 </div>
 
                             </div>
+                        </div>
+                        &nbsp;
+                        <div id="botones-admin">
+                            <button id="usuarios" class="usuarios btn btn-warning">Usuarios</button>
                         </div>
                     </div>
                     <div class="col-12 col-md-1 col-lg-1 text-right">

@@ -96,11 +96,9 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     const paginaInput = document.getElementById('pagina');
     const limiteInput = document.getElementById('limite');
-    const smsPersonalizable = document.getElementById('smsPersonalizable');
 
     paginaInput.addEventListener('change', cambioConfiguracionRejilla);
     limiteInput.addEventListener('change', cambioConfiguracionRejilla);
-    smsPersonalizable.addEventListener('change', cambioConfiguracionRejilla);
 
 
     async function cambioConfiguracionRejilla() {
@@ -144,8 +142,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         * */
         const paginaInput = document.getElementById('pagina');
         const limiteInput = document.getElementById('limite');
-        const smsEjemplo = document.getElementById('smsEjemplo');
-        const smsPersonalizable = document.getElementById('smsPersonalizable');
 
         const urlConfiguracionRejilla = raizUrl + `/api/configuracionRejilla/usuario/${usuarioId}`;
         const responseConfiguracionRejilla = await axios.get(urlConfiguracionRejilla, {
@@ -157,7 +153,6 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         paginaInput.value = dataConfiguracionRejilla.pagina;
         limiteInput.value = dataConfiguracionRejilla.limiteDePaginas;
-        smsPersonalizable.value = dataConfiguracionRejilla.mensajeSMS;
 
         const page = parseInt(paginaInput.value, 10) - 1; // Restamos 1 porque la API espera un índice base 0
         const size = parseInt(limiteInput.value, 10);
@@ -259,7 +254,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     },
                     {
                         data: 'mensajeSMS',
-                        width: 150
+                        width: 300
                     },
                     {
                         data: 'origen',
@@ -659,6 +654,28 @@ document.addEventListener('DOMContentLoaded', async function () {
         } catch (error) {
             console.error('Error al cargar los datos:', error);
         }
+
+        /*
+        * Mensaje de Ejemplo
+        * */
+
+        $('#generarMensaje').click(function () {
+            generarMensaje();
+        });
+
+        async function generarMensaje() {
+            const urlConfiguracionRejilla = raizUrl + `/api/v1/complete-chat-no-mono/gpt-3.5-turbo/prompt}`;
+            const responseConfiguracionRejilla = await axios.get(urlConfiguracionRejilla, {
+                headers: {
+                    'Authorization': `Bearer ` + authToken
+                }
+            });
+            const smsEjemplo = document.getElementById('mensajeEjemplo');
+            smsEjemplo.value = responseConfiguracionRejilla.data;
+
+        }
+
+
     }
 
 
