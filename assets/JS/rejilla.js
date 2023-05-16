@@ -594,7 +594,9 @@ document.addEventListener('DOMContentLoaded', async function () {
 
             let tasa = Number(count / countCierres).toFixed(1);
             const tasaCierre = document.getElementById('tasa');
-            tasaCierre.innerHTML = +tasa;
+            /*
+                        tasaCierre.innerHTML = +tasa;
+            */
 
             /*
             hot.addHook('afterCreateRow', function (index, amount) {
@@ -694,8 +696,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         crearBotones();
 
         async function crearBotones() {
-            const contendorBienvenida = document.getElementById('botones-admin');
-            contendorBienvenida.innerHTML = "<button id=\"usuarios\" class=\"usuarios btn btn-warning\">Usuarios</button>";
+            const contendorBienvenida = $('#botones-admin');
+            contendorBienvenida.css('display', 'block'); // Hace visible el contenedor
         }
 
 
