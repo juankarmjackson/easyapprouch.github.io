@@ -175,6 +175,8 @@ document.addEventListener('DOMContentLoaded', async function () {
 
             const container = document.getElementById('tabla-contenedor');
             const hot = new Handsontable(container, {
+                filters: true, // Habilita los filtros
+                dropdownMenu: ['filter_by_condition', 'filter_by_value', 'filter_action_bar'],
                 data: data,
                 rowHeaders: true,
                 colHeaders: ['ID', 'Nombre', 'Teléfono', 'Email', 'WhatsApp', 'Llamada', 'Email Enviado',
