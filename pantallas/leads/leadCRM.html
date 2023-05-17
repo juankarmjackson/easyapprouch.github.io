@@ -85,16 +85,16 @@
                                 class="fa-solid fa-trash"></i>
                         </button>
                     </div>
-                    <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-end">
+                    <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-end ">
 
                         <button id="boton-facebook" class="btn" data-bs-toggle="tooltip"
-                                data-bs-placement="right"
+                                data-bs-placement="bottom"
                                 title="Pronto estará disponible">
                             <img src="../../assets/img/fb.png" alt="Conectarse con Facebook"/>
                         </button>
 
                         <button id="boton-google" class="btn" data-bs-toggle="tooltip"
-                                data-bs-placement="right"
+                                data-bs-placement="bottom"
                                 title="Pronto estará disponible">
                             <img src="../../assets/img/google.png" alt="Conectarse con Google"/>
                         </button>
@@ -113,7 +113,7 @@
                                     <div class="col-12">
                                         <label for="mensajeEjemplo">Mensaje de ejemplo:</label>
                                         <br>
-                                        <textarea id="mensajeEjemplo">
+                                        <textarea id="mensajeEjemplo" rows="3">
 ¡Hola ${nombre}! Descubre nuestras ofertas exclusivas en nuestra tienda online. ¡No esperes más y ahorra hoy! Visítanos en https://easyapprouch.com/consultoria.html
                                         </textarea>
                                     </div>
@@ -123,11 +123,14 @@
                                         <div class="col-12">
 
                                             <button type="button" class="btn btn-success" data-bs-toggle="tooltip"
-                                                    data-bs-placement="right"
+                                                    data-bs-placement="bottom"
                                                     title="Generar un mensaje para enviar un SMS"
-                                                    id="generarMensaje" disabled>
+                                                    id="generarMensaje">
                                                 Generar
                                             </button>
+                                            <img id="loading" src="../../assets/img/work-in-progress.gif"
+                                                 style="display: none">
+
 
                                         </div>
                                     </div>

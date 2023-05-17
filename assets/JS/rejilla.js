@@ -661,16 +661,35 @@ document.addEventListener('DOMContentLoaded', async function () {
             generarMensaje();
         });
 
-        async function generarMensaje() {
-            const urlConfiguracionRejilla = raizUrl + `/api/v1/complete-chat-no-mono/gpt-3.5-turbo/prompt}`;
-            const responseConfiguracionRejilla = await axios.get(urlConfiguracionRejilla, {
-                headers: {
-                    'Authorization': `Bearer ` + authToken
-                }
-            });
-            const smsEjemplo = document.getElementById('mensajeEjemplo');
-            smsEjemplo.value = responseConfiguracionRejilla.data;
+        $('#generarMensaje').click(function () {
+            generarMensaje();
+        });
 
+        async function generarMensaje() {
+            // Deshabilita el botón y muestra el gif de carga
+            $('#generarMensaje').prop('disabled', true);
+            $('#loading').show();
+
+            const urlConfiguracionRejilla = raizUrl + `/api/v1/complete-chat-no-mono`;
+            const data = {
+                modeloGenerado: "gpt-3.5-turbo",
+                promp: "generame un mensaje de sms marketing, corto y conciso, con este caracter donde debe ir ${nombre}"
+            };
+            try {
+                const responseConfiguracionRejilla = await axios.post(urlConfiguracionRejilla, data, {
+                    headers: {
+                        'Authorization': `Bearer ` + authToken
+                    }
+                });
+                const smsEjemplo = document.getElementById('mensajeEjemplo');
+                smsEjemplo.value = responseConfiguracionRejilla.data;
+            } catch (error) {
+                console.error(error);
+            } finally {
+                // Habilita el botón y oculta el gif de carga
+                $('#generarMensaje').prop('disabled', false);
+                $('#loading').hide();
+            }
         }
 
 
