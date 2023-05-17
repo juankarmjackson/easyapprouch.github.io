@@ -237,10 +237,21 @@ footer .box-footer div a{
 .handsontable td, .handsontable th {
     border-color: white;
 }
+
 #tabla-contenedor {
     width: 100%; /* Ajusta al 100% del ancho del padre */
     height: 70vb; /* Define una altura fija, puedes cambiar este valor a tu necesidad */
     overflow: auto;
+}
+
+#contenedor-handsomtable {
+    /*
+    border: 2px solid;
+    */
+    background-color: #F2F2F2; /* Este es un tono de gris muy claro, semejante al blanco. Puedes ajustarlo a tus necesidades. */
+    /*
+    border-image: linear-gradient(to right, darkred, darkorange, gold, darkgreen, darkblue, indigo, darkviolet) 1;
+    */
 }
 
 /* WhatsApp en verde */
