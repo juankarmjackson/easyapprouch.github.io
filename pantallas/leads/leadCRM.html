@@ -36,28 +36,6 @@
     </div>
 </header>
 
-<!-- <section class="resultados">
-    <div class="resultado">
-        <h1>Nº DE LEADS</h1>
-        <div id="resultado"></div>
-    </div>
-    <div class="resultado">
-        <h1>CONTACTADOS</h1>
-        <div id="contactados"></div>
-    </div>
-    <div class="resultado">
-        <h1>NEGOCIACIONES</h1>
-        <div id="negociacion"></div>
-    </div>
-    <div class="resultado">
-        <h1>CIERRES</h1>
-        <div id="cierres"></div>
-    </div>
-    <div class="resultado">
-        <h1>TASA</h1>
-        <div id="tasa"></div>
-    </div>
-</section> -->
 
 <section class="panel">
     <div class="results">
@@ -92,7 +70,7 @@
 
 
 <br>
-<div class="container-fluid">
+<div id="crm-lead" class="container-fluid">
     <div class="row botones-herramientas">
         <div class="row">
             <div class="col-1">
@@ -109,15 +87,17 @@
                     </div>
                     <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-end">
 
-                        <div style="display: none">
-                            <button id="boton-facebook" class="btn">
-                                <img src="../../assets/img/fb.png" alt="Conectarse con Facebook"/>
-                            </button>
+                        <button id="boton-facebook" class="btn" data-bs-toggle="tooltip"
+                                data-bs-placement="right"
+                                title="Pronto estará disponible">
+                            <img src="../../assets/img/fb.png" alt="Conectarse con Facebook"/>
+                        </button>
 
-                            <button id="boton-google" class="btn">
-                                <img src="../../assets/img/google.png" alt="Conectarse con Google"/>
-                            </button>
-                        </div>
+                        <button id="boton-google" class="btn" data-bs-toggle="tooltip"
+                                data-bs-placement="right"
+                                title="Pronto estará disponible">
+                            <img src="../../assets/img/google.png" alt="Conectarse con Google"/>
+                        </button>
 
                         <div id="botones-herramientas">
                             <button id="actualizarRejilla" class="btn btn-warning">Actualizar Rejilla</button>
@@ -225,9 +205,9 @@
 <footer>
     <div class="box-footer">
         <div>
-      <i class="fa-solid fa-person"><a href="leadCRM.html"></a></i>
-        <a class="enlace" href="leadCRM.html"><span>CRM</span></a>
-      </div>
+            <i class="fa-solid fa-person"><a href="#crm-lead"></a></i>
+            <a class="enlace" href="#crm-lead"><span>CRM</span></a>
+        </div>
       <div>
         <i class="fa-solid fa-money-bill"></i>
         <a  class="enlace" href="#"><span>Presupuestos</span></a>
