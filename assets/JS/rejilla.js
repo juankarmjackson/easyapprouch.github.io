@@ -178,6 +178,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                 filters: true, // Habilita los filtros
                 dropdownMenu: ['filter_by_condition', 'filter_by_value', 'filter_action_bar'],
                 data: data,
+                fixedColumnsStart: 2,
+                manualColumnFreeze: true,
                 rowHeaders: true,
                 colHeaders: ['ID', 'Nombre', 'Teléfono', 'Email', 'WhatsApp', 'Llamada', 'Email Enviado',
                     'Estado', 'Fecha', 'Fecha de Registro', 'Observación', 'SMS Enviado', 'Mensaje SMS',
@@ -185,7 +187,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 columns: [
                     {
                         data: 'id',
-                        readOnly: true // Añade esta línea para hacer la columna de solo lectura
+                        readOnly: true, // Añade esta línea para hacer la columna de solo lectura
                     },
                     {
                         data: 'nombre',
@@ -265,10 +267,9 @@ document.addEventListener('DOMContentLoaded', async function () {
                 manualColumnMove: true,
                 contextMenu: ['row_above', 'row_below', 'remove_row', 'undo', 'redo'],
                 licenseKey: 'non-commercial-and-evaluation',
-                hiddenColumns: {/*
+                hiddenColumns: {
                     columns: [0], // Agrega esta línea para ocultar la columna ID
                     indicators: false // Desactiva los indicadores visuales de las columnas ocultas
-               */
                 },
                 beforeCopy: function (data, coords) {/*
                     for (let i = 0; i < data.length; i++) {
