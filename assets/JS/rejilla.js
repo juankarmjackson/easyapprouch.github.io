@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     async function crearContenidoPagina() {
 
         const contendorBienvenida = document.getElementById('nombreBienvenida');
-        contendorBienvenida.innerHTML = '<h1> Bienvenido ' + username + '</h1>';
+        contendorBienvenida.innerHTML = username;
 
     }
 

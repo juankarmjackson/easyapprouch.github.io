@@ -29,27 +29,39 @@
 
 </head>
 <body>
-<header>
-    <div id="nombreBienvenida">
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary nav-img" style="padding: 0">
+    <div class="container-fluid">
+        <button id="logout" class="btn btn-outline-dark btn-sm">
+            <i class="bi bi-box-arrow-left"></i>
+        </button>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            </ul>
+            <span class="navbar-text">
+                <h6> Bienvenido <span id="nombreBienvenida"></span> <i class="bi bi-person-fill"></i></h6>
+            </span>
+        </div>
     </div>
-    <div id="botones-usuarios">
-        <button id="logout" class="logout"><i class="fa-solid fa-power-off"></i></button>
-    </div>
-</header>
+</nav>
 
 <div class="container-fluid">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
             <a class="nav-link" id="tablero-tab" data-bs-toggle="tab" href="#tablero" role="tab" aria-controls="tablero"
-               aria-selected="true">Tablero Miro</a>
+               aria-selected="true">Tablero Miro <i class="bi bi-easel2"></i></a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" id="leads-tab" data-bs-toggle="tab" href="#leads-tab-id" role="tab"
-               aria-controls="leads" aria-selected="false">Leads CRM</a>
+               aria-controls="leads" aria-selected="false">Leads CRM <i class="bi bi-table"></i></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="metricas-tab" data-bs-toggle="tab" href="#metricas" role="tab"
-               aria-controls="metricas" aria-selected="false">Métricas</a>
+               aria-controls="metricas" aria-selected="false">Métricas <i class="bi bi-speedometer2"></i></a>
         </li>
     </ul>
     <div class="tab-content" id="myTabContent">
@@ -251,7 +263,6 @@
 </div>
 
 
-<br>
 <br>
 <br>
 
