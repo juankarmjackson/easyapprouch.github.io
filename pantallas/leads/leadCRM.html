@@ -30,20 +30,26 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary nav-img" style="padding: 0">
+<nav class="navbar navbar-expand-lg bg-body-tertiary nav-img">
     <div class="container-fluid">
         <button id="logout" class="btn btn-outline-dark btn-sm">
             <i class="bi bi-box-arrow-left"></i>
         </button>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
-                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarText">
+
+        <div class="text-right" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             </ul>
             <span class="navbar-text">
-                <h6> Bienvenido <span id="nombreBienvenida"></span> <i class="bi bi-person-fill"></i></h6>
+                <div>
+                    <h6>
+                        <i id="bandejaEntrada" class="bi bi-inbox-fill"></i> &nbsp; &nbsp;
+                        <i id="notificaciones" class="bi bi-bell-fill"></i> &nbsp; &nbsp;
+                         &nbsp; |  &nbsp;
+                        <i class="bi bi-question-circle-fill"></i> &nbsp; &nbsp;
+                        <i class="bi bi-search"></i>&nbsp; &nbsp;
+                        Bienvenido <span id="nombreBienvenida"></span> <i class="bi bi-person-fill"></i></h6>
+
+                </div>
             </span>
         </div>
     </div>
@@ -53,15 +59,38 @@
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
             <a class="nav-link" id="tablero-tab" data-bs-toggle="tab" href="#tablero" role="tab" aria-controls="tablero"
-               aria-selected="true">Tablero <i class="bi bi-easel2"></i></a>
+               aria-selected="true">
+
+                <div class="d-lg-none">
+                    <i class="bi bi-easel2"></i>
+                </div>
+                <div class="d-none d-lg-block">
+                    Tablero <i class="bi bi-easel2"></i>
+                </div>
+            </a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" id="leads-tab" data-bs-toggle="tab" href="#leads-tab-id" role="tab"
-               aria-controls="leads" aria-selected="false">Leads CRM <i class="bi bi-table"></i></a>
+               aria-controls="leads" aria-selected="false">
+                <div class="d-lg-none">
+                    <i class="bi bi-table"></i>
+                </div>
+                <div class="d-none d-lg-block">
+                    Leads CRM <i class="bi bi-table"></i>
+                </div>
+            </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="metricas-tab" data-bs-toggle="tab" href="#metricas" role="tab"
-               aria-controls="metricas" aria-selected="false">Métricas <i class="bi bi-speedometer2"></i></a>
+               aria-controls="metricas" aria-selected="false">
+
+                <div class="d-lg-none">
+                    <i class="bi bi-speedometer2"></i>
+                </div>
+                <div class="d-none d-lg-block">
+                    Métricas <i class="bi bi-speedometer2"></i>
+                </div>
+            </a>
         </li>
     </ul>
     <div class="tab-content" id="myTabContent">
@@ -78,17 +107,34 @@
                         </div>
                         <div class="col-10">
                             <div class="row">
-                                <div class="col-12 col-md-5 col-lg-5 text-left">
-                                    <button id="add-row" class="btn btn-info">Añadir fila</button>
+                                <div class="col-5 col-md-5 col-lg-5 text-left">
+                                    <button id="add-row" class="btn btn-info btn-sm">
+
+                                        <div class="d-lg-none">
+                                            <i class="bi bi-plus-circle-fill"></i>
+                                        </div>
+                                        <div class="d-none d-lg-block">
+                                            <i class="bi bi-plus-circle-fill"></i>
+                                            Añadir
+                                        </div>
+
+                                    </button>
 
 
-                                    <button id="eliminar-fila" class="btn btn-danger">Eliminar filas seleccionada <i
-                                            class="bi bi-trash-fill"></i>
+                                    <button id="eliminar-fila" class="btn btn-danger btn-sm">
+
+
+                                        <div class="d-lg-none">
+                                            <i class="bi bi-trash-fill"></i>
+                                        </div>
+                                        <div class="d-none d-lg-block">
+                                            <i class="bi bi-trash-fill"></i> Eliminar
+                                        </div>
                                     </button>
                                 </div>
-                                <div class="col-12 col-md-7 col-lg-7">
+                                <div class="col-7 col-md-7 col-lg-7">
                                     <div class="row">
-                                        <div class="col-12 d-flex justify-content-start justify-content-md-end">
+                                        <div class="col-12 d-flex justify-content-end" style="padding: 0">
                                             <button id="boton-integraciones" class="btn btn-outline-info btn-sm"
                                                     data-bs-toggle="tooltip"
                                                     data-bs-placement="bottom"
@@ -118,7 +164,7 @@
                                                 <img src="../../assets/img/google.png" alt="Conectarse con Google"/>
                                             </button>-->
 
-                                            <button id="actualizarRejilla" class="btn btn-warning">
+                                            <button id="actualizarRejilla" class="btn btn-warning btn-sm">
                                                 <div class="d-lg-none">
                                                     <i class="bi bi-arrow-clockwise"></i>
                                                 </div>
@@ -127,7 +173,8 @@
                                                 </div>
                                             </button>
                                             &nbsp;
-                                            <button type="button" class="btn btn-success" onclick="toggleCodigo()">
+                                            <button type="button" class="btn btn-success btn-sm"
+                                                    onclick="toggleCodigo()">
 
                                                 <div class="d-lg-none">
                                                     <i class="bi bi-tools"></i>
@@ -139,7 +186,7 @@
 
                                             &nbsp;
                                             <div id="botones-admin">
-                                                <button id="usuarios" class="usuarios btn btn-warning">
+                                                <button id="usuarios" class="usuarios btn btn-warning btn-sm">
 
                                                     <div class="d-lg-none">
                                                         <i class="bi bi-person-plus-fill"></i>
@@ -150,7 +197,7 @@
                                                 </button>
                                             </div>
                                         </div>
-                                        <div class="col-12  d-flex justify-content-start justify-content-md-end">
+                                        <div class="col-12  d-flex justify-content-end" style="padding: 0">
                                             <div>
                                                 <div id="codigo" style="display:none;">
                                                     <div class="row">
@@ -294,16 +341,16 @@
             <i class="fa-solid fa-person"><a href="#crm-lead"></a></i>
             <a class="enlace" href="#crm-lead"><span>CRM</span></a>
         </div>
-      <div>
-        <i class="fa-solid fa-money-bill"></i>
-        <a  class="enlace" href="#"><span>Presupuestos</span></a>
-      </div>
-      <div>
-        <i class="fa-solid fa-pen-nib"></i>
-        <a class="enlace" href="#"><span>Contratos</span></a>
-      </div>
+        <div>
+            <i class="fa-solid fa-money-bill"></i>
+            <a class="enlace" href="#"><span>Presupuestos</span></a>
+        </div>
+        <div>
+            <i class="fa-solid fa-pen-nib"></i>
+            <a class="enlace" href="#"><span>Contratos</span></a>
+        </div>
     </div>
-  </footer>
+</footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="../../assets/JS/rejilla.js"></script>
