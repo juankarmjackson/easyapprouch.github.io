@@ -240,7 +240,7 @@ footer .box-footer div a{
 
 #tabla-contenedor {
     width: 100%; /* Ajusta al 100% del ancho del padre */
-    height: 70vb; /* Define una altura fija, puedes cambiar este valor a tu necesidad */
+    height: 60vb; /* Define una altura fija, puedes cambiar este valor a tu necesidad */
     overflow: auto;
 }
 
