@@ -1,0 +1,97 @@
+body{
+    margin: 0;
+}
+
+
+header{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../img/fondoeasy3.png);
+    background-size: cover;
+    color: white;
+}
+
+.title{
+    border-radius: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(6px);
+    padding: 20px;
+    text-align: center;
+}
+
+.chat{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../img/fondoeasy4.png);
+    background-size: cover;
+    color: white;
+}
+
+.ia{
+    height: 500px;
+    width: 301px;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    margin: auto;
+}
+
+.ventajas {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../img/fondoeasy3.png);
+    background-size: cover;
+    color: white;
+}
+
+.ventajas .ventaja{
+    border-radius: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(6px);
+    padding: 20px;
+    text-align: center;
+    margin: 20px;
+}
+
+.ventaja img{
+    width: 250px;
+}
+
+footer{
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../img/fondoeasy5.png);
+    background-size: cover;
+    color: white;
+}
+
+footer .enlace{
+    text-align: end;
+}
+
+footer .enlace li{
+    list-style: none;
+}
+
+/* MEDIAS QUERYS */
+
+@media (max-width: 1100px) {
+    .ventajas {
+        display: block;
+        height: auto;
+    }
+
+    .ventajas .ventaja{
+        margin: 5px;
+    }
+
+
+}
