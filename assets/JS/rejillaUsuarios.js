@@ -445,7 +445,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         document.getElementById('leads').addEventListener('click', redirigirRejillaLeads);
 
         async function redirigirRejillaLeads() {
-            window.location.href = '../leads/leadCRM.html';
+            window.location.href = '../leads/julex.html';
         }
 
         document.getElementById('clientes-potenciales').addEventListener('click', redirigirRejillaClientesPotenciales);
