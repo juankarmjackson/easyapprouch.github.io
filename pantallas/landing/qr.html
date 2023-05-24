@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content= "width=device-width, user-scalable=no">
+	<meta name="referrer" content="no-referrer">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link href="https://fonts.cdnfonts.com/css/lovelo" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <link rel="shortcut icon" type="image/jpg" href="https://juankarmjackson.github.io/easyapprouch.github.io/assets/img/easyapprouch.png"/>
+    <link rel="stylesheet" href="../../assets/CSS/easyapprouch.css">
+    <title>Easy Approuch</title>
+</head>
+<body>
+   <section class="slider-principal">
+       <div class="title">
+            <h1>Historia de Elevator Pitch</h1>
+            <span>Mejora tu Pitch con los mejores tips.</span>
+       </div>
+       <div class="capa"></div>
+   </section>
+<section class="palancas-compra">
+    <div class="texto-compra">
+        <h2 style="color: red">Rellena el Formulario.</h2>
+    </div>
+    <div class="palancas">
+        <div class="palanca">
+           <div>
+            <label for="">Nombre Completo</label><br>
+            <input type="text" placeholder="Escribe Tu Nombre" id="nombre" required style="width: 90%; padding: 10px; border-radius: 10px; margin: 10px; border: none"><br><br>
+           </div>
+           <div>
+            <label for="">Teléfono</label><br>
+            <input type="text" placeholder="Escribe Tu Teléfono" id="telefono" required style="width: 90%; padding: 10px; border-radius: 10px; margin: 10px; border: none"><br><br>
+           </div>
+           <div>
+            <label for="">Email</label><br>
+            <input type="text" placeholder="¿Dónde te enviamos nuestra guía?" id="email" required style="width: 90%; padding: 10px; border-radius: 10px; margin: 10px; border: none"><br><br>
+           </div>
+           <div>
+                <p id="inputBoton" style="cursor: pointer; color:white; background: red; border-radius: 30px; padding: 10px; width: 90%">Enviar</p>
+                <p id="respuesta" style="display:none;background: green; color: white; padding: 10px;">Formulario Enviado, Te enviaremos un SMS con la info.</p>
+           </div>
+        </div>
+        <div class="palanca">
+            <img src="../../assets/img/pdf.png" style="width: 90%;" alt="Copia y Pegua método de duplicar facturación">
+        </div>
+    </div>
+</section>
+<!-- Hotjar Tracking Code for Easy Approch -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:3482523,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+    <script type="module">
+        const inputBoton = document.getElementById('inputBoton');
+console.log(inputBoton);
+
+
+inputBoton.addEventListener('click', function(){
+    const nombre = document.getElementById('nombre').value;
+    const telefono = document.getElementById('telefono').value;
+    const email = document.getElementById('email').value
+
+    $.ajax({
+        url: `https://presupuestaya-production.up.railway.app/api/leads/script`,
+        type: 'POST',
+        async: false,
+        contentType: 'application/json',
+        dataType: 'json',
+        data: JSON.stringify({
+            "nombre": nombre,
+            "telefono": telefono,
+            "email": email,
+            "origen": "QR",
+            "username": "admin",
+        }),
+        success: function (data) {
+            const respuesta = document.getElementById('respuesta');
+            respuesta.style.display = "block";
+        }
+
+    })
+
+});
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+   
+
+</body>
+</html>
