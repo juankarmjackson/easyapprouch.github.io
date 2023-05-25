@@ -161,7 +161,13 @@
                 <form id="chatbot-form" style="display: flex;">
                     <input type="text" class="form-control border-success" id="chatbot-input"
                            placeholder="Escribe un mensaje..." style="flex-grow: 1;">
-                    <button type="submit" class="btn btn-success" style="margin-left: 10px;">Enviar</button>
+                    <button type="submit" id="boton-enviar"
+                            class="btn btn-success" style="margin-left: 25px;">
+                        <span class="spinner-border spinner-border-sm" id="carga-boton" role="status" aria-hidden="true"
+                              style="display: none;"></span>
+                        <span id="boton-nombre-enviar">Enviar</span>
+
+                    </button>
                 </form>
 
             </div>
