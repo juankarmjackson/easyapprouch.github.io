@@ -19,6 +19,7 @@ header{
     backdrop-filter: blur(6px);
     padding: 20px;
     text-align: center;
+    max-width: 550px;
 }
 
 .chat{
@@ -32,8 +33,6 @@ header{
 }
 
 .ia{
-    height: 80vh;
-    width: 301px;
     display: flex;
     justify-content: center;
     align-items: end;
@@ -98,7 +97,6 @@ footer .enlace li{
 
 #chatbot-container {
     overflow: auto;
-    height: 80vb; /* Define una altura fija, puedes cambiar este valor a tu necesidad */
 }
 
 .bg-custom {
