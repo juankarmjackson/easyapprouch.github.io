@@ -24,7 +24,7 @@ async function mostrarMensajes() {
             if (mensaje.role === 'assistant') {
                 html = `
                     <div class="col-6">
-                        <div class="p-3 mb-2 bg-info-subtle text-emphasis-info rounded">
+                        <div class="p-3 mb-2 bg-custom text-white rounded">
                             <p>${mensaje.content}</p>
                         </div>
                     </div>
@@ -34,7 +34,7 @@ async function mostrarMensajes() {
                 html = `
                     <div class="col-6"></div>
                     <div class="col-6">
-                        <div class="p-3 mb-2 bg-success-subtle text-emphasis-success rounded">
+                        <div class="p-3 mb-2 bg-custom2 text-white rounded">
                             <p class="text-right">${mensaje.content}</p>
                         </div>
                     </div>

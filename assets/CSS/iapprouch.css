@@ -100,3 +100,11 @@ footer .enlace li{
     overflow: auto;
     height: 80vb; /* Define una altura fija, puedes cambiar este valor a tu necesidad */
 }
+
+.bg-custom {
+    background-color: #01204C;
+}
+
+.bg-custom2 {
+    background-color: #E2C2EF;
+}
