@@ -89,9 +89,13 @@ footer .enlace li{
         height: auto;
     }
 
-    .ventajas .ventaja{
+    .ventajas .ventaja {
         margin: 5px;
     }
 
 
+}
+
+#chatbot-container {
+    overflow: auto;
 }
