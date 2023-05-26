@@ -32,7 +32,7 @@ header{
 }
 
 .ia{
-    height: 500px;
+    height: 80vh;
     width: 301px;
     display: flex;
     justify-content: center;
@@ -98,4 +98,5 @@ footer .enlace li{
 
 #chatbot-container {
     overflow: auto;
+    height: 80vb; /* Define una altura fija, puedes cambiar este valor a tu necesidad */
 }
