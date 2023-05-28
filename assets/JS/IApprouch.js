@@ -24,7 +24,7 @@ async function mostrarMensajes() {
             if (mensaje.role === 'assistant') {
                 html = `
                     <div class="col-6">
-                        <div class="p-3 mb-2 bg-custom text-white rounded">
+                        <div class="p-3 mb-2 bg-custom2 text-white rounded">
                             <p>${mensaje.content}</p>
                         </div>
                     </div>
@@ -34,7 +34,7 @@ async function mostrarMensajes() {
                 html = `
                     <div class="col-6"></div>
                     <div class="col-6">
-                        <div class="p-3 mb-2 bg-custom2 text-white rounded">
+                        <div class="p-3 mb-2 bg-custom text-white rounded">
                             <p class="text-right">${mensaje.content}</p>
                         </div>
                     </div>
@@ -64,7 +64,7 @@ function enviarMensaje() {
         html = `
                     <div class="col-6"></div>
                     <div class="col-6">
-                        <div class="p-3 mb-2 bg-success-subtle text-emphasis-success rounded">
+                        <div class="p-3 mb-2 bg-custom text-white rounded">
                             <p class="text-right">${message}</p>
                         </div>
                     </div>
@@ -73,7 +73,7 @@ function enviarMensaje() {
         await esperar(2000);
         html = `
                     <div class="escribiendo col-6">
-                        <div class="p-3 mb-2 bg-transparent text-body rounded">
+                        <div class="p-3 mb-2 bg-custom2 text-white rounded">
                             <img src="../../assets/img/work-in-progress.gif" height="50px" width="50px">
                         </div>
                     </div>
@@ -97,7 +97,7 @@ function enviarMensaje() {
 
             html = `
                     <div class="col-6">
-                        <div class="p-3 mb-2 bg-info-subtle text-emphasis-info rounded">
+                        <div class="p-3 mb-2 bg-custom2 text-white rounded">
                         ${response.data}
                         </div>
                     </div>
