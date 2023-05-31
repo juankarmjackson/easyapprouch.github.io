@@ -25,61 +25,76 @@
         <h2>Tu Asistente Virtual con IA</h2>
     </div>
 </header>
-<section class="chat">
-    <div class="title">
-        <div class="ia">
-            <div id="chatbot-container">
-                <div id="chatbot-messages">
-                    <br>
-                    <div class="container-fluid">
+
+<div class="chat">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-1 col-lg-1 text-center"></div>
+            <div class="col-12 col-md-4 col-lg-4 text-center">
+                <div class="row">
+                    <div class="col-12 p-3 mb-2 bg-black bg-gradient text-white ">
                         <div class="row">
-                            <div class="col-12">
-                                <div class="p-3 mb-2 bg-black bg-gradient text-white ">
+                            <div class="col-11 text-center">
+                                Julex.ai
+                            </div>
+                            <div class="col-1">
+                                <button type="button" id="borrarConversacion"
+                                        class="btn btn-danger text-right">
+                                    <i class="bi bi-trash2"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div id="chatbot-container">
+                            <div id="chatbot-messages">
+                                <br>
+                                <div class="container-fluid">
                                     <div class="row">
-                                        <div class="col-11 text-center">
-                                            Julex.ai
+                                        <div class="col-12">
                                         </div>
-                                        <div class="col-1">
-                                            <button type="button" id="borrarConversacion"
-                                                    class="btn btn-danger text-right">
-                                                <i class="bi bi-trash2"></i>
-                                            </button>
+                                        <div id="mensaje-generados">
+                                            <div id="loading-gif" class="text-center" style="display: none;">
+                                                <img src="../../assets/img/work-in-progress.gif" alt="Cargando..."/>
+                                            </div>
+
+                                            <div class="row">
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div id="mensaje-generados">
-                                <div id="loading-gif" class="text-center" style="display: none;">
-                                    <img src="../../assets/img/work-in-progress.gif" alt="Cargando..."/>
-                                </div>
 
-                                <div class="row">
 
-                                </div>
                             </div>
+
+                            <br>
+
                         </div>
-
                     </div>
-
-                </div>
-
-                <br>
-                <form id="chatbot-form" style="display: flex;">
-                    <input type="text" class="form-control border-success" id="chatbot-input"
-                           placeholder="Escribe un mensaje..." style="flex-grow: 1;">
-                    <button type="submit" id="boton-enviar"
-                            class="btn btn-success" style="margin-left: 25px;">
+                    <div class="col-12">
+                        <form id="chatbot-form" style="display: flex;">
+                            <input type="text" class="form-control border-success" id="chatbot-input"
+                                   placeholder="Escribe un mensaje..." style="flex-grow: 1;">
+                            <button type="submit" id="boton-enviar"
+                                    class="btn btn-success" style="margin-left: 25px;">
                         <span class="spinner-border spinner-border-sm" id="carga-boton" role="status" aria-hidden="true"
                               style="display: none;"></span>
-                        <span id="boton-nombre-enviar">Enviar</span>
+                                <span id="boton-nombre-enviar">Enviar</span>
 
-                    </button>
-                </form>
+                            </button>
+                        </form>
 
+                    </div>
+                </div>
             </div>
+            <div class="col-12 col-md-1 col-lg-1 text-center"></div>
+            <div class="col-12 col-md-1 col-lg-1 text-center"></div>
+            <div class="col-12 col-md-4 col-lg-4 text-center"></div>
+            <div class="col-12 col-md-1 col-lg-1 text-center"></div>
         </div>
     </div>
-</section>
+</div>
 <section class="ventajas">
     <div class="ventaja">
         <img src="../../assets/img/star.png">

@@ -97,8 +97,7 @@ footer .enlace li{
 
 #chatbot-container {
     overflow: auto;
-    height: 80vb; /* Define una altura fija, puedes cambiar este valor a tu necesidad */
-    width: 100vb;
+    height: 60vb; /* Define una altura fija, puedes cambiar este valor a tu necesidad */
 }
 
 .bg-custom {
