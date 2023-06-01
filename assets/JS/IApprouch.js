@@ -10,6 +10,8 @@ $(document).ready(function () {
     enviarMensaje('ChatBotAtaca');
     borrarConversacion('ChatBotNormal');
     borrarConversacion('ChatBotAtaca');
+
+    mostrarbotonIniciarConversacion('ChatBotAtaca');
 });
 
 
@@ -37,7 +39,8 @@ async function mostrarMensajes(nombreConversacion, idDiv) {
                     <div class="col-6"></div>
                 `;
             } else if (mensaje.role === 'user') {
-                html = `
+                if (mensaje.content !== '' && mensaje.content !== null && mensaje.content !== 'undefined') {
+                    html = `
                     <div class="col-6"></div>
                     <div class="col-6">
                         <div class="p-3 mb-2 bg-custom text-white rounded">
@@ -45,6 +48,8 @@ async function mostrarMensajes(nombreConversacion, idDiv) {
                         </div>
                     </div>
                 `;
+
+                }
             }
 
             $('#' + idDiv + ' .row').append(html);
@@ -66,7 +71,8 @@ function enviarMensaje(nombreConversacion) {
         $("#boton-nombre-enviar-" + nombreConversacion).css("display", "none");
 
         var html = '';
-        html = `
+        if (message !== '' && message !== null && message !== 'undefined') {
+            html = `
                     <div class="col-6"></div>
                     <div class="col-6">
                         <div class="p-3 mb-2 bg-custom text-white rounded">
@@ -74,7 +80,8 @@ function enviarMensaje(nombreConversacion) {
                         </div>
                     </div>
                 `;
-        $('#mensaje-generados-' + nombreConversacion + ' .row').append(html);
+            $('#mensaje-generados-' + nombreConversacion + ' .row').append(html);
+        }
         await esperar(2000);
         html = `
                     <div class="escribiendo-` + nombreConversacion + ` col-6">
@@ -145,7 +152,43 @@ function borrarConversacion(nombreConversacion) {
         // Oculta el GIF animado después de completar la carga o procesamiento
         $("#loading-gif-" + nombreConversacion).css("display", "none");
 
+        if (nombreConversacion === 'ChatBotAtaca') {
+            $("#chatbot-input-" + nombreConversacion).prop("disabled", true);
+            $("#boton-enviar-" + nombreConversacion).prop("disabled", true);
+            $("#borrarConversacion-" + nombreConversacion).prop("disabled", true);
+            $("#iniciarConversacion-" + nombreConversacion).css("display", "block");
+        }
 
+    });
+}
+
+async function mostrarbotonIniciarConversacion(nombreConversacion) {
+
+    await axios.get(raizUrl + '/api/v1/mensajes_chatbot/porUsuarioYNombreConversacion', {
+        params: {
+            nombreConversacion: nombreConversacion
+        }
+    }).then(function (response) {
+        var mensajes = response.data;
+        if (mensajes.length === 0) {
+            $("#chatbot-input-" + nombreConversacion).prop("disabled", true);
+            $("#boton-enviar-" + nombreConversacion).prop("disabled", true);
+            $("#borrarConversacion-" + nombreConversacion).prop("disabled", true);
+        } else {
+            $("#chatbot-input-" + nombreConversacion).prop("disabled", false);
+            $("#boton-enviar-" + nombreConversacion).prop("disabled", false);
+            $("#borrarConversacion-" + nombreConversacion).prop("disabled", false);
+            $("#iniciarConversacion-" + nombreConversacion).css("display", "none");
+        }
+    });
+
+    $("#iniciarConversacion-" + nombreConversacion).click(async function (event) {
+        event.preventDefault(); // Evita que el formulario se envíe automáticamente
+        $("#chatbot-form-" + nombreConversacion).submit();
+        $("#chatbot-input-" + nombreConversacion).prop("disabled", false);
+        $("#boton-enviar-" + nombreConversacion).prop("disabled", false);
+        $("#borrarConversacion-" + nombreConversacion).prop("disabled", false);
+        $("#iniciarConversacion-" + nombreConversacion).css("display", "none");
     });
 }
 
