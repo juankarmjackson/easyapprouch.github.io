@@ -38,7 +38,7 @@
                                 Julex.ai
                             </div>
                             <div class="col-1">
-                                <button type="button" id="borrarConversacion"
+                                <button type="button" id="borrarConversacion-ChatBotNormal"
                                         class="btn btn-danger text-right">
                                     <i class="bi bi-trash2"></i>
                                 </button>
@@ -46,26 +46,22 @@
                         </div>
                     </div>
                     <div class="col-12">
-                        <div id="chatbot-container">
-                            <div id="chatbot-messages">
-                                <br>
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-12">
+                        <div class="chatbot-container">
+                            <br>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-12">
+                                    </div>
+                                    <div id="mensaje-generados-ChatBotNormal">
+                                        <div id="loading-gif-ChatBotNormal" class="text-center" style="display: none;">
+                                            <img src="../../assets/img/work-in-progress.gif" alt="Cargando..."/>
                                         </div>
-                                        <div id="mensaje-generados">
-                                            <div id="loading-gif" class="text-center" style="display: none;">
-                                                <img src="../../assets/img/work-in-progress.gif" alt="Cargando..."/>
-                                            </div>
 
-                                            <div class="row">
+                                        <div class="row">
 
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
 
                             <br>
@@ -73,14 +69,15 @@
                         </div>
                     </div>
                     <div class="col-12">
-                        <form id="chatbot-form" style="display: flex;">
-                            <input type="text" class="form-control border-success" id="chatbot-input"
+                        <form id="chatbot-form-ChatBotNormal" style="display: flex;">
+                            <input type="text" class="form-control border-success" id="chatbot-input-ChatBotNormal"
                                    placeholder="Escribe un mensaje..." style="flex-grow: 1;">
-                            <button type="submit" id="boton-enviar"
+                            <button type="submit" id="boton-enviar-ChatBotNormal"
                                     class="btn btn-success" style="margin-left: 25px;">
-                        <span class="spinner-border spinner-border-sm" id="carga-boton" role="status" aria-hidden="true"
+                        <span class="spinner-border spinner-border-sm" id="carga-boton-ChatBotNormal" role="status"
+                              aria-hidden="true"
                               style="display: none;"></span>
-                                <span id="boton-nombre-enviar">Enviar</span>
+                                <span id="boton-nombre-enviar-ChatBotNormal">Enviar</span>
 
                             </button>
                         </form>
@@ -90,7 +87,62 @@
             </div>
             <div class="col-12 col-md-1 col-lg-1 text-center"></div>
             <div class="col-12 col-md-1 col-lg-1 text-center"></div>
-            <div class="col-12 col-md-4 col-lg-4 text-center"></div>
+            <div class="col-12 col-md-4 col-lg-4 text-center">
+                <div class="row">
+                    <div class="col-12 p-3 mb-2 bg-black bg-gradient text-white ">
+                        <div class="row">
+                            <div class="col-11 text-center">
+                                Julex.ai
+                            </div>
+                            <div class="col-1">
+                                <button type="button" id="borrarConversacion-ChatBotAtaca"
+                                        class="btn btn-danger text-right">
+                                    <i class="bi bi-trash2"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="chatbot-container">
+                            <br>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-12">
+                                    </div>
+                                    <div id="mensaje-generados-ChatBotAtaca">
+                                        <div id="loading-gif-ChatBotAtaca" class="text-center" style="display: none;">
+                                            <img src="../../assets/img/work-in-progress.gif" alt="Cargando..."/>
+                                        </div>
+
+                                        <div class="row">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br>
+
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <form id="chatbot-form-ChatBotAtaca" style="display: flex;">
+                            <input type="text" class="form-control border-success" id="chatbot-input-ChatBotAtaca"
+                                   placeholder="Escribe un mensaje..." style="flex-grow: 1;">
+                            <button type="submit" id="boton-enviar-ChatBotAtaca"
+                                    class="btn btn-success" style="margin-left: 25px;">
+                        <span class="spinner-border spinner-border-sm" id="carga-boton-ChatBotAtaca" role="status"
+                              aria-hidden="true"
+                              style="display: none;"></span>
+                                <span id="boton-nombre-enviar-ChatBotAtaca">Enviar</span>
+
+                            </button>
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
             <div class="col-12 col-md-1 col-lg-1 text-center"></div>
         </div>
     </div>
@@ -123,73 +175,75 @@
     const inputBoton = document.getElementById('inputBoton');
     console.log(inputBoton);
 
+    /*
 
-    inputBoton.addEventListener('click', function () {
-        const nombre = document.getElementById('nombre').value;
-        const telefono = document.getElementById('telefono').value;
-        const email = document.getElementById('email').value
-        const nombreempresa = document.getElementById('nombreempresa').value;
-        const observaciones = document.getElementById('observaciones').value;
-
-
-        const username = "username1";
-        const password = "password1";
-
-        $.ajax({
-            url: `https://presupuestaya-production.up.railway.app/api/clientes-potenciales`,
-            type: 'POST',
-            async: false,
-            contentType: 'application/json',
-            dataType: 'json',
-            username: username,
-            password: password,
-            data: JSON.stringify({
-                "nombres": nombre,
-                "telefono": telefono,
-                "email": email,
-                "nombreEmpresa": nombreempresa,
-                "observaciones": observaciones
-            }),
-            success: function (data) {
-                console.log('okey');
-            }
-
-        })
-
-    });
-
-    $('#inputBoton2').click(function () {
-        const nombre = document.getElementById('nombre').value;
-        const telefono = document.getElementById('telefono').value;
-        const nombreempresa = document.getElementById('nombreempresa').value;
-        const observaciones = document.getElementById('observaciones').value;
-        const tipoDeNegocio = "Agencia de Marketing";
+        inputBoton.addEventListener('click', function () {
+            const nombre = document.getElementById('nombre').value;
+            const telefono = document.getElementById('telefono').value;
+            const email = document.getElementById('email').value
+            const nombreempresa = document.getElementById('nombreempresa').value;
+            const observaciones = document.getElementById('observaciones').value;
 
 
-        const username = "username1";
-        const password = "password1";
+            const username = "username1";
+            const password = "password1";
 
-        $.ajax({
-            url: `http://localhost:8080/api/clientes-potenciales`,
-            type: 'POST',
-            async: false,
-            contentType: 'application/json',
-            dataType: 'json',
-            username: username,
-            password: password,
-            data: JSON.stringify({
-                "nombres": nombre,
-                "telefono": telefono,
-                "nombreEmpresa": nombreempresa,
-                "observaciones": observaciones
-            }),
-            success: function (data) {
-                console.log('okey');
-            }
+            $.ajax({
+                url: `https://presupuestaya-production.up.railway.app/api/clientes-potenciales`,
+                type: 'POST',
+                async: false,
+                contentType: 'application/json',
+                dataType: 'json',
+                username: username,
+                password: password,
+                data: JSON.stringify({
+                    "nombres": nombre,
+                    "telefono": telefono,
+                    "email": email,
+                    "nombreEmpresa": nombreempresa,
+                    "observaciones": observaciones
+                }),
+                success: function (data) {
+                    console.log('okey');
+                }
 
-        })
+            })
 
-    });
+        });
+
+        $('#inputBoton2').click(function () {
+            const nombre = document.getElementById('nombre').value;
+            const telefono = document.getElementById('telefono').value;
+            const nombreempresa = document.getElementById('nombreempresa').value;
+            const observaciones = document.getElementById('observaciones').value;
+            const tipoDeNegocio = "Agencia de Marketing";
+
+
+            const username = "username1";
+            const password = "password1";
+
+            $.ajax({
+                url: `http://localhost:8080/api/clientes-potenciales`,
+                type: 'POST',
+                async: false,
+                contentType: 'application/json',
+                dataType: 'json',
+                username: username,
+                password: password,
+                data: JSON.stringify({
+                    "nombres": nombre,
+                    "telefono": telefono,
+                    "nombreEmpresa": nombreempresa,
+                    "observaciones": observaciones
+                }),
+                success: function (data) {
+                    console.log('okey');
+                }
+
+            })
+
+        });
+    */
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"

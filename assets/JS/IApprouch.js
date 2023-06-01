@@ -4,19 +4,25 @@ const raizUrl = 'http://localhost:8080';
 const raizUrl = 'https://presupuestaya-production.up.railway.app';
 
 $(document).ready(function () {
-    mostrarMensajes();
-    enviarMensaje();
-    borrarConversacion();
+    mostrarMensajes('ChatBotNormal', 'mensaje-generados-ChatBotNormal');
+    mostrarMensajes('ChatBotAtaca', 'mensaje-generados-ChatBotAtaca');
+    enviarMensaje('ChatBotNormal');
+    enviarMensaje('ChatBotAtaca');
+    borrarConversacion('ChatBotNormal');
+    borrarConversacion('ChatBotAtaca');
 });
 
-async function mostrarMensajes() {
-    // Enviar el mensaje al servidor y obtener la respuesta del chatbot al cargar la página
-    await axios.get(raizUrl + '/api/v1/mensajes_chatbot/findUserAndAssistantMessages').then(function (response) {
-        $('#mensaje-generados .row').empty();
+
+async function mostrarMensajes(nombreConversacion, idDiv) {
+    await axios.get(raizUrl + '/api/v1/mensajes_chatbot/porUsuarioYNombreConversacion', {
+        params: {
+            nombreConversacion: nombreConversacion
+        }
+    }).then(function (response) {
+        $('#' + idDiv + ' .row').empty();
 
         var mensajes = response.data;
 
-        // Iterar sobre los mensajes y generar el HTML correspondiente
         for (var i = 0; i < mensajes.length; i++) {
             var mensaje = mensajes[i];
             var html = '';
@@ -41,24 +47,23 @@ async function mostrarMensajes() {
                 `;
             }
 
-            // Agregar el HTML al contenedor de mensajes
-            $('#mensaje-generados .row').append(html);
+            $('#' + idDiv + ' .row').append(html);
         }
     });
 }
 
-function enviarMensaje() {
+function enviarMensaje(nombreConversacion) {
 
-    $("#chatbot-form").submit(async function (event) {
+    $("#chatbot-form-" + nombreConversacion).submit(async function (event) {
         event.preventDefault(); // Evita que el formulario se envíe automáticamente
-        var message = $("#chatbot-input").val();
+        var message = $("#chatbot-input-" + nombreConversacion).val();
 
         // Limpia el campo de entrada después de enviar el mensaje
-        $("#chatbot-input").val("");
+        $("#chatbot-input-" + nombreConversacion).val("");
 
-        $("#boton-enviar").prop("disabled", true);
-        $("#carga-boton").css("display", "block");
-        $("#boton-nombre-enviar").css("display", "none");
+        $("#boton-enviar-" + nombreConversacion).prop("disabled", true);
+        $("#carga-boton-" + nombreConversacion).css("display", "block");
+        $("#boton-nombre-enviar-" + nombreConversacion).css("display", "none");
 
         var html = '';
         html = `
@@ -69,28 +74,29 @@ function enviarMensaje() {
                         </div>
                     </div>
                 `;
-        $('#mensaje-generados .row').append(html);
+        $('#mensaje-generados-' + nombreConversacion + ' .row').append(html);
         await esperar(2000);
         html = `
-                    <div class="escribiendo col-6">
+                    <div class="escribiendo-` + nombreConversacion + ` col-6">
                         <div class="p-3 mb-2 bg-custom2 text-white rounded">
                             <img src="../../assets/img/work-in-progress.gif" height="50px" width="50px">
                         </div>
                     </div>
-                    <div class="escribiendo col-6"></div>
+                    <div class="escribiendo-` + nombreConversacion + ` col-6"></div>
                 `;
-        $('#mensaje-generados .row').append(html);
+        $('#mensaje-generados-' + nombreConversacion + ' .row').append(html);
 
 
         // Obtén el valor del campo de entrada
 
         // Enviar el mensaje al servidor y obtener la respuesta del chatbot
-        await axios.post(raizUrl + '/api/v1/complete-chat-no-mono', {
+        await axios.post(raizUrl + '/api/v1/complete-chat-no-mono-atacar', {
             modeloGenerado: "gpt-3.5-turbo",
-            mensaje: message
+            mensaje: message,
+            nombreConversacion: nombreConversacion
         }).then(function (response) {
 
-            const elementos = document.getElementsByClassName("escribiendo");
+            const elementos = document.getElementsByClassName("escribiendo-" + nombreConversacion);
             while (elementos.length > 0) {
                 elementos[0].parentNode.removeChild(elementos[0]);
             }
@@ -103,37 +109,41 @@ function enviarMensaje() {
                     </div>
                     <div class="col-6"></div>
                 `;
-            $('#mensaje-generados .row').append(html);
+            $('#mensaje-generados-' + nombreConversacion + ' .row').append(html);
         });
 
         // Oculta el GIF animado después de completar la carga o procesamiento
-        $("#loading-gif").css("display", "none");
-        $("#boton-enviar").prop("disabled", false);
-        $("#carga-boton").css("display", "none");
-        $("#boton-nombre-enviar").css("display", "block");
+        $("#loading-gif-" + nombreConversacion).css("display", "none");
+        $("#boton-enviar-" + nombreConversacion).prop("disabled", false);
+        $("#carga-boton-" + nombreConversacion).css("display", "none");
+        $("#boton-nombre-enviar-" + nombreConversacion).css("display", "block");
 
     });
 }
 
-function borrarConversacion() {
+function borrarConversacion(nombreConversacion) {
 
-    $("#borrarConversacion").click(async function (event) {
+    $("#borrarConversacion-" + nombreConversacion).click(async function (event) {
         event.preventDefault(); // Evita que el formulario se envíe automáticamente
 
         // Muestra el GIF animado de carga
-        $('#mensaje-generados .row').empty();
-        $("#loading-gif").css("display", "block");
+        $('#mensaje-generados-' + nombreConversacion + ' .row').empty();
+        $("#loading-gif-" + nombreConversacion).css("display", "block");
 
         // Obtén el valor del campo de entrada
-        const message = $("#chatbot-input").val();
+        const message = $("#chatbot-input-" + nombreConversacion).val();
 
         // Enviar el mensaje al servidor y obtener la respuesta del chatbot
-        await axios.delete(raizUrl + '/api/v1/mensajes_chatbot/borrarMensajes').then(function (response) {
+        await axios.delete(raizUrl + '/api/v1/mensajes_chatbot/borrarMensajes', {
+            params: {
+                nombreConversacion: nombreConversacion
+            }
+        }).then(function (response) {
             mostrarMensajes();
         });
 
         // Oculta el GIF animado después de completar la carga o procesamiento
-        $("#loading-gif").css("display", "none");
+        $("#loading-gif-" + nombreConversacion).css("display", "none");
 
 
     });
