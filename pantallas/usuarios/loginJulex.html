@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta name="referrer" content="no-referrer">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.cdnfonts.com/css/lovelo" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/0a7198e186.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" type="image/jpg"
+          href="https://juankarmjackson.github.io/easyapprouch.github.io/assets/img/easyapprouch.png"/>
+    <link rel="stylesheet" href="../../assets/CSS/julex.css">
+    <title>Easy Approuch | Login</title>
+</head>
+<body>
+<section class="slider">
+    <div class="title">
+        <img src="../../assets/img/logoJulex.png" alt="Easy Approuch | Proposal System">
+    </div>
+    <div class="formulario plan">
+        <form id="loginForm">
+            <div class="form">
+                <label for="">Nombre</label>
+                <input type="text" placeholder="Escriba su Nombre" id="nombre">
+                <label for="">Contraseña</label>
+                <input type="password" id="password" placeholder="Escribe su contraseña">
+                <button type="submit" id="inputBoton">Acceder</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+
+<footer>
+    <ul>
+        <li>Políticas de Empresa</li>
+        <li>Preguntas Frecuentes</li>
+        <li>Aviso Legal</li>
+    </ul>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+<script src="confetti.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script type="module">
+
+    document.getElementById('loginForm').addEventListener('submit', async function (event) {
+        // Previene el comportamiento predeterminado del formulario
+        event.preventDefault();
+
+        const username = document.getElementById('nombre').value;
+        const password = document.getElementById('password').value;
+        /*
+                                const raizUrl = 'http://localhost:8080';
+        */
+        const raizUrl = 'https://presupuestaya-production.up.railway.app';
+
+        $.ajax({
+            url: raizUrl + `/api/authenticate`, // Cambia esta URL a la ruta de autenticación en tu servidor
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                "username": username,
+                "password": password
+            }),
+            success: function (data) {
+                // Si la autenticación es exitosa, redirige al usuario a la página de leads
+                localStorage.setItem('authToken', data.jwt);
+
+                window.location.href = '../IA/asistente-julex.html'; // Cambia esta URL a la ruta de la página de leads en tu aplicación
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                // Si hay un error, muestra un mensaje al usuario
+                alert('Error al iniciar sesión. Por favor, verifica tus credenciales e intenta nuevamente.');
+            }
+        });
+
+    });
+
+</script>
+
+</body>
+</html>
