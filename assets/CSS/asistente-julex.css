@@ -1,0 +1,253 @@
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.nav-img {
+    background-image: url(../img/positivenation6.gif);
+    background-size: cover;
+}
+
+header #nombreBienvenida h1 {
+    color: white;
+    padding: 10px;
+    font-size: 15px;
+}
+
+header #tituloPantalla {
+    padding: 10px;
+    margin: 10px;
+    background: rgb(86 125 181 / 58%);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(50px);
+    border-radius: 30px;
+}
+
+header #tituloPantalla h1 {
+    color: white;
+    padding: 10px;
+}
+
+.panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin: auto;
+    max-width: 1000px;
+
+}
+
+.panel .results {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 50%;
+}
+
+.panel .results .leyenda {
+    display: flex;
+    flex-direction: column;
+}
+
+.panel .results .leyenda span {
+    margin: 5px;
+}
+
+.panel .results .cifra {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.panel .results .cifra span {
+    margin: 5px;
+}
+
+.panel .notificaciones {
+    width: 50%;
+}
+
+.panel .cifra #resultado {
+    color: white;
+    background-color: rgb(22, 187, 220);
+    padding: 8px;
+    border-radius: 30px;
+}
+
+.panel .cifra #contactados {
+    color: white;
+    background-color: grey;
+    padding: 8px;
+    border-radius: 30px;
+}
+
+.panel .cifra #negociacion {
+    color: white;
+    background-color: orange;
+    padding: 8px;
+    border-radius: 30px;
+}
+
+.panel .cifra #cierres {
+    color: white;
+    background-color: green;
+    padding: 8px;
+    border-radius: 30px;
+}
+
+.miro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+    width: 90%;
+    margin: auto;
+    padding: 10px;
+}
+
+.miro iframe {
+    width: 100%;
+    height: 100%;
+    margin: 10px;
+}
+
+
+/*#eliminar-fila{
+    padding: 10px;
+    margin: 10px;
+    background-image: url(../img/positivenation4.png);
+    background-size: cover;
+    background-position: center;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 30px;
+    color: white;
+}*/
+
+#botones-admin {
+    display: none;
+}
+
+.botones-herramientas img {
+    width: 30px;
+}
+
+.excell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.opciones input[type=number] {
+    width: 30px;
+}
+
+.blog {
+    width: 90%;
+    margin: auto;
+}
+
+
+/* FOOTER */
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+footer .box-footer {
+    background-image: url(../img/positivenation4.png);
+    background-size: cover;
+    background-position: center;
+    width: 90vw;
+    margin: auto;
+    padding: 10px;
+    border-radius: 30px 30px 0 0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    color: white;
+    height: 50px;
+}
+
+footer .box-footer div a {
+    color: white;
+    text-decoration: none;
+}
+
+@media (max-width: 500px) {
+    .panel {
+        display: block;
+    }
+
+    .panel .results {
+        width: 90%;
+        margin: auto;
+    }
+
+    .panel .notificaciones {
+        width: 90%;
+        margin: auto;
+    }
+
+    footer .box-footer div .enlace {
+        display: none;
+    }
+
+    footer .box-footer div i {
+        font-size: 25px;
+    }
+}
+
+/*.tabla-contenedor-fixed {
+    background-color: #d5ffc7;
+}*/
+
+
+/*
+* handsometable CSS
+*/
+.handsontable td, .handsontable th {
+    border-color: white;
+}
+
+#tabla-contenedor {
+    width: 100%; /* Ajusta al 100% del ancho del padre */
+    height: 60vb; /* Define una altura fija, puedes cambiar este valor a tu necesidad */
+    overflow: auto;
+}
+
+#tabla-productos {
+    width: auto; /* Ajusta al 100% del ancho del padre */
+    height: 30vb; /* Define una altura fija, puedes cambiar este valor a tu necesidad */
+    overflow: auto;
+}
+
+.contenedor-handsomtable {
+    /*
+    border: 2px solid;
+    */
+    /*
+    background-color: #F2F2F2; !* Este es un tono de gris muy claro, semejante al blanco. Puedes ajustarlo a tus necesidades. *!
+    */
+    /*
+    border-image: linear-gradient(to right, darkred, darkorange, gold, darkgreen, darkblue, indigo, darkviolet) 1;
+    */
+}
+
+/* WhatsApp en verde */
+.whatsapp-link {
+    color: green !important;
+}
+
+/* Correo electrónico en marrón */
+.email-link {
+    color: brown !important;
+}
+
