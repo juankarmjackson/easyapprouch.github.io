@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content= "width=device-width, user-scalable=no">
+	<meta name="referrer" content="no-referrer">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link href="https://fonts.cdnfonts.com/css/lovelo" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <link rel="shortcut icon" type="image/jpg" href="https://juankarmjackson.github.io/easyapprouch.github.io/assets/img/easyapprouch.png"/>
+    <link rel="stylesheet" href="assets/CSS/signup.css">
+    <title>Entrenamiento Consultor</title>
+</head>
+    <div class="popup-box" id="popup" style="display: none;">
+        <div class="popup">
+            <h3>Por favor, déjanos tus datos para reservar tu acceso 
+                y enviarte el Entrenamiento DE INMEDIATO</h3>
+            <span>Deja tus datos para reservar tu plaza👇</span>
+            <div class="formulario">
+                <input type="text" placeholder="Tu Primer Nombre" id="nombre"><br>
+                <input type="text" placeholder="Tu correo Electrónico" id="email"><br>
+                <input type="text" placeholder="Whatsapp" id="whatsapp"><br>
+               <button id="lead">Regístrate AHORA al Entrenamiento</button>
+               <h3>*Solo para Clínicas que ya estén invirtiendo en Publicidad*</h3>
+            </div>
+            <img src="assets/img/close.png" style="width: 30px; position: absolute; top:-10px; cursor: pointer; right: -10px;" id="cerrar">
+        </div>
+    </div>
+    <header>
+        <img src="assets/img/easyapprouch.png" alt="Logo IApprouch">
+    </header>
+    <section class="cliente">
+        <p> Dueños de Clínicas Dentales con +2 años en el Mercado</p>
+    </section>
+    <section class="vsl">
+        <h1>
+            <span>Aprende exactamente cómo</span>
+            <span style="color: #0045E7; font-weight: bolder;">cerrar el doble de citas y convertirlos en clientes</span> sólo para Clínicas Dentales que ya están
+            <span style="color: #0045E7 ;font-weight: bolder; text-decoration: underline;"> invirtiendo en <span style="text-decoration: underline;"> Publicidad</span></span>
+        </h1>
+        <div id="foto"><img src="assets/img/registro.png" style="width: 550px; margin: 10px auto; border-radius: 10px; cursor: pointer;"></div>
+        <button id="boton">¡REGÍSTRATE AL ENTRENAMIENTO!</button>
+        <div><img src="assets/img/iconarrow.png" style="width: 100px; margin: 10px auto;"></div>
+        <p>Conoce <span style="color: #0045E7; font-weight: bolder;">la estrategia que ha obtenido hasta 10X de retorno</span> , uniendo los secretos de los líderes en marketing e innovación</p>
+        <div><img src="assets/img/logosempresas.png" style="width: 650px; margin: 10px auto;"></div>
+    </section>
+    <footer>
+        <div><img src="assets/img/easyapprouch.png" style="width: 100px; margin: 10px auto;" alt="Logo IApprouch"></div>
+        <p>EASY APPROUCH CONSULTING SL. - Todos los derechos reservados</p>
+        <p><a href="">Políticas de Empresa</a></p>
+    </footer>
+    <script type="module">
+
+        // ABRIR
+        let popup = document.getElementById('popup');
+        let boton = document.getElementById('boton');
+        let foto = document.getElementById('foto');
+       
+        boton.addEventListener('click', function(){
+            popup.style.display = "flex";
+        })
+
+        foto.addEventListener('click', function(){
+            popup.style.display = "flex";
+        })
+
+        //CERRAR
+        let cerrar = document.getElementById('cerrar');
+        cerrar.addEventListener('click', function(){
+            popup.style.display = "none";
+        })
+
+// ENVIAR FORMULARIO
+
+let lead = document.getElementById('lead');
+
+lead.addEventListener('click', function(){
+    const nombre = document.getElementById('nombre').value;
+    const email = document.getElementById('email').value;
+    const whatsapp = document.getElementById('whatsapp').value;
+
+    $.ajax({
+        url: `https://presupuestaya-production.up.railway.app/api/leads/script`,
+        type: 'POST',
+        async: false,
+        contentType: 'application/json',
+        dataType: 'json',
+        data: JSON.stringify({
+            "nombre": nombre,
+            "telefono": telefono,
+            "email": email,
+            "origen": "QR",
+            "username": "admin",
+        }),
+        success: function (data) {
+            const respuesta = document.getElementById('respuesta');
+            respuesta.style.display = "block";
+        }
+
+    })
+
+});
+
+    </script>
+<!-- Meta Pixel Code -->
+<script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '358894079750562');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=358894079750562&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- Meta Pixel Code -->
+<script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1454669831970203');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1454669831970203&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+   <!-- Hotjar Tracking Code for Easy Approch -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:3482523,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+   
+
+</body>
+</html>

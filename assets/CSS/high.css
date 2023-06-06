@@ -1,0 +1,71 @@
+
+body{
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+}
+
+header img{
+    width: 150px;
+}
+
+.aviso{
+   background-color: #FFE300;
+}
+
+.aviso p{
+    margin: 0;
+    padding: 10px;
+    text-align: center;
+    font-size: 25px;
+}
+
+.vsl {
+    padding: 10px;
+    margin: 0 auto;
+    width: 80%;
+    max-width: 1150px;
+    text-align: center;
+}
+
+.vsl h1{
+    font-size:35px ;
+}
+
+.vsl button{
+    margin: 10px 0 10px auto;
+    width: 90%;
+    font-size: 28px;
+    padding: 10px;
+    text-align: center;
+    background-color: #0045E7;
+    border-radius: 10px;
+    border:none;
+    color: white;
+}
+
+.vsl p{
+    font-size: 28px;
+
+
+}
+
+footer{
+    text-align: center;
+    background-color: black;
+    color: white;
+    padding: 10px;
+}
+
+
+/* MEDIAS QUERYS */
+
+@media (max-width: 850px) {
+    
+}

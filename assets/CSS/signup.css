@@ -1,0 +1,123 @@
+
+body{
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+}
+
+header img{
+    width: 150px;
+}
+
+.cliente{
+   background-color: #0045E7;
+   color: white;
+}
+
+.cliente p{
+    margin: 0;
+    padding: 10px;
+    text-align: center;
+    font-size: 22px;
+}
+
+.vsl {
+    padding: 10px;
+    margin: 0 auto;
+    width: 80%;
+    max-width: 1150px;
+    text-align: center;
+}
+
+.vsl h1{
+    font-size:35px ;
+}
+
+.vsl button{
+    margin: 10px 0 10px auto;
+    width: 90%;
+    font-size: 28px;
+    padding: 10px;
+    text-align: center;
+    background-color: #0045E7;
+    border-radius: 10px;
+    border:none;
+    color: white;
+    cursor: pointer;
+}
+
+.vsl p{
+    font-size: 28px;
+
+
+}
+
+.popup-box{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    opacity: 1;
+    text-align: center;
+}
+
+.popup{
+    background-color: white;
+    padding: 50px;
+    border-radius: 15px;
+    width: 90%;
+    margin: 0 auto;
+    max-width: 550px;
+    position: relative;
+}
+
+.popup button{
+    margin: 10px 0 10px auto;
+    width: 90%;
+    font-size: 20px;
+    padding: 10px;
+    text-align: center;
+    background-color: #0045E7;
+    border-radius: 10px;
+    border:none;
+    color: white;
+    cursor: pointer;
+    
+}
+
+.popup .formulario{
+    padding: 20px;
+}
+
+.popup .formulario input{
+    margin: 5px auto;
+    padding: 10px;
+    display: block;
+    width: 90%;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+footer{
+    text-align: center;
+    background-color: black;
+    color: white;
+    padding: 10px;
+}
+
+
+/* MEDIAS QUERYS */
+
+@media (max-width: 850px) {
+    
+}
