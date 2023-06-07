@@ -1,0 +1,12 @@
+body {
+    margin: 0;
+    font-family: 'Tilt Warp', cursive;
+}
+
+.title {
+    font-size: 55px;
+    letter-spacing: -.1vw;
+    -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(to right,#000 20%,#4dd4b6);
+    -webkit-background-clip: text;
+}
