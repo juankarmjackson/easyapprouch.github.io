@@ -22,16 +22,6 @@ header{
     max-width: 550px;
 }
 
-.chat{
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url(../img/fondoeasy4.png);
-    background-size: cover;
-    color: white;
-}
-
 .ia{
     display: flex;
     justify-content: center;
@@ -95,15 +85,12 @@ footer .enlace li{
 
 }
 
-.chatbot-container {
-    overflow: auto;
-    height: 60vb; /* Define una altura fija, puedes cambiar este valor a tu necesidad */
-}
-
-.bg-custom {
-    background-color: #01204C;
-}
-
-.bg-custom2 {
-    background-color: #6b5a70;
+.chat {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../img/fondoeasy4.png);
+    background-size: cover;
+    color: white;
 }

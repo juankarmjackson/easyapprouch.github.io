@@ -1,7 +1,7 @@
 /*
-const raizUrl = 'http://localhost:8080';
+const raizUrlChat = 'http://localhost:8080';
 */
-const raizUrl = 'https://presupuestaya-production.up.railway.app';
+const raizUrlChat = 'https://presupuestaya-production.up.railway.app';
 
 $(document).ready(function () {
     mostrarMensajes('ChatBotNormal', 'mensaje-generados-ChatBotNormal');
@@ -16,7 +16,7 @@ $(document).ready(function () {
 
 
 async function mostrarMensajes(nombreConversacion, idDiv) {
-    await axios.get(raizUrl + '/api/v1/mensajes_chatbot/porUsuarioYNombreConversacion', {
+    await axios.get(raizUrlChat + '/api/v1/mensajes_chatbot/porUsuarioYNombreConversacion', {
         params: {
             nombreConversacion: nombreConversacion
         }
@@ -97,7 +97,7 @@ function enviarMensaje(nombreConversacion) {
         // Obtén el valor del campo de entrada
 
         // Enviar el mensaje al servidor y obtener la respuesta del chatbot
-        await axios.post(raizUrl + '/api/v1/complete-chat-no-mono-atacar', {
+        await axios.post(raizUrlChat + '/api/v1/complete-chat-no-mono-atacar', {
             modeloGenerado: "gpt-3.5-turbo",
             mensaje: message,
             nombreConversacion: nombreConversacion
@@ -141,7 +141,7 @@ function borrarConversacion(nombreConversacion) {
         const message = $("#chatbot-input-" + nombreConversacion).val();
 
         // Enviar el mensaje al servidor y obtener la respuesta del chatbot
-        await axios.delete(raizUrl + '/api/v1/mensajes_chatbot/borrarMensajes', {
+        await axios.delete(raizUrlChat + '/api/v1/mensajes_chatbot/borrarMensajes', {
             params: {
                 nombreConversacion: nombreConversacion
             }
@@ -164,7 +164,7 @@ function borrarConversacion(nombreConversacion) {
 
 async function mostrarbotonIniciarConversacion(nombreConversacion) {
 
-    await axios.get(raizUrl + '/api/v1/mensajes_chatbot/porUsuarioYNombreConversacion', {
+    await axios.get(raizUrlChat + '/api/v1/mensajes_chatbot/porUsuarioYNombreConversacion', {
         params: {
             nombreConversacion: nombreConversacion
         }

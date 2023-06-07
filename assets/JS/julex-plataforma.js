@@ -29,23 +29,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         console.error('Error al obtener usuarioId:', error);
     }
 
-    try {
-        const response = await axios.get(raizUrl + '/api/token_miro/findByUsuario', {
-            headers: {
-                'Authorization': `Bearer ` + authToken
-            }
-        });
-        var tokenMiro = response.data;
-        var contenedorMiro = document.getElementById('contenedorMiro');
-        contenedorMiro.innerHTML = '\n' +
-            '    <div class="miro">\n' +
-            '        <iframe src="' + tokenMiro + '" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>\n' +
-            '    </div>';
-
-    } catch (error) {
-        console.error('No se encuentra el token de acceso al miro:', error);
-    }
-
 
     try {
         const response = await axios.get(raizUrl + '/usuarios/obtenerUsernameByAutentication', {
@@ -1290,82 +1273,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
     }
 });
-
-
-// Carga el SDK de Facebook de manera asíncrona
-(function (d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "https://connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-
-// Inicializa el SDK de Facebook
-window.fbAsyncInit = function () {
-    FB.init({
-        appId: '598094998940576', // Reemplaza con tu App ID de Facebook
-        cookie: true,
-        xfbml: true,
-        version: 'v12.0'
-    });
-};
-
-
-// Función para manejar el inicio de sesión con Facebook
-function loginWithFacebook() {
-
-    FB.init({
-        appId: '598094998940576',
-        autoLogAppEvents: true,
-        xfbml: true,
-        version: 'v12.0'
-    });
-
-    console.log("Iniciando sesión con Facebook");
-
-    FB.login(function (response) {
-        if (response.authResponse) {
-            // ... (código anterior)
-
-            // Si el inicio de sesión es exitoso, redirige al usuario al punto final de tu aplicación Spring Boot
-            const url = raizUrl + `/login/facebook?accessToken=${response.authResponse.accessToken}`;
-            axios.get(url, {
-                headers: {
-                    'Authorization': `Bearer ` + authToken
-                }
-            }).then(axiosResponse => {
-                const data = axiosResponse.status;
-                console.log(data);
-                location.reload();
-
-                /*
-                                if (data === true) {
-                                    location.reload();
-                                }else {
-                                    location.reload();
-                                }
-                */
-
-            }).catch(error => {
-                console.error('Error al realizar la solicitud a la API: ', error);
-                location.reload();
-            });
-
-        } else {
-            // Manejar el caso en que el usuario no complete el inicio de sesión
-        }
-    }, {scope: 'public_profile,email,pages_show_list,leads_retrieval'}); // Añade otros permisos aquí si es necesario
-
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-    const botonFacebook = document.getElementById("boton-facebook");
-
-    botonFacebook.addEventListener("click", loginWithFacebook);
-});
-
 
 document.getElementById('logout').addEventListener('click', function () {
     fetch(raizUrl + '/api/logout', {
