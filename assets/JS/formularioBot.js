@@ -1,7 +1,7 @@
-const raizUrlFormulario = 'http://localhost:8080';
 /*
-const raizUrlChat = 'https://presupuestaya-production.up.railway.app';
+const raizUrlFormulario = 'http://localhost:8080';
 */
+const raizUrlChat = 'https://presupuestaya-production.up.railway.app';
 
 $(document).ready(function () {
 
