@@ -121,22 +121,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         /*
         * Añadimos datos desde Backend
         * */
-        const paginaInput = document.getElementById('pagina');
-        const limiteInput = document.getElementById('limite');
-
-        const urlConfiguracionRejilla = raizUrl + `/api/configuracionRejilla/usuario/${usuarioId}`;
-        const responseConfiguracionRejilla = await axios.get(urlConfiguracionRejilla, {
-            headers: {
-                'Authorization': `Bearer ` + authToken
-            }
-        });
-        const dataConfiguracionRejilla = responseConfiguracionRejilla.data;
-
-        paginaInput.value = dataConfiguracionRejilla.pagina;
-        limiteInput.value = dataConfiguracionRejilla.limiteDePaginas;
-
-        const page = parseInt(paginaInput.value, 10) - 1; // Restamos 1 porque la API espera un índice base 0
-        const size = parseInt(limiteInput.value, 10);
 
         try {
             let isPasting = false;
@@ -164,8 +148,15 @@ document.addEventListener('DOMContentLoaded', async function () {
                 fixedColumnsStart: 1,
                 manualColumnFreeze: true,
                 rowHeaders: true,
-                colHeaders: ['Nombre', 'Descripcion', 'Tipo de Cliente', 'Precio'],
+                colHeaders: ['ID', 'Nombre', 'Descripcion', 'Tipo de Cliente', 'Precio'],
                 columns: [
+                    {
+                        data: 'id',
+                    },
+                    {
+                        data: 'nombre',
+                        width: 150,
+                    },
                     {
                         data: 'nombre',
                         width: 150,
@@ -187,10 +178,9 @@ document.addEventListener('DOMContentLoaded', async function () {
                 manualColumnMove: true,
                 contextMenu: ['row_above', 'row_below', 'remove_row', 'undo', 'redo'],
                 licenseKey: 'non-commercial-and-evaluation',
-                hiddenColumns: {/*
+                hiddenColumns: {
                     columns: [0], // Agrega esta línea para ocultar la columna ID
                     indicators: false // Desactiva los indicadores visuales de las columnas ocultas
-               */
                 },
                 beforeCopy: function (data, coords) {/*
                     for (let i = 0; i < data.length; i++) {
@@ -273,10 +263,10 @@ document.addEventListener('DOMContentLoaded', async function () {
             function guardarFila(row) {
                 // Crea un nuevo registro a partir de los datos de la fila
                 const registro = {
-                    id: hot.getDataAtCell(row, 0) || -1,
-                    nombre: hot.getDataAtCell(row, 1),
-                    telefono: hot.getDataAtCell(row, 2),
-                    email: hot.getDataAtCell(row, 3),
+                    nombre: hot.getDataAtCell(row, 0) || -1,
+                    descripcion: hot.getDataAtCell(row, 1),
+                    tipoCliente: hot.getDataAtCell(row, 2),
+                    precio: hot.getDataAtCell(row, 3),
                     whatsapp: hot.getDataAtCell(row, 4) || false,
                     llamada: hot.getDataAtCell(row, 5) || false,
                     emailEnviado: hot.getDataAtCell(row, 6) || false,

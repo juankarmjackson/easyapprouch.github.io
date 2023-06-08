@@ -30,10 +30,10 @@ async function cargarFormulario(variables) {
             'Authorization': `Bearer ` + authToken
         }
     }).then(function (response) {
-        if (response.data.length < 0) {
+        if (response.data.length > 0) {
 
             var formulario = response.data[0];
-            variables.formularioBotId.val(formulario.formularioBotId);
+            variables.formularioBotId.val(formulario.id);
             variables.nombreEmpresa.val(formulario.nombreEmpresa);
             variables.nombre.val(formulario.nombre);
             variables.Perfil.val(formulario.Perfil);
@@ -61,12 +61,7 @@ function actualizarFormulario(variables) {
                 'Content-Type': 'application/json'
             }
         }).then(function (response) {
-            if (reponse.data !== null) {
-
-                var formulario = response.data;
-                nombreEmpresa.val(formulario.nombreEmpresa);
-
-            }
+            alert('Formulario actualizado correctamente');
         });
 
     });
