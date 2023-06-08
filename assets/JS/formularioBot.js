@@ -17,7 +17,7 @@ function iniciarlizarVariables() {
         formularioBotId: $("#formularioBotId"),
         nombreEmpresa: $("#nombreEmpresa"),
         nombre: $("#nombre"),
-        Perfil: $("#Perfil"),
+        puestoTrabajo: $("#puestoTrabajo"),
         linkAgendar: $("#linkAgendar"),
     };
     return variables;
@@ -36,7 +36,7 @@ async function cargarFormulario(variables) {
             variables.formularioBotId.val(formulario.id);
             variables.nombreEmpresa.val(formulario.nombreEmpresa);
             variables.nombre.val(formulario.nombre);
-            variables.Perfil.val(formulario.Perfil);
+            variables.puestoTrabajo.val(formulario.puestoTrabajo);
             variables.linkAgendar.val(formulario.linkAgendar);
 
         }
@@ -51,7 +51,7 @@ function actualizarFormulario(variables) {
             id: variables.formularioBotId.val(),
             nombreEmpresa: variables.nombreEmpresa.val(),
             nombre: variables.nombre.val(),
-            puestoTrabajo: variables.Perfil.val(),
+            puestoTrabajo: variables.puestoTrabajo.val(),
             linkAgendar: variables.linkAgendar.val(),
         };
 
@@ -61,7 +61,7 @@ function actualizarFormulario(variables) {
                 'Content-Type': 'application/json'
             }
         }).then(function (response) {
-            alert('Formulario actualizado correctamente');
+            console.log('Formulario actualizado correctamente');
         });
 
     });

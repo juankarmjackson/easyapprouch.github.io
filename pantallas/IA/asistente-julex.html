@@ -173,9 +173,12 @@
                         <div id="nombreDescripcion" class="form-text">Nombre del Bot.</div>
                     </div>
                     <div class="mb-3">
-                        <label for="Perfil" class="form-label">Puesto de trabajo</label>
-                        <input type="text" class="form-control" id="Perfil" aria-describedby="PerfilDescripcion">
-                        <div id="PerfilDescripcion" class="form-text">El puesto de trabajo del Bot en tu empresa.</div>
+                        <label for="puestoTrabajo" class="form-label">Puesto de trabajo</label>
+                        <input type="text" class="form-control" id="puestoTrabajo"
+                               aria-describedby="puestoTrabajoDescripcion">
+                        <div id="puestoTrabajoDescripcion" class="form-text">El puesto de trabajo del Bot en tu
+                            empresa.
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="linkAgendar" class="form-label">Cadenly</label>
@@ -272,42 +275,44 @@
 
 
                             <br>
-                            <div class="row">
-                                <div class="row">
-                                    <div class="col-1">
-                                    </div>
-                                    <div class="col-10">
-                                        <div class="row">
-                                            <div class="col-12 col-md-6 col-lg-6 text-left">
-                                                <div>
-                                                    <label for="pagina">Página:</label>
-                                                    <input type="number" id="pagina" min="1" value="1">
-                                                </div>
+                            <!--
+                                                        <div class="row">
+                                                            <div class="row">
+                                                                <div class="col-1">
+                                                                </div>
+                                                                <div class="col-10">
+                                                                    <div class="row">
+                                                                        <div class="col-12 col-md-6 col-lg-6 text-left">
+                                                                            <div>
+                                                                                <label for="pagina">Página:</label>
+                                                                                <input type="number" id="pagina" min="1" value="1">
+                                                                            </div>
 
-                                            </div>
-                                            <div class="col-12 col-md-6 col-lg-6 text-right">
-                                                <div class="row">
-                                                    <div class="col-12 col-md-6 col-lg-6 text-right"></div>
-                                                    <div class="col-12 col-md-6 col-lg-6 text-right">
-                                                        <div>
-                                                            <label for="limite">Límite de registros por página:</label>
-                                                            <select id="limite">
-                                                                <option value="20">20</option>
-                                                                <option value="30" selected>30</option>
-                                                                <option value="50">50</option>
-                                                                <option value="100">100</option>
-                                                                <option value="1000">1000</option>
-                                                            </select>
+                                                                        </div>
+                                                                        <div class="col-12 col-md-6 col-lg-6 text-right">
+                                                                            <div class="row">
+                                                                                <div class="col-12 col-md-6 col-lg-6 text-right"></div>
+                                                                                <div class="col-12 col-md-6 col-lg-6 text-right">
+                                                                                    <div>
+                                                                                        <label for="limite">Límite de registros por página:</label>
+                                                                                        <select id="limite">
+                                                                                            <option value="20">20</option>
+                                                                                            <option value="30" selected>30</option>
+                                                                                            <option value="50">50</option>
+                                                                                            <option value="100">100</option>
+                                                                                            <option value="1000">1000</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-1">
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-1">
-                                    </div>
-                                </div>
-                            </div>
+                            -->
                         </div>
 
                     </div>
@@ -513,9 +518,9 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="../../assets/JS/formularioBot.js"></script>
 <script src="../../assets/JS/julex-plataforma.js"></script>
 <script src="../../assets/JS/chats.js"></script>
-<script src="../../assets/JS/formularioBot.js"></script>
 <script type="module">
     (function (h, o, t, j, a, r
     ) {

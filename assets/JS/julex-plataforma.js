@@ -76,40 +76,42 @@ document.addEventListener('DOMContentLoaded', async function () {
     /*
     * Cambio en Configuracion Rejilla
     * */
-
-    const paginaInput = document.getElementById('pagina');
-    const limiteInput = document.getElementById('limite');
-
-    paginaInput.addEventListener('change', cambioConfiguracionRejilla);
-    limiteInput.addEventListener('change', cambioConfiguracionRejilla);
-
-
-    async function cambioConfiguracionRejilla() {
+    /*
 
         const paginaInput = document.getElementById('pagina');
         const limiteInput = document.getElementById('limite');
 
-        const registroConfiguracionRejilla = {
-            id: null,
-            limiteDePaginas: limiteInput.value,
-            pagina: paginaInput.value,
-            usuarioId: usuarioId,
-        };
+        paginaInput.addEventListener('change', cambioConfiguracionRejilla);
+        limiteInput.addEventListener('change', cambioConfiguracionRejilla);
 
 
-        try {
-            await axios.put(raizUrl + `/api/configuracionRejilla/${usuarioId}`, registroConfiguracionRejilla, {
-                headers: {
-                    'Authorization': `Bearer ` + authToken,
-                    'Content-Type': 'application/json'
-                }
-            });
+        async function cambioConfiguracionRejilla() {
 
-            await loadData();
-        } catch (error) {
-            console.error('Error al actualizar la configuración de la rejilla:', error);
+            const paginaInput = document.getElementById('pagina');
+            const limiteInput = document.getElementById('limite');
+
+            const registroConfiguracionRejilla = {
+                id: null,
+                limiteDePaginas: limiteInput.value,
+                pagina: paginaInput.value,
+                usuarioId: usuarioId,
+            };
+
+
+            try {
+                await axios.put(raizUrl + `/api/configuracionRejilla/${usuarioId}`, registroConfiguracionRejilla, {
+                    headers: {
+                        'Authorization': `Bearer ` + authToken,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                await loadData();
+            } catch (error) {
+                console.error('Error al actualizar la configuración de la rejilla:', error);
+            }
         }
-    }
+    */
 
 
     /*
@@ -126,12 +128,13 @@ document.addEventListener('DOMContentLoaded', async function () {
             let isPasting = false;
             let pastedData = [];
             const tablaContenedor = document.getElementById('tabla-productos');
+            const id = document.getElementById('formularioBotId').value || -1;
 
             // Vacía el contenedor de la tabla
             tablaContenedor.innerHTML = '';
 
             //Actualizamos la Tabla
-            const url = raizUrl + `/productos/usuario`;
+            const url = raizUrl + `/productos/formulario_bot/${id}`;
             const response = await axios.get(url, {
                 headers: {
                     'Authorization': `Bearer ` + authToken
@@ -155,23 +158,15 @@ document.addEventListener('DOMContentLoaded', async function () {
                     },
                     {
                         data: 'nombre',
-                        width: 150,
-                    },
-                    {
-                        data: 'nombre',
-                        width: 150,
                     },
                     {
                         data: 'descripcion',
-                        width: 150,
                     },
                     {
                         data: 'tipoCliente',
-                        width: 150,
                     },
                     {
                         data: 'precio',
-                        width: 150,
                     },
                 ],
                 manualRowMove: true,
@@ -240,9 +235,9 @@ document.addEventListener('DOMContentLoaded', async function () {
 
                 // Obtén los datos de la nueva fila
                 var newRowData = hot.getDataAtRow(0);
-                hot.setDataAtCell(0, 1, "NuevaFila");
+                hot.setDataAtCell(0, 1, "Nuevo Producto");
                 // Llama a tu función para guardar la nueva fila
-                guardarFilaFirst("NuevaFila", newRowData);
+                guardarFilaFirst("Nuevo Producto", newRowData);
             };
 
 // Utiliza jQuery para asignar el evento
@@ -263,21 +258,15 @@ document.addEventListener('DOMContentLoaded', async function () {
             function guardarFila(row) {
                 // Crea un nuevo registro a partir de los datos de la fila
                 const registro = {
-                    nombre: hot.getDataAtCell(row, 0) || -1,
-                    descripcion: hot.getDataAtCell(row, 1),
-                    tipoCliente: hot.getDataAtCell(row, 2),
-                    precio: hot.getDataAtCell(row, 3),
-                    whatsapp: hot.getDataAtCell(row, 4) || false,
-                    llamada: hot.getDataAtCell(row, 5) || false,
-                    emailEnviado: hot.getDataAtCell(row, 6) || false,
-                    estadoNombre: hot.getDataAtCell(row, 7),
-                    fecha: hot.getDataAtCell(row, 8),
-                    observacion: hot.getDataAtCell(row, 10),
-                    smsEnviado: hot.getDataAtCell(row, 11) || false,
-                    mensajeSMS: hot.getDataAtCell(row, 12),
+                    id: hot.getDataAtCell(row, 0) || -1,
+                    nombre: hot.getDataAtCell(row, 1),
+                    descripcion: hot.getDataAtCell(row, 2),
+                    tipoCliente: hot.getDataAtCell(row, 3),
+                    precio: hot.getDataAtCell(row, 4),
+                    formularioBotId: $('#formularioBotId').val(),
                 };
 
-                const camposObligatorios = ['nombre', 'whatsapp', 'llamada', 'emailEnviado'];
+                const camposObligatorios = ['nombre'];
                 const registroCompleto = camposObligatorios.every((campo) => registro[campo] !== null && registro[campo] !== undefined && registro[campo] !== '');
 
                 if (registroCompleto) {
@@ -304,16 +293,10 @@ document.addEventListener('DOMContentLoaded', async function () {
                 const registro = {
                     id: null,
                     nombre: TextoGuardado,
-                    telefono: null,
-                    email: null,
-                    whatsapp: false,
-                    llamada: false,
-                    emailEnviado: false,
-                    estadoNombre: null,
-                    fecha: null,
-                    observacion: null,
-                    smsEnviado: false,
-                    mensajeSMS: null,
+                    descripcion: null,
+                    tipoCliente: null,
+                    precio: null,
+                    formularioBotId: $('#formularioBotId').val(),
                 };
 
 
@@ -339,20 +322,13 @@ document.addEventListener('DOMContentLoaded', async function () {
                 const id = hot.getDataAtCell(row, 0) || -1; // Asegúrate de que la columna 0 contiene el ID
                 const registro = {
                     nombre: hot.getDataAtCell(row, 1),
-                    telefono: hot.getDataAtCell(row, 2),
-                    email: hot.getDataAtCell(row, 3),
-                    whatsapp: hot.getDataAtCell(row, 4) || false,
-                    llamada: hot.getDataAtCell(row, 5) || false,
-                    emailEnviado: hot.getDataAtCell(row, 6) || false,
-                    estadoNombre: hot.getDataAtCell(row, 7),
-                    fecha: hot.getDataAtCell(row, 8),
-                    observacion: hot.getDataAtCell(row, 10),
-                    smsEnviado: hot.getDataAtCell(row, 11) || false,
-                    mensajeSMS: hot.getDataAtCell(row, 12),
+                    descripcion: hot.getDataAtCell(row, 2),
+                    tipoCliente: hot.getDataAtCell(row, 3),
+                    precio: hot.getDataAtCell(row, 4),
+                    formularioBotId: $('#formularioBotId').val(),
                 };
 
-
-                const camposObligatorios = ['nombre', 'whatsapp', 'llamada', 'emailEnviado'];
+                const camposObligatorios = ['nombre'];
                 const registroCompleto = camposObligatorios.every((campo) => registro[campo] !== null && registro[campo] !== undefined && registro[campo] !== '');
 
                 if (registroCompleto && id !== -1) {
@@ -377,20 +353,13 @@ document.addEventListener('DOMContentLoaded', async function () {
                 const registro = {
                     id: row['id'] || -1,
                     nombre: row['nombre'],
-                    telefono: row['telefono'],
-                    email: row['email'],
-                    whatsapp: row['whatsapp'] || false,
-                    llamada: row['llamada'] || false,
-                    emailEnviado: row['emailEnviado'] || false,
-                    estadoNombre: row['estadoNombre'],
-                    fecha: row['fecha'],
-                    observacion: row['observacion'],
-                    smsEnviado: row['smsEnviado'],
-                    mensajeSMS: row['mensajeSMS'],
+                    descripcion: row['descripcion'],
+                    tipoCliente: row['tipoCliente'],
+                    precio: row['precio'],
+                    formularioBotId: $('#formularioBotId').val(),
                 };
 
-
-                const camposObligatorios = ['nombre', 'whatsapp', 'llamada', 'emailEnviado'];
+                const camposObligatorios = ['nombre'];
                 const registroCompleto = camposObligatorios.every((campo) => registro[campo] !== null && registro[campo] !== undefined && registro[campo] !== '');
 
                 if (registroCompleto) {
@@ -507,7 +476,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             */
 
             function guardarRegistro(registro) {
-                return axios.post(raizUrl + '/api/leads', registro, {
+                return axios.post(raizUrl + '/productos', registro, {
                     headers: {
                         'Authorization': `Bearer ` + authToken,
                         'Content-Type': 'application/json'
@@ -516,7 +485,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             }
 
             function actualizarRegistro(id, registro) {
-                return axios.put(raizUrl + `/api/leads/${id}`, registro, {
+                return axios.put(raizUrl + `/productos/${id}`, registro, {
                     headers: {
                         'Authorization': `Bearer ` + authToken,
                         'Content-Type': 'application/json'
@@ -547,7 +516,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
                     // Elimina el registro en el servidor
                     try {
-                        await axios.delete(raizUrl + `/api/leads/${id}`, {
+                        await axios.delete(raizUrl + `/productos/${id}`, {
                             headers: {
                                 'Authorization': `Bearer ` + authToken
                             }
@@ -568,46 +537,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         } catch (error) {
             console.error('Error al cargar los datos:', error);
         }
-
-        /*
-        * Mensaje de Ejemplo
-        * */
-
-        $('#generarMensaje').click(function () {
-            generarMensaje();
-        });
-
-        $('#generarMensaje').click(function () {
-            generarMensaje();
-        });
-
-        async function generarMensaje() {
-            // Deshabilita el botón y muestra el gif de carga
-            $('#generarMensaje').prop('disabled', true);
-            $('#loading').show();
-
-            const urlConfiguracionRejilla = raizUrl + `/api/v1/complete-chat-no-mono`;
-            const data = {
-                modeloGenerado: "gpt-3.5-turbo",
-                promp: "generame un mensaje de sms marketing, corto y conciso, con este caracter donde debe ir ${nombre}"
-            };
-            try {
-                const responseConfiguracionRejilla = await axios.post(urlConfiguracionRejilla, data, {
-                    headers: {
-                        'Authorization': `Bearer ` + authToken
-                    }
-                });
-                const smsEjemplo = document.getElementById('mensajeEjemplo');
-                smsEjemplo.value = responseConfiguracionRejilla.data;
-            } catch (error) {
-                console.error(error);
-            } finally {
-                // Habilita el botón y oculta el gif de carga
-                $('#generarMensaje').prop('disabled', false);
-                $('#loading').hide();
-            }
-        }
-
 
     }
 
