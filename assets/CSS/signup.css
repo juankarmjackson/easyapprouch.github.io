@@ -58,6 +58,13 @@ header img{
 
 }
 
+#foto #entrenamiento{
+    width: 550px; 
+    margin: 10px auto; 
+    border-radius: 10px; 
+    cursor: pointer;
+}
+
 .popup-box{
     position: fixed;
     height: 100%;
@@ -118,12 +125,12 @@ footer{
 
 /* MEDIAS QUERYS */
 
-@media (max-width: 450px) {
-    .vsl .foto img{
-        width: 100%;
+@media (max-width: 750px) {
+     #foto #entrenamiento{
+        width: 100%!important;
     }
 
     .vsl .logos img{
-        width: 100%;
+        width: 100%!important;
     }
 }
