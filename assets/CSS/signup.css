@@ -119,5 +119,11 @@ footer{
 /* MEDIAS QUERYS */
 
 @media (max-width: 850px) {
-    
+    .vsl .foto img{
+        width: 100%;
+    }
+
+    .vsl .logos img{
+        width: 100%;
+    }
 }
