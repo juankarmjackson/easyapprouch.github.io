@@ -7,6 +7,12 @@ body {
     font-size: 55px;
     letter-spacing: -.1vw;
     -webkit-text-fill-color: transparent;
-    background-image: linear-gradient(to right,#000 20%,#4dd4b6);
+    background-image: linear-gradient(to right, #000 20%, #4dd4b6);
     -webkit-background-clip: text;
 }
+
+.vertical-line {
+    border-left: 1px solid black;
+    height: 500px;
+}
+
