@@ -1,0 +1,82 @@
+body {
+    background-image: url(../img/fondo1.jpeg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: 'Montserrat';
+}
+
+header{
+    color: white;
+}
+
+.form{
+    background-color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+.form input{
+    display: block;
+    border: none;
+    border-radius: 10px;
+    font-size: 25px;
+    padding: 5px;
+    margin: 8px 0;
+}
+
+.form button{
+    padding: 10px;
+    font-size: 20px;
+    background-color: #0045E7;
+    color: white;
+    margin: 10px 0;
+}
+
+.intinerario {
+    padding: 10px;
+}
+
+.intinerario p{
+    color: white;
+}
+
+
+  /* SECTION LOGOS */
+
+  .slider2 {
+    width: 90%;
+    height: auto;
+    margin: auto;
+    overflow: hidden;
+}
+
+.slider2 .slide-track {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    animation: scroll 40s linear infinite;
+    -webkit-animation: scroll 40s linear infinite;
+    width: calc(200px * 14);
+}
+
+.slider2 .slide {
+    width: 200px;
+}
+
+.slider2 .slide img {
+    width: 150px;
+}
+
+@keyframes scroll {
+    0% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+    100% {
+        -webkit-transform: translateX(calc(-200px * 7));
+        transform: translateX(calc(-200px * 7));
+    }
+}
+
+
+

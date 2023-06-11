@@ -11,45 +11,86 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <link rel="shortcut icon" type="image/jpg" href="https://juankarmjackson.github.io/easyapprouch.github.io/assets/img/easyapprouch.png"/>
-    <link rel="stylesheet" href="../../assets/CSS/easyapprouch.css">
-    <title>Easy Approuch</title>
+    <link rel="stylesheet" href="../../assets/CSS/qr.css">
+    <title>Easy Approuch | QR</title>
 </head>
 <body>
-   <section class="slider-principal">
-       <div class="title">
-            <h1>Historia de Elevator Pitch</h1>
-            <span>Mejora tu Pitch con los mejores tips.</span>
-       </div>
-       <div class="capa"></div>
+  <header>
+    <h1>BIENVENIDO</h1>
+    <img src="../../assets/img/lobo2.gif" style="width: 100%">
+    <h1>A PRIME TIME EVENTS ...</h1>
+  </header>
+  <section class="formulario">
+        <div class="form">
+            <h1>CHECK IN</h1>
+            <p>Tranquilo todos tus datos quedarán protegidos</p>
+            <input type="text" placeholder="Tu Nombre Completo" id="nombre">
+            <input type="text" placeholder="Tu Teléfono" id="telefono">
+            <input type="text" placeholder="Tu Email, Real ee no fake" id="email">
+            <button id="inputBoton">Registrarme Ahora</button>
+        </div>
+  </section>
+  <section class="fotos">
+    <section class="informacion">
+        <h1>EXPERTISE</h1>
+        <div class="slider2">
+            <div class="slide-track">
+                <div class="slide">
+                    <img src="../../assets/img/foto1.jpeg">
+                </div>
+                <div class="slide">
+                    <img src="../../assets/img/foto2.jpeg">
+                </div>
+                <div class="slide">
+                    <img src="../../assets/img/foto3.jpeg">
+                </div>
+                <div class="slide">
+                    <img src="../../assets/img/foto4.jpeg">
+                </div>
+                <div class="slide">
+                    <img src="../../assets/img/foto1.jpeg">
+                </div>
+                <div class="slide">
+                    <img src="../../assets/img/foto1.jpeg">
+                </div>
+                <div class="slide">
+                    <img src="../../assets/img/foto1.jpeg">
+                </div>
+                <div class="slide">
+                    <img src="../../assets/img/foto1.jpeg">
+                </div>
+                <div class="slide">
+                    <img src="../../assets/img/foto1.jpeg">
+                </div>
+                <div class="slide">
+                    <img src="../../assets/img/foto1.jpeg">
+                </div>
+                <div class="slide">
+                    <img src="../../assets/img/foto1.jpeg">
+                </div>
+                <div class="slide">
+                    <img src="../../assets/img/foto1.jpeg">
+                </div>
+            </div>
+        </div>
    </section>
-<section class="palancas-compra">
-    <div class="texto-compra">
-        <h2 style="color: red">Rellena el Formulario.</h2>
-    </div>
-    <div class="palancas">
-        <div class="palanca">
-           <div>
-            <label for="">Nombre Completo</label><br>
-            <input type="text" placeholder="Escribe Tu Nombre" id="nombre" required style="width: 90%; padding: 10px; border-radius: 10px; margin: 10px; border: none"><br><br>
-           </div>
-           <div>
-            <label for="">Teléfono</label><br>
-            <input type="text" placeholder="Escribe Tu Teléfono" id="telefono" required style="width: 90%; padding: 10px; border-radius: 10px; margin: 10px; border: none"><br><br>
-           </div>
-           <div>
-            <label for="">Email</label><br>
-            <input type="text" placeholder="¿Dónde te enviamos nuestra guía?" id="email" required style="width: 90%; padding: 10px; border-radius: 10px; margin: 10px; border: none"><br><br>
-           </div>
-           <div>
-                <p id="inputBoton" style="cursor: pointer; color:white; background: red; border-radius: 30px; padding: 10px; width: 90%">Enviar</p>
-                <p id="respuesta" style="display:none;background: green; color: white; padding: 10px;">Formulario Enviado, Te enviaremos un SMS con la info.</p>
-           </div>
-        </div>
-        <div class="palanca">
-            <img src="../../assets/img/pdf.png" style="width: 90%;" alt="Copia y Pegua método de duplicar facturación">
-        </div>
-    </div>
-</section>
+  </section>
+  <section class="intinerario">
+    <p>⏰ 19:00pm - 22:00pm. <br>
+        📍Calle Santa Engracia , 53 <br>
+        Barrio Chamberí  (Metro “Iglesias”) <br>
+        <br>
+        Se trata de un encuentro de Networking muy cercano, chill 🍻, pero con gente muy top. Emprendedores: Programadores, Marketers, Networkers, Inmobiliaria, IA, Consultoría 🤖🏠💰
+        <br>
+        EVENTO
+        <br>
+        De 19:00 a 20:00 Networking  🗣️ <br>
+        De 20:00 a 21:00 Elevator Pitch  y premio 🥇 al mejor  <br>
+        De 21:30 a 22:00 Sorpresa <br>
+        De 23:00 a 00:00 Networking <br>
+        <br>
+        Después fiesta para los emprendedores más fiesteros en la sala Fitz, entrada gratis 🎫 desde el evento.</p>
+  </section>
 <!-- Hotjar Tracking Code for Easy Approch -->
 <script>
     (function(h,o,t,j,a,r){
@@ -63,8 +104,6 @@
 </script>
     <script type="module">
         const inputBoton = document.getElementById('inputBoton');
-console.log(inputBoton);
-
 
 inputBoton.addEventListener('click', function(){
     const nombre = document.getElementById('nombre').value;
