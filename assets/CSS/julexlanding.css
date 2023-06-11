@@ -16,3 +16,11 @@ body {
     height: 500px;
 }
 
+.tamaño-numeros {
+    font-size: 10vb;
+}
+
+.hr-vertical-line {
+    height: 100%;
+}
+
