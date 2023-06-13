@@ -3,11 +3,29 @@ body {
     font-family: 'Tilt Warp', cursive;
 }
 
+body i{
+    color: #C613D4;
+}
+
 .title {
-    font-size: 55px;
+    /* font-size: 55px; */
     letter-spacing: -.1vw;
     -webkit-text-fill-color: transparent;
-    background-image: linear-gradient(to right, #000 20%, #4dd4b6);
+    background-image: linear-gradient(to right, #000 20%, #C613D4);
+    -webkit-background-clip: text;
+}
+
+h1{
+    letter-spacing: -.1vw;
+    -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(to right, #000 20%, #C613D4);
+    -webkit-background-clip: text;
+}
+
+h2 {
+    letter-spacing: -.1vw;
+    -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(to right, #000 20%, #C613D4);
     -webkit-background-clip: text;
 }
 
