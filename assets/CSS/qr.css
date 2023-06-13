@@ -30,6 +30,7 @@ header{
     background-color: #0045E7;
     color: white;
     margin: 10px 0;
+    cursor: pointer;
 }
 
 .intinerario {
