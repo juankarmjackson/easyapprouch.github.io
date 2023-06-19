@@ -98,7 +98,7 @@ function enviarMensaje(nombreConversacion) {
 
         // Enviar el mensaje al servidor y obtener la respuesta del chatbot
         await axios.post(raizUrlChat + '/api/v1/complete-chat-no-mono-atacar', {
-            modeloGenerado: "gpt-3.5-turbo",
+            modeloGenerado: "gpt-3.5-turbo-16k",
             mensaje: message,
             nombreConversacion: nombreConversacion
         }).then(function (response) {
