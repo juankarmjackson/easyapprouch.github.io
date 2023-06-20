@@ -185,12 +185,20 @@
                         <input type="text" class="form-control" id="linkAgendar"
                                aria-describedby="linkAgendarDescripcion">
                         <div id="linkAgendarDescripcion" class="form-text">Link para agendar cita.</div>
-                    </div><!--
+                    </div>
                     <div class="mb-3">
-                        <label for="linkCobro" class="form-label">Link Stripe</label>
-                        <input type="text" class="form-control" id="linkCobro" aria-describedby="linkCobroDescripcion">
-                        <div id="linkCobroDescripcion" class="form-text">Link para cobrar.</div>
-                    </div>-->
+                        <label for="formFile" class="form-label">Información de tu empresa</label>
+                        <input class="form-control" type="file" id="formFile" accept="application/pdf">
+                        <div id="pdfEmpresa" class="form-text">Subir archivo PDF con información de tu empresa.</div>
+                    </div>
+
+
+                    <!--
+                                        <div class="mb-3">
+                                            <label for="linkCobro" class="form-label">Link Stripe</label>
+                                            <input type="text" class="form-control" id="linkCobro" aria-describedby="linkCobroDescripcion">
+                                            <div id="linkCobroDescripcion" class="form-text">Link para cobrar.</div>
+                                        </div>-->
                     <div class="mb-3">
                         <label class="form-label">Productos</label>
                         <div id="crm-lead">
@@ -484,7 +492,7 @@
                         <span id="leads">Número de Leads Totales</span>
                         <span>Contactados</span>
                         <span>En Fase de Negociación</span>
-                        <span>Cerrado</span>
+                        <span>Agendados</span>
                         <span>Tasa de Cierre</span>
                     </div>
                     <div class="cifra">
@@ -506,6 +514,118 @@
             </section>
         </div>
         <div class="tab-pane fade" id="historial" role="tabpanel" aria-labelledby="historial-tab">
+            <br>
+            <div class="row">
+                <div class="col-4">
+                    <div class="col-12 p-3 mb-2 bg-black bg-gradient text-white ">
+                        <div class="row">
+                            <div class="col-11 text-center">
+                                Conversacion con Maria
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chatbot-container">
+                        <br>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div id="mensaje-generados-ChatBotNormal">
+                                    <div id="loading-gif-ChatBotNormal" class="text-center" style="display: none;">
+                                        <img src="../../assets/img/work-in-progress.gif" alt="Cargando...">
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-6"></div>
+                                        <div class="col-6">
+                                            <div class="p-3 mb-2 bg-custom text-white rounded">
+                                                <p class="text-right">Buenas!</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <div class="p-3 mb-2 bg-custom2 text-white rounded">
+                                                <p>¡Hola! ¡Bienvenido a EasyApprouch! 😄 ¿En qué puedo ayudarte hoy?</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-6"></div>
+
+                                        <div class="col-6"></div>
+                                        <div class="col-6">
+                                            <div class="p-3 mb-2 bg-custom text-white rounded">
+                                                <p class="text-right">quiero los servicios de facebookAds</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <div class="p-3 mb-2 bg-custom2 text-white rounded">
+                                                <p>¡Genial! 😄 Tenemos un servicio específico para eso. Se llama "Gestión
+                                                    Publicitaria" y consiste en lanzar campañas publicitarias en
+                                                    Facebook para ayudarte a captar más leads para tu negocio. ¿Te
+                                                    gustaría saber más detalles sobre este servicio?</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-6"></div>
+
+                                        <div class="col-6"></div>
+                                        <div class="col-6">
+                                            <div class="p-3 mb-2 bg-custom text-white rounded">
+                                                <p class="text-right">Si</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <div class="p-3 mb-2 bg-custom2 text-white rounded">
+                                                <p>Perfecto. Nuestro servicio de Gestión Publicitaria incluye la
+                                                    creación y optimización de campañas publicitarias en Facebook.
+                                                    Nuestro objetivo es ayudarte a llegar a tu público objetivo y
+                                                    generar más leads para tu negocio.
+
+                                                    Con nuestras estrategias de segmentación y creatividad,
+                                                    maximizaremos el impacto de tus anuncios y te proporcionaremos
+                                                    informes detallados para que puedas ver el rendimiento de tus
+                                                    campañas.
+
+                                                    El precio de este servicio es de 250€ mensuales. ¿Te gustaría
+                                                    agendar una reunión para discutir más detalles y ver cómo podemos
+                                                    ayudarte? Solo necesito tu email y tu teléfono para agendar la cita.
+                                                    🔥💪🏼🚀</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-6"></div>
+
+                                        <div class="col-6"></div>
+                                        <div class="col-6">
+                                            <div class="p-3 mb-2 bg-custom text-white rounded">
+                                                <p class="text-right">Perfecto, mi email es easyApprouch@gmail.com y mi
+                                                    numero es 685217194</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <div class="p-3 mb-2 bg-custom2 text-white rounded">
+                                                <p>¡Genial! 😄 Hemos registrado tu email (easyApprouch@gmail.com) y tu
+                                                    número de teléfono (685217194). En breve, uno de nuestros expertos
+                                                    en Gestión Publicitaria se pondrá en contacto contigo para agendar
+                                                    una reunión y discutir más detalles.
+
+                                                    ¡Estamos emocionados de trabajar contigo y ayudarte a potenciar tu
+                                                    negocio con Facebook Ads! Si tienes alguna otra pregunta, no dudes
+                                                    en decírmelo. ¡Estoy aquí para ayudarte! 🔥🚀💪🏼</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-6"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+
+                    </div>
+
+                </div>
+                <div class="col-4"></div>
+                <div class="col-4"></div>
+            </div>
 
         </div>
     </div>

@@ -430,24 +430,24 @@ document.addEventListener('DOMContentLoaded', async function () {
 
                     // CONTADOR TOTAL
                     const numeroTotal = document.getElementById('resultado');
-                    numeroTotal.innerHTML = kpis.numeroLeadTotales;
+                    numeroTotal.innerHTML = 10;
 
                     // CONTACTADOS TOTAL
                     const contactadosTotal = document.getElementById('contactados');
-                    contactadosTotal.innerHTML = kpis.numeroLeadsContactados;
+                    contactadosTotal.innerHTML = 1;
 
                     // EN NEGOCIACION
                     const enNegociacion = document.getElementById('negociacion');
-                    enNegociacion.innerHTML = kpis.numeroLeadsFaseNegociacion;
+                    enNegociacion.innerHTML = 1;
 
                     // EN CIERRES
                     const cierres = document.getElementById('cierres');
-                    cierres.innerHTML = kpis.numeroLeadsCerrados;
+                    cierres.innerHTML = 1;
 
                     // TASA
                     let tasa = Number(kpis.numeroLeadTotales / kpis.numeroLeadsCerrados).toFixed(1);
                     const tasaCierre = document.getElementById('tasa');
-                    tasaCierre.innerHTML = tasa + '%';
+                    tasaCierre.innerHTML = '100' + '%';
 
                 } catch (error) {
                     console.error(`Error al obtener los KPIs:`, error);
