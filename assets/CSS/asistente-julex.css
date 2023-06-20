@@ -251,3 +251,75 @@ footer .box-footer div a {
     color: brown !important;
 }
 
+/* IA */
+
+.capa {
+    /* position: fixed; */
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../../assets/../pantallas/IA/fondoia2.png);
+    background-size: cover;
+    text-align: center;
+}
+
+.popup {
+    background: rgba(225, 225, 225, 0.30);
+    box-shadow: 0 8px 32px 0 rgb(31 38 135 / 37%);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(50px);
+    padding: 50px;
+    border-radius: 15px;
+    /* width: 90%; */
+    margin: 0 auto;
+    /* max-width: 550px; */
+    position: relative;
+}
+
+.popup img {
+    width: 250px;
+    border-radius: 30px;
+}
+
+.bg-pop {
+
+    color: black;
+    padding: 10px;
+}
+
+
+
+
+
+
+.popup button{
+    background-color: #BB009B;
+    color: white;
+    padding: 8px;
+    font-size: 15px;
+    margin: 10px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+
+.popup th{
+    border: 1px solid white;
+    padding: 10px;
+    margin: 0;
+}
+
+.popup tr{
+    border: 1px solid white;
+    padding: 10px;
+    margin: 0;
+}
+
+.popup td{
+    border: 1px solid white;
+    padding: 10px;
+    margin: 0;
+}

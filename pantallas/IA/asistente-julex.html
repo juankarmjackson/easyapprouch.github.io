@@ -94,13 +94,13 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="prueba-chat" data-bs-toggle="tab" href="#prueba-chat-id" role="tab"
+            <a class="nav-link" id="leads-tab" data-bs-toggle="tab" href="#leads-tab-id" role="tab"
                aria-controls="leads" aria-selected="false">
                 <div class="d-lg-none">
-                    <i class="bi bi-chat"></i>
+                    <i class="bi bi-table"></i>
                 </div>
                 <div class="d-none d-lg-block">
-                    Prueba Chat <i class="bi bi-chat"></i>
+                    Julex.ia <i class="bi bi-table"></i>
                 </div>
             </a>
         </li>
@@ -117,16 +117,18 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="leads-tab" data-bs-toggle="tab" href="#leads-tab-id" role="tab"
+            <a class="nav-link" id="prueba-chat" data-bs-toggle="tab" href="#prueba-chat-id" role="tab"
                aria-controls="leads" aria-selected="false">
                 <div class="d-lg-none">
-                    <i class="bi bi-table"></i>
+                    <i class="bi bi-chat"></i>
                 </div>
                 <div class="d-none d-lg-block">
-                    Leads CRM <i class="bi bi-table"></i>
+                    Prueba Chat <i class="bi bi-chat"></i>
                 </div>
             </a>
         </li>
+        
+        
         <li class="nav-item">
             <a class="nav-link" id="metricas-tab" data-bs-toggle="tab" href="#metricas" role="tab"
                aria-controls="metricas" aria-selected="false">
@@ -471,9 +473,25 @@
         </div>
 
         <div class="tab-pane fade" id="flujos" role="tabpanel" aria-labelledby="flujos-tab">
+            <iframe style="width: 100%; height: 100vh" src="https://miro.com/app/live-embed/uXjVM8ixbyQ=/?moveToViewport=-892,-847,4226,2144&embedId=564616951234" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>
         </div>
-        <div class="tab-pane fade show active" id="leads-tab-id" role="tabpanel" aria-labelledby="leads-tab">
-            <br>
+        <div class="tab-pane fade" id="leads-tab-id" role="tabpanel" aria-labelledby="leads-tab">
+            <div class="capa">
+                <div class="popup">
+                  <img src="julex.jpeg" alt="Julex" />
+                  <h1>Julex.ia</h1>
+                  <input type="number" value="1214816331" id="boardIdInput">
+                  <button onclick="fetchData()">Comenzar</button>
+                    <br>
+                    <div class="marketing">
+                        <button id="emailmarketing">Email Marketing</button>
+                        <button id="whatsappmarketing">whatsappmarketing</button>
+                        <button>Llamada (Voz IP)</button>
+                    </div>
+                    <hr>
+                    <div id="tablaContainer"></div>
+                </div>
+              </div>
         </div>
 
         <div class="tab-pane fade" id="metricas" role="tabpanel" aria-labelledby="metricas-tab">
@@ -518,6 +536,8 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/monday-sdk-js/dist/main.js"></script>
+<script src="../../assets/JS/julex-ia.js"></script>
 <script src="../../assets/JS/formularioBot.js"></script>
 <script src="../../assets/JS/julex-plataforma.js"></script>
 <script src="../../assets/JS/chats.js"></script>
