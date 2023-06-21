@@ -229,6 +229,12 @@ footer .box-footer div a {
     overflow: auto;
 }
 
+#tabla-lead {
+    width: auto; /* Ajusta al 100% del ancho del padre */
+    height: 50vb; /* Define una altura fija, puedes cambiar este valor a tu necesidad */
+    overflow: auto;
+}
+
 .contenedor-handsomtable {
     /*
     border: 2px solid;
