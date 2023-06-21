@@ -1,8 +1,8 @@
 const authTokenLeadCRM = localStorage.getItem('authToken');
-const leadCRMUrl = 'http://localhost:8080';
 /*
-const leadCRMUrl = 'https://presupuestaya-production.up.railway.app';
+const leadCRMUrl = 'http://localhost:8080';
 */
+const leadCRMUrl = 'https://presupuestaya-production.up.railway.app';
 
 document.addEventListener('DOMContentLoaded', async function () {
 
