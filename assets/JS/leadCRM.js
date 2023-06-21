@@ -87,9 +87,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                 fixedColumnsStart: 2,
                 manualColumnFreeze: true,
                 rowHeaders: true,
-                colHeaders: ['ID', 'Nombre', 'Teléfono', 'Email', 'WhatsApp', 'Llamada', 'Email Enviado',
-                    'Estado', 'Fecha', 'Fecha de Registro', 'Observación', 'SMS Enviado', 'Mensaje SMS',
-                    'Origen Lead'],
+                colHeaders: ['ID', 'Nombre', 'Teléfono', 'Email',
+                    'Estado', 'Fecha Registro', 'Observación', 'Activar Julex'],
                 columns: [
                     {
                         data: 'id',
@@ -109,12 +108,6 @@ document.addEventListener('DOMContentLoaded', async function () {
                         width: 250,
                         renderer: emailRenderer // Añade esta línea para usar el renderer de correo electrónico
                     },
-                    {
-                        data: 'whatsapp',
-                        type: 'checkbox'
-                    },
-                    {data: 'llamada', type: 'checkbox'},
-                    {data: 'emailEnviado', type: 'checkbox'},
                     {
                         data: 'estadoNombre',
                         type: 'dropdown',
@@ -144,30 +137,14 @@ document.addEventListener('DOMContentLoaded', async function () {
                         }
                     },
                     {
-                        data: 'fecha',
-                        type: 'date'
-                    },
-                    {
                         data: 'fechaRegistro',
                         type: 'date',
                         readOnly: true // Añade esta línea para hacer la columna de solo lectura
                     },
                     {
-                        data: 'observacion',
-                        width: 250
-                    },
-                    {
-                        data: 'smsEnviado',
-                        type: 'checkbox',
-                    },
-                    {
-                        data: 'mensajeSMS',
-                        width: 300
-                    },
-                    {
-                        data: 'origen',
-                        readOnly: true // Añade esta línea para hacer la columna de solo lectura
-                    },
+                        data: 'boton',
+                        renderer: botonRenderer
+                    }
                 ],
                 manualRowMove: true,
                 manualColumnMove: true,
@@ -224,6 +201,20 @@ document.addEventListener('DOMContentLoaded', async function () {
                     }
                 },
             });
+
+            function botonRenderer(instance, td, row, col, prop, value, cellProperties) {
+                var button = document.createElement('button');
+                button.className = 'btn btn-outline-dark btn-sm';
+                button.innerHTML = '<i class="bi bi-skip-end-circle"></i>' + ' Activar Julex';
+                button.onclick = function () {
+                    // Aquí puedes manejar el evento de clic del botón
+                    var leadName = instance.getDataAtRowProp(row, 'nombre');
+                    alert('Julex ha empezado trabajar con ' + leadName);
+                };
+                Handsontable.dom.empty(td);
+                td.appendChild(button);
+            }
+
 
             /*
             * Añadir fila
