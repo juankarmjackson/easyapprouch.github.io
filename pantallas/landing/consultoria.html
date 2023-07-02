@@ -178,27 +178,49 @@
             <label for="">Email</label><br>
             <input type="text" placeholder="Escribe Email Principal" id="email2" required style="width: 90%; padding: 10px; border-radius: 10px; margin: 10px; border: none"><br><br>
            </div>
-           <div>
-                <button id="inputBoton2" style="cursor: pointer; color:white; background: red; border-radius: 30px; padding: 10px; width: 90%">Enviar</button>
-                <p id="respuesta2" style="display:none;background: green; color: white; padding: 10px;">Formulario Enviado</p>
-           </div>
+            <div>
+                <button id="inputBoton2"
+                        style="cursor: pointer; color:white; background: red; border-radius: 30px; padding: 10px; width: 90%">
+                    Enviar
+                </button>
+                <p id="respuesta2" style="display:none;background: green; color: white; padding: 10px;">Formulario
+                    Enviado</p>
+            </div>
         </div>
         <div class="palanca">
-            <iframe style="width: 300px; height: 500px; border-radius: 30px;" src="https://www.youtube.com/embed/UJomHH_mqug" title="CRM Funcionalidad | Procesos" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <iframe style="width: 300px; height: 500px; border-radius: 30px;"
+                    src="https://www.youtube.com/embed/UJomHH_mqug" title="CRM Funcionalidad | Procesos" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
         </div>
     </div>
 </section>
-    <script type="module">
-        const inputBoton = document.getElementById('inputBoton');
+   <script type="text/javascript">
+       (function (d, t) {
+           var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+           v.onload = function () {
+               window.voiceflow.chat.load({
+                   verify: {projectID: '649bebfd3c363c0007776388'},
+                   url: 'https://general-runtime.voiceflow.com',
+                   versionID: 'production'
+               });
+           }
+           v.src = "https://cdn.voiceflow.com/widget/bundle.mjs";
+           v.type = "text/javascript";
+           s.parentNode.insertBefore(v, s);
+       })(document, 'script');
+   </script>
+   <script type="module">
+       const inputBoton = document.getElementById('inputBoton');
 
-inputBoton.addEventListener('click', function(){
-    const nombre = document.getElementById('nombre').value;
-    const telefono = document.getElementById('telefono').value;
-    const email = document.getElementById('email').value
+       inputBoton.addEventListener('click', function () {
+           const nombre = document.getElementById('nombre').value;
+           const telefono = document.getElementById('telefono').value;
+           const email = document.getElementById('email').value
 
-    /*
-        const raizUrl = 'http://localhost:8080';
-    */
+           /*
+               const raizUrl = 'http://localhost:8080';
+           */
     const raizUrl = 'https://presupuestaya-production.up.railway.app';
 
     $.ajax({
@@ -305,7 +327,6 @@ inputBoton2.addEventListener('click', function() {
 </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-   
 
 </body>
 </html>
